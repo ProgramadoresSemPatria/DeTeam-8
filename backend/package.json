@@ -13,6 +13,7 @@
   "type": "commonjs",
   "description": "",
   "devDependencies": {
+    "@rocketseat/eslint-config": "2.2.2",
     "@types/express": "^5.0.1",
     "@types/node": "^22.13.13",
     "tsup": "^8.4.0",
