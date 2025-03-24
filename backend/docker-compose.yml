@@ -1,0 +1,9 @@
+services:
+  api-solid:
+    image: bitnami/postgresql
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRESQL_USERNAME=time8
+      - POSTGRESQL_PASSWORD=time8
+      - POSTGRESQL_DATABASE=time8
