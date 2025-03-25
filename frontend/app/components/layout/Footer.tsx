@@ -160,7 +160,6 @@ export default function Footer() {
             </div>
 
             <div className="mt-8 md:flex justify-between items-center hidden">
-              <p className="text-xs text-gray-500">© 2023</p>
               <div className="flex space-x-4">
                 <Link href="https://github.com/" className="text-gray-400 hover:text-gray-600">
                   <Github size={16} />
