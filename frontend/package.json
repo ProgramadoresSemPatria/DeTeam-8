@@ -6,13 +6,16 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "biome:check": "biome ci --vcs-use-ignore-file=true",
+    "biome:write": "biome check --vcs-use-ignore-file=true --write"
   },
   "dependencies": {
     "@radix-ui/react-collapsible": "^1.1.3",
     "@radix-ui/react-navigation-menu": "^1.2.5",
     "@radix-ui/react-primitive": "^2.0.2",
     "@radix-ui/react-slot": "^1.1.2",
+    "biome": "^0.3.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.5.0",
