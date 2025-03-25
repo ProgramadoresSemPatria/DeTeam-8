@@ -1,9 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist: true, // remove propriedades que não estão nos DTOs
+    forbidNonWhitelisted: true, // lança erro caso haja propriedades não esperadas
+  }));
 
   await app.listen(process.env.PORT ?? 3000);
 
