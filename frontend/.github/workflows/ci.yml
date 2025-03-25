@@ -29,17 +29,3 @@ jobs:
 
       - name: Run lint script with Biome
         run: pnpm biome:check
-
-  auto-merge:
-    needs: lint-styles 
-    runs-on: ubuntu-latest
-    if: success()  # Apenas executa se o Biome passar sem erros
-
-    steps:
-      - name: Habilitar Auto Merge
-        uses: pascalgn/automerge-action@v0.15.4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          mergeMethod: squash
-          base: development  # Faz merge para a branch development
