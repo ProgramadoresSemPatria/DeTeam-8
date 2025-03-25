@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { Button } from "../ui/button";
-import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { cn } from "../../lib/utils";
+import { Button } from "../ui/button";
 
 export default function Hero() {
   return (
@@ -15,6 +15,9 @@ export default function Hero() {
       className="pt-20 sm:pt-24 md:pt-32 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6"
     >
       <div className="container mx-auto max-w-6xl">
+        <div className="mx-auto w-fit sm:mx-0 sm:w-auto sm:inline-block sm:text-center px-4 py-1 rounded-full bg-green-100 text-green-600 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+          Receba. Converta. Gerencie.
+        </div>
         <div className="flex flex-col lg:flex-row items-center">
           <div className="w-full lg:w-1/2 mb-10 lg:mb-0 lg:pr-8 xl:pr-12">
             <motion.div
@@ -23,10 +26,7 @@ export default function Hero() {
               transition={{ duration: 0.5 }}
               className="text-center lg:text-left"
             >
-              <div className="inline-block px-4 py-1 rounded-full bg-green-100 text-green-600 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
-                Receba. Converta. Gerencie.
-              </div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold md:leading-16 text-gray-900 mb-4 sm:mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold md:leading-15 text-gray-900 mb-4 sm:mb-6">
                 Gerencie seus <span className="text-blue-500">Pagamentos Internacionais</span> com Facilidade
               </h1>
               <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-8">
