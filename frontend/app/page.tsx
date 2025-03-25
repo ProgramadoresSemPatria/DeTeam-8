@@ -1,9 +1,11 @@
+import Navbar from "./components/general/Navbar";
+import Hero from "./components/general/Hero";
+
 export default function Home() {
   return (
-    <div>
-      <h1>Hello World</h1>
-      <p>Hello Next.js</p>
-      <p>Hello Next.js</p>
+    <div className="min-h-screen flex flex-col">
+
+      <Hero />
     </div>
   );
 }
