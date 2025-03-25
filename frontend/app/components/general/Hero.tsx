@@ -58,8 +58,8 @@ export default function Hero() {
               <div className="aspect-[4/3] bg-gradient-to-br from-blue-600 to-green-700 rounded-2xl overflow-hidden relative">
                 <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_50%_120%,white,transparent_70%)]"></div>
 
-                {/* Finance-themed grid elements */}
-                <div className="absolute inset-0 grid grid-cols-3 grid-rows-3 gap-2 sm:gap-4 p-3 sm:p-6">
+                {/* Finance-themed grid elements - 6 blocks on mobile, 9 on larger screens */}
+                <div className="absolute inset-0 grid grid-cols-2 sm:grid-cols-3 grid-rows-3 gap-2 sm:gap-4 p-3 sm:p-6">
                   {Array(9).fill(0).map((_, i) => {
                     // Enhanced financial dashboard elements
                     const isBarChart = i === 1;
@@ -71,6 +71,9 @@ export default function Hero() {
                     const isPieChart = i === 7;
                     const isDataTable = i === 8;
 
+                    // Hide elements 7, 8 on mobile (show only first 6)
+                    const hiddenOnMobile = i >= 6;
+
                     return (
                       <motion.div
                         key={i}
@@ -79,6 +82,7 @@ export default function Hero() {
                         transition={{ duration: 0.3, delay: 0.3 + (i * 0.1) }}
                         className={cn(
                           "glass rounded-lg sm:rounded-xl flex flex-col overflow-hidden backdrop-blur-sm",
+                          hiddenOnMobile ? "hidden sm:flex" : "flex",
                           isCurrencyCard ? "col-span-1 row-span-1 bg-white/40 border border-white/30 shadow-lg" :
                           isBarChart ? "bg-white/20 border-l-4 border-green-400 shadow-md" :
                           isLineChart ? "bg-white/20 border-l-4 border-blue-300 shadow-md" :
@@ -110,7 +114,7 @@ export default function Hero() {
                         )}
 
                         {isCurrencyCard && (
-                          <div className="w-full h-full flex flex-col items-center justify-center">
+                          <div className="w-full h-full p-2 flex flex-col justify-center">
                             <div className="text-white/80 text-[8px] sm:text-xs font-medium">CÂMBIO</div>
                             <div className="text-white font-bold text-sm sm:text-lg flex items-center">
                               <span className="text-green-300 mr-1">R$</span>1,00 = <span className="text-green-300 ml-1">$</span>0,20
