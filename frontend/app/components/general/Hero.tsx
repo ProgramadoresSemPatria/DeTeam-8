@@ -33,13 +33,13 @@ export default function Hero() {
                 Uma plataforma completa para desenvolvedores acompanharem taxas, impostos e escolherem as melhores opções de pagamento.
               </p>
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center lg:justify-start">
-                <Button asChild size="lg" className="w-full sm:w-auto rounded-full bg-blue-500 hover:bg-blue-600 px-6 sm:px-8">
+                <Button asChild size="lg" className="w-full text-white sm:w-auto rounded-full bg-blue-500 hover:bg-blue-600 px-6 sm:px-8">
                   <Link href="/">
                     Comece Agora
                     <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                   </Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="w-full sm:w-auto rounded-full border-gray-200">
+                <Button asChild variant="outline" size="lg" className="w-full sm:w-auto hover:bg-green-100 hover:text-green-800 rounded-full border-gray-200">
                   <Link href="/">Saiba Mais</Link>
                 </Button>
               </div>
