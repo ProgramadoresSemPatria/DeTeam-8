@@ -1,9 +1,18 @@
+version: '3.8'
+
 services:
-  api-solid:
-    image: bitnami/postgresql
-    ports:
-      - 5433:5432
+  postgres:
+    image: postgres:latest
+    container_name: DB_team_8
+    restart: on-failure
     environment:
-      - POSTGRESQL_USERNAME=time8
-      - POSTGRESQL_PASSWORD=time8
-      - POSTGRESQL_DATABASE=time8
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
