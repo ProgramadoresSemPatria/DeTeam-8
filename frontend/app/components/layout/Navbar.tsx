@@ -1,34 +1,23 @@
+import { Calendar } from "lucide-react";
 import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="py-5 flex items-center justify-between">
+    <nav className="py-5 flex items-center justify-between text-black">
       <div className="flex items-center gap-6">
-        <Link href="/">
-          <h1 className="text-3xl font-semibold">
-            <span className="text-green-500">FinAI</span>
-          </h1>
-        </Link>
-
-        <div className="hidden sm:flex items-center gap-6">
-          <Link
-            className="text-sm font-medium hover:text-purple-500 transition-colors"
-            href="/"
-          >
-            Home
+        <Link href="/" className="flex items-center space-x-2">
+            <Calendar className="h-6 w-6" />
+            <span className="font-bold inline-block lg:text-xl">EventManager</span>
           </Link>
-          <Link
-            className="text-sm font-medium hover:text-purple-500 transition-colors"
-            href="/dashboard"
-          >
-            Dashboard
-          </Link>
-        </div>
       </div>
 
-      <div className="flex items-center gap-4">
-        <button>Login</button>
-        <button>Sing up</button>
+      <div className="flex items-center gap-8 sm:text-lg font-medium">
+        <button>
+          <Link href="/login">Login</Link>
+        </button>
+        <button>
+          <Link href="/signup">Signup</Link>
+        </button>
       </div>
 
       {/* {user ? (
