@@ -1,9 +1,9 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { motion } from "framer-motion";
 
 export default function CallToAction() {
   return (
@@ -21,11 +21,13 @@ export default function CallToAction() {
           <div className="relative z-10 flex flex-col lg:flex-row items-center">
             <div className="w-full lg:w-2/3 mb-8 lg:mb-0 lg:pr-12 text-center lg:text-left">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 mb-4">
-                Pronto para simplificar seus pagamentos internacionais?
+                Pronto para organizar seu próximo evento de forma fácil e
+                rápida?
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-gray-600">
-                Gerencie taxas, impostos e receba seu dinheiro com mais
-                eficiência, como milhares de desenvolvedores já fazem.
+                Crie, gerencie e compartilhe eventos casuais de forma simples,
+                rápida e sem burocracia, com controle de presença e lista de
+                contribuições.
               </p>
             </div>
             <div className="w-full lg:w-1/3 flex justify-center">
