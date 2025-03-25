@@ -27,8 +27,18 @@ export default function Navbar() {
       </div>
 
       <div className="flex items-center gap-4">
-        <button>Login</button>
-        <button>Sing up</button>
+        <Link
+          className="text-sm font-medium hover:text-purple-500 transition-colors"
+          href="/SignIn"
+        >
+          Login
+        </Link>
+        <Link
+          className="text-sm font-medium hover:text-purple-500 transition-colors"
+          href="/SingUp"
+        >
+          Sign up
+        </Link>
       </div>
 
       {/* {user ? (
