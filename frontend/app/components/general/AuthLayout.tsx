@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { ReactNode } from "react";
 
 interface AuthLayoutProps {
@@ -23,7 +23,7 @@ export function AuthLayout({
       <div className="w-full max-w-md space-y-8 animate-fade-in">
         <div className="text-center">
           <h2
-            className="text-3xl font-bold tracking-tight text-foreground animate-slide-in"
+            className="text-3xl font-bold tracking-tight text-blue-500 animate-slide-in"
             style={{ animationDelay: "0.1s" }}
           >
             {title}
@@ -50,7 +50,7 @@ export function AuthLayout({
           {footerText}{" "}
           <Link
             href={footerLinkHref}
-            className="font-medium text-primary hover:text-primary/80 transition-colors"
+            className="font-medium text-blue-500 hover:text-blue-500/80 transition-colors"
           >
             {footerLinkText}
           </Link>

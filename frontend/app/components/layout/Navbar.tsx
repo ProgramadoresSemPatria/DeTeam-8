@@ -1,8 +1,8 @@
-import Link from "next/link";
+import { Link } from 'next-view-transitions';
 
 export default function Navbar() {
   return (
-    <nav className="py-5 flex items-center justify-between">
+    <nav className="max-w-7xl mx-auto py-5 flex items-center justify-between">
       <div className="flex items-center gap-6">
         <Link href="/">
           <h1 className="text-3xl font-semibold">

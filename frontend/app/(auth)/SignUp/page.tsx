@@ -8,7 +8,7 @@ export default function SignUp() {
       subtitle="Sign up to get started with our platform"
       footerText="Already have an account?"
       footerLinkText="Sign in"
-      footerLinkHref="/SignUp"
+      footerLinkHref="/SignIn"
     >
       <SignUpForm />
     </AuthLayout>
