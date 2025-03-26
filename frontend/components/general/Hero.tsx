@@ -5,7 +5,6 @@ import { ArrowRight } from "lucide-react";
 import {Link} from "next-view-transitions";
 import { cn } from '@/lib/utils';
 import { Button } from "@/components/ui/button";
-import EventModal  from "@/components/general/EventModal";
 
 export default function Hero() {
   return (
@@ -42,9 +41,8 @@ export default function Hero() {
                   size="lg"
                   className="w-full text-white sm:w-auto rounded-full bg-blue-500 hover:bg-blue-600 px-6 sm:px-8"
                 >
-                  <Link href="/">
-                    Criar Evento
-                    <EventModal />
+                  <Link href="/painel">
+                    Criar novo evento
                     <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                   </Link>
                 </Button>
@@ -239,7 +237,7 @@ export default function Hero() {
                                 {['João', 'Maria', 'Pedro', 'Ana', 'Lucas'].map((name, idx) => (
                                   <div
                                     key={idx}
-                                    className="inline-block h-5 w-5 rounded-full ring-1 ring-white flex items-center justify-center text-[6px] font-medium text-white"
+                                    className=" h-5 w-5 rounded-full ring-1 ring-white flex items-center justify-center text-[6px] font-medium text-white"
                                     style={{
                                       background: `linear-gradient(45deg, ${['#60A5FA', '#F472B6', '#4ADE80', '#A78BFA', '#FBBF24'][idx % 5]}, ${['#3B82F6', '#EC4899', '#22C55E', '#8B5CF6', '#F59E0B'][idx % 5]})`
                                     }}
@@ -247,7 +245,7 @@ export default function Hero() {
                                     {name[0]}
                                   </div>
                                 ))}
-                                <div className="inline-block h-5 w-5 rounded-full bg-gray-700 text-[6px] text-white flex items-center justify-center ring-1 ring-white">
+                                <div className=" h-5 w-5 rounded-full bg-gray-700 text-[6px] text-white flex items-center justify-center ring-1 ring-white">
                                   +27
                                 </div>
                               </div>

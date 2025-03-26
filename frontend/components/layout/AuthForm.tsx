@@ -135,7 +135,7 @@ export function SignInForm() {
       />
       <InputField
         id="password"
-        label="Password"
+        label="Senha"
         type="password"
         placeholder="••••••••"
         required
@@ -161,7 +161,7 @@ export function SignInForm() {
         </div>
         <div className="relative flex justify-center text-xs">
           <span className="bg-card px-2 text-muted-foreground">
-            Or continue with
+            Ou continue com
           </span>
         </div>
       </div>
@@ -207,7 +207,7 @@ export function SignUpForm() {
       />
       <InputField
         id="password"
-        label="Password"
+        label="Senha"
         type="password"
         placeholder="••••••••"
         required
@@ -243,7 +243,7 @@ export function SignUpForm() {
         </label>
       </div>
 
-      <SubmitButton className="cursor-pointer" isLoading={isLoading}>Create account</SubmitButton>
+      <SubmitButton className="cursor-pointer" isLoading={isLoading}>Criar conta</SubmitButton>
 
       <div className="relative my-6">
         <div className="absolute inset-0 flex items-center">
@@ -251,7 +251,7 @@ export function SignUpForm() {
         </div>
         <div className="relative flex justify-center text-xs">
           <span className="bg-card px-2 text-muted-foreground">
-            Or continue with
+            Ou continue com
           </span>
         </div>
       </div>

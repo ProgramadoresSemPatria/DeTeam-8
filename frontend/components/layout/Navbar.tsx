@@ -5,37 +5,22 @@ export default function Navbar() {
     <nav className="max-w-7xl mx-auto py-5 flex items-center justify-between">
       <div className="flex items-center gap-6">
         <Link href="/">
-          <h1 className="text-3xl font-semibold">
-            <span className="text-green-500">FinAI</span>
-          </h1>
+          <p className="text-3xl font-semibold">
+            <span className="text-blue-500">EventoFacil</span>
+          </p>
         </Link>
-
-        <div className="hidden sm:flex items-center gap-6">
-          <Link
-            className="text-sm font-medium hover:text-purple-500 transition-colors"
-            href="/"
-          >
-            Home
-          </Link>
-          <Link
-            className="text-sm font-medium hover:text-purple-500 transition-colors"
-            href="/dashboard"
-          >
-            Dashboard
-          </Link>
-        </div>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-6">
         <Link
-          className="text-sm font-medium hover:text-purple-500 transition-colors"
-          href="/SignIn"
+          className="text-md font-medium hover:text-blue-500 transition-colors"
+          href="/sign-in"
         >
           Login
         </Link>
         <Link
-          className="text-sm font-medium hover:text-purple-500 transition-colors"
-          href="/SignUp"
+          className="text-md font-medium hover:text-blue-500 transition-colors"
+          href="/sign-up"
         >
           Sign up
         </Link>
