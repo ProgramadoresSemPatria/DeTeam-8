@@ -1,5 +1,5 @@
-import { AuthLayout } from "@/components/general/AuthLayout";
-import { SignUpForm } from "@/components/general/AuthForm";
+import { SignUpForm } from "@/components/layout/AuthForm";
+import { AuthLayout } from "@/components/layout/AuthLayout";
 
 export default function SignUp() {
   return (

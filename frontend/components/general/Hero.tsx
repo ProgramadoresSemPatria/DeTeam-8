@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import {Link} from "next-view-transitions";
 import { cn } from '@/lib/utils';
 import { Button } from "@/components/ui/button";
+import EventModal  from "@/components/general/EventModal";
 
 export default function Hero() {
   return (
@@ -43,6 +44,7 @@ export default function Hero() {
                 >
                   <Link href="/">
                     Criar Evento
+                    <EventModal />
                     <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                   </Link>
                 </Button>
