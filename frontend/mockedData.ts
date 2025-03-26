@@ -1,4 +1,5 @@
-type EventType = 'Presencial' | 'Online';
+import { EventStatus, EventType } from "./util/types";
+
 export const upcomingEvents = [
   {
     id: "1",
@@ -8,6 +9,7 @@ export const upcomingEvents = [
     type: "Presencial" as EventType,
     capacity: 500,
     registered: 342,
+    status: "ativo" as EventStatus,
     imageUrl: "https://images.unsplash.com/photo-1605379399642-870262d3d051?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
   },
   {
@@ -18,6 +20,7 @@ export const upcomingEvents = [
     type: "Presencial" as EventType,
     capacity: 50,
     registered: 32,
+    status: "ativo" as EventStatus,    
     imageUrl: "https://images.unsplash.com/photo-1504564321107-4aa3efddb5bd?q=80&w=3988&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
@@ -28,6 +31,7 @@ export const upcomingEvents = [
     type: "Online" as EventType,
     capacity: 1000,
     registered: 456,
+    status: "concluido" as EventStatus,
     imageUrl: "https://plus.unsplash.com/premium_photo-1677093905912-a653c6301260?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDIwfHx8ZW58MHx8fHx8",
   },
   {
@@ -38,6 +42,7 @@ export const upcomingEvents = [
     type: "Presencial" as EventType,
     capacity: 1000,
     registered: 456,
+    status: "ativo" as EventStatus,
     imageUrl: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3VyZnxlbnwwfHwwfHx8MA%3D%3D",
   },
 ]
