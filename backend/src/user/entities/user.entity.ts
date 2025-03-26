@@ -1,5 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany } from 'typeorm';
 import { IsEmail, IsNotEmpty } from 'class-validator';
+import { Event } from 'src/events/entities/event.entity';
+import { Guest } from 'src/guests/entities/guest.entity';
 
 @Entity('users')
 export class User {
@@ -17,12 +19,18 @@ export class User {
     @IsNotEmpty()
     password: string;
 
-    @CreateDateColumn()
-    created_at: Date;
+    @CreateDateColumn({ name: "created_at" })
+    createdAt: Date;
 
-    @UpdateDateColumn()
-    updated_at: Date;
+    @UpdateDateColumn({ name: "updated_at" })
+    updatedAt: Date;
 
-    @DeleteDateColumn()
-    deleted_at: Date;
+    @DeleteDateColumn({ name: "deleted_at", nullable: true })
+    deletedAt?: Date;
+
+    @OneToMany(() => Event, event => event.user)
+    events: Event[];
+
+    @OneToMany(() => Guest, guest => guest.user)
+    guests: Guest[];
 }

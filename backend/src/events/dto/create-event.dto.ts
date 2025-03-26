@@ -1,31 +1,38 @@
-import { IsNotEmpty, IsString, IsDate, IsEnum, IsInt, IsOptional } from 'class-validator';
-import { Type } from 'class-transformer';
-
-export type EventType = 'public' | 'private';
+import {
+    IsNotEmpty,
+    IsOptional,
+    IsUUID,
+    IsEnum,
+    IsDateString,
+    MaxLength,
+    IsInt
+} from 'class-validator';
 
 export class CreateEventDto {
     @IsNotEmpty()
-    @IsString()
+    @MaxLength(255)
     name: string;
 
     @IsNotEmpty()
-    @Type(() => Date)
-    @IsDate()
+    @IsDateString()
     date: Date;
 
     @IsNotEmpty()
-    @IsString()
+    @MaxLength(255)
     location: string;
 
-    @IsNotEmpty()
-    @IsString()
-    description: string;
+    @IsOptional()
+    description?: string;
 
     @IsNotEmpty()
-    @IsEnum(['public', 'private'])
-    type: EventType;
+    @IsEnum(["public", "private"])
+    type: "public" | "private";
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsInt()
-    maximumCapacity: number;
+    maximumCapacity?: number;
+
+    @IsNotEmpty()
+    @IsUUID()
+    userId: string;
 }
