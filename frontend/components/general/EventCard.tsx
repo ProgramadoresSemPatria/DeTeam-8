@@ -1,6 +1,6 @@
 import { CalendarDays, MapPin, Users } from "lucide-react";
 import Image from "next/image";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { useTransitionRouter } from 'next-view-transitions';
 
 interface Event {
@@ -13,11 +13,11 @@ interface Event {
     registered: number
     imageUrl: string
   }
-  
+
   interface EventCardProps {
     event: Event
   }
-  
+
   export function EventCard({ event }: EventCardProps) {
     const router = useTransitionRouter();
 
@@ -32,14 +32,14 @@ interface Event {
     return (
         <div className="bg-white rounded-md border border-gray-200">
             <div className="flex-1 h-[12rem] relative">
-                <Image 
-                src={event.imageUrl} 
+                <Image
+                src={event.imageUrl}
                 width={400}
                 height={400}
-                alt="" 
+                alt=""
                 className="w-full h-full object-cover rounded-t-md"
                 />
-                <span 
+                <span
                     className={`absolute top-2 right-2 px-3 py-[0.15rem] rounded-2xl text-[.75rem] font-bold
                     ${event.type === "Presencial" ? "bg-black text-white" : "bg-white text-black"}`}
                     >
@@ -64,8 +64,8 @@ interface Event {
                         </span>
                     </div>
                 </div>
-                <Button 
-                    asChild 
+                <Button
+                    asChild
                     className="w-full bg-gray-900 text-white mt-3 cursor-pointer"
                     onClick={() => router.push(`/eventos-publicos/${event.id}`)}
                 >
