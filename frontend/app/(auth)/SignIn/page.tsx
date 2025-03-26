@@ -9,7 +9,7 @@ export default function SignIn() {
       subtitle="Sign in to your account to continue"
       footerText="Don't have an account?"
       footerLinkText="Create an account"
-      footerLinkHref="/SignUp"
+      footerLinkHref="/SignIn"
     >
       <SignInForm />
     </AuthLayout>

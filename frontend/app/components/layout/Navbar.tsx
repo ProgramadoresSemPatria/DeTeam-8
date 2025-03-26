@@ -35,7 +35,7 @@ export default function Navbar() {
         </Link>
         <Link
           className="text-sm font-medium hover:text-purple-500 transition-colors"
-          href="/SingUp"
+          href="/SignUp"
         >
           Sign up
         </Link>
