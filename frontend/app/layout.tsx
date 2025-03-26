@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import LayoutWrapper from "./components/layout/LayoutWrapper";
+import { ViewTransitions } from 'next-view-transitions'
+
 
 import "./globals.css";
 
@@ -25,13 +27,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ViewTransitions>
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased
-        max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}
+         mx-auto px-4 sm:px-6 lg:px-8`}
       >
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
+    </ViewTransitions>
   );
 }

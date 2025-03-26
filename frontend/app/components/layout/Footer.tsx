@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
+import {Link} from "next-view-transitions";
 import { Github, X, Mail } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-gray-200 bg-white py-12 sm:py-16">
+    <footer className="max-w-7xl mx-auto border-t border-gray-200 bg-white py-12 sm:py-16">
       <div className="container mx-auto max-w-6xl px-4 sm:px-6">
         <div className="flex justify-between">
           {/* Logo */}
