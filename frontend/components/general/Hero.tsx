@@ -42,7 +42,7 @@ export default function Hero() {
                   className="w-full text-white sm:w-auto rounded-full bg-blue-500 hover:bg-blue-600 px-6 sm:px-8"
                 >
                   <Link href="/painel">
-                    Criar novo evento
+                    Criar evento
                     <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                   </Link>
                 </Button>
