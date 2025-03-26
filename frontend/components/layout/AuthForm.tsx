@@ -48,7 +48,7 @@ export function InputField({
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+            className="absolute right-3 cursor-pointer top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
             aria-label={showPassword ? "Hide password" : "Show password"}
           >
             {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -73,7 +73,7 @@ export function SubmitButton({
   return (
     <Button
       type="submit"
-      className={`auth-button w-full bg-blue-500 text-white hover:bg-blue-700/90 h-11 ${className}`}
+      className={`auth-button w-full cursor-pointer bg-blue-500 text-white hover:bg-blue-700/90 h-11 ${className}`}
       disabled={isLoading}
       {...props}
     >
@@ -100,7 +100,7 @@ export function SocialButton({
     <Button
       type="button"
       variant="outline"
-      className={`auth-button pointer w-full h-11 border-blue-500/60 hover:blue-600/80 ${className}`}
+      className={`auth-button pointer cursor-pointer w-full h-11 border-blue-500/60 hover:blue-600/80 ${className}`}
       onClick={onClick}
       disabled={isLoading}
       {...props}
@@ -147,7 +147,7 @@ export function SignInForm() {
       <div className="flex items-center justify-end">
         <a
           href="#"
-          className="text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+          className="text-sm font-medium text-blue-500 hover:text-blue-500/80 transition-colors"
         >
           Forgot password?
         </a>
@@ -220,7 +220,7 @@ export function SignUpForm() {
         <input
           type="checkbox"
           id="terms"
-          className="h-4 w-4 rounded border-gray-300 text-blue-500 focus:ring-primary"
+          className="h-4 w-4 cursor-pointer rounded border-gray-300 text-blue-500 focus:ring-primary"
         />
         <label
           htmlFor="terms"
@@ -243,7 +243,7 @@ export function SignUpForm() {
         </label>
       </div>
 
-      <SubmitButton isLoading={isLoading}>Create account</SubmitButton>
+      <SubmitButton className="cursor-pointer" isLoading={isLoading}>Create account</SubmitButton>
 
       <div className="relative my-6">
         <div className="absolute inset-0 flex items-center">
@@ -257,7 +257,7 @@ export function SignUpForm() {
       </div>
 
       <div className="grid gap-4">
-        <SocialButton>Google</SocialButton>
+        <SocialButton className="cursor-pointer">Google</SocialButton>
       </div>
     </form>
   );
