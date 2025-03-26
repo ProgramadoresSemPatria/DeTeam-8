@@ -1,3 +1,4 @@
+import { Gift } from "src/gifts/entities/gift.entity";
 import { Guest } from "src/guests/entities/guest.entity";
 import { User } from "src/user/entities/user.entity";
 import {
@@ -56,4 +57,7 @@ export class Event {
 
     @OneToMany(() => Guest, guest => guest.event)
     guests: Guest[];
+
+    @OneToMany(() => Gift, gift => gift.event)
+    gifts: Gift[];
 }
