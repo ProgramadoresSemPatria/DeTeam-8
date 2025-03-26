@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 import { EventsModule } from './events/events.module';
 import { GuestsModule } from './guests/guests.module';
+import { GiftsModule } from './gifts/gifts.module';
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { GuestsModule } from './guests/guests.module';
     }),
     DatabaseModule,
     EventsModule,
-    GuestsModule
+    GuestsModule,
+    GiftsModule
   ],
   controllers: [AppController],
   providers: [AppService],
