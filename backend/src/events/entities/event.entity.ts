@@ -1,3 +1,5 @@
+import { Guest } from "src/guests/entities/guest.entity";
+import { User } from "src/user/entities/user.entity";
 import {
     Entity,
     PrimaryGeneratedColumn,
@@ -5,6 +7,9 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     DeleteDateColumn,
+    ManyToOne,
+    JoinColumn,
+    OneToMany,
 } from "typeorm";
 
 @Entity("events")
@@ -28,9 +33,13 @@ export class Event {
         type: "enum",
         enum: ["public", "private"],
     })
+    type: "public" | "private";
 
     @Column({ name: "maximum_capacity", nullable: true })
     maximumCapacity: number;
+
+    @Column({ type: "uuid", name: "user_id" })
+    userId: string;
 
     @CreateDateColumn({ name: "created_at" })
     createdAt: Date;
@@ -40,4 +49,11 @@ export class Event {
 
     @DeleteDateColumn({ name: "deleted_at", nullable: true })
     deletedAt?: Date;
+
+    @ManyToOne(() => User, user => user.events)
+    @JoinColumn({ name: "user_id" })
+    user: User;
+
+    @OneToMany(() => Guest, guest => guest.event)
+    guests: Guest[];
 }
