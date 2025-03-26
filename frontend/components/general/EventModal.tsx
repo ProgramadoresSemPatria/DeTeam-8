@@ -420,7 +420,7 @@ const EventModal = ({ onSubmit }: EventModalProps) => {
           </form>
         </ScrollArea>
 
-        <div className="px-6 py-4 flex justify-end space-x-3 border-t border-blue-100 bg-white sticky bottom-0">
+        <div className="px-6 py-2 flex justify-end space-x-3 border-t border-blue-100 bg-white sticky bottom-0">
           <DialogClose asChild>
             <Button type="button" variant="outline" className="text-blue-800 cursor-pointer border-blue-300 hover:bg-blue-50">
               Cancelar
