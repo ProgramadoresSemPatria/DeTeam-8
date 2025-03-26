@@ -1,27 +1,16 @@
 import { CalendarDays, MapPin, Users } from "lucide-react";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { useTransitionRouter } from 'next-view-transitions';
-import { Badge } from "../ui/badge";
 
-interface Event {
-    id: string
-    title: string
-    date: string
-    location: string
-    type: "Presencial" | "Online"
-    capacity: number
-    registered: number
-    imageUrl: string
-    isUserRegistered?: boolean
-}
+import { Badge } from "../ui/badge";
+import { Link } from "next-view-transitions";
+import { Event } from "@/types/event";
 
   interface EventCardProps {
     event: Event
   }
 
   export function EventCard({ event }: EventCardProps) {
-    const router = useTransitionRouter();
+
     const isUserRegistered = true;
 
     const formattedDate = new Date(event.date).toLocaleDateString("pt-BR", {
@@ -69,22 +58,20 @@ interface Event {
                     </div>
                 </div>
                <div className="flex gap-4">
-                <Button
-                    asChild
+                <Link
+                    href={`/eventos-publicos/${event.id}`}
                     className="w-full bg-blue-500 hover:bg-blue-500/80 text-white mt-3 cursor-pointer"
-                    onClick={() => router.push(`/eventos-publicos/${event.id}`)}
                 >
                     <span>Ver detalhes</span>
-                </Button>
+                </Link>
 
                 {isUserRegistered == true && (
-                    <Button
-                        asChild
-                        className="w-full bg-blue-300 hover:bg-blue-500/80 text-white mt-3 cursor-pointer"
-                        onClick={() => router.push(`/eventos-publicos/${event.id}`)}
-                    >
-                        <span>Add to calendar</span>
-                    </Button>
+                    <Link
+                    href={`/eventos-publicos/${event.id}`}
+                    className="w-full bg-blue-500 hover:bg-blue-500/80 text-white mt-3 cursor-pointer"
+                >
+                    <span>Ver detalhes</span>
+                </Link>
                 )}
                </div>
             </div>
