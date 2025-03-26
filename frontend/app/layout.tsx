@@ -28,17 +28,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ViewTransitions>
+    <>
       <Tooltip />
       <Toaster />
-      <html lang="en">
+      <html lang="pt-BR">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased
          max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}
         >
-          <LayoutWrapper>{children}</LayoutWrapper>
+          <ViewTransitions>
+              <LayoutWrapper>{children}</LayoutWrapper> 
+          </ViewTransitions>
         </body>
       </html>
-    </ViewTransitions>
+    </>
   );
 }

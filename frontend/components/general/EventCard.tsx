@@ -1,11 +1,18 @@
 import { CalendarDays, MapPin, Users } from "lucide-react";
 import Image from "next/image";
 
+
 import { Event } from "@/types/event";
 import { Link } from "next-view-transitions";
+
+import { Button } from "@/components/ui/button";
+
+import { formattedDate } from "@/util/functions/formattedDate";
+
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { EventCardSkeleton } from "./EventCardSkeleton";
+
 
 interface EventCardProps {
   event: Event;
@@ -71,6 +78,7 @@ export function EventCard({ event, isLoading = false }: EventCardProps) {
               <span>Ver detalhes</span>
             </Link>
           </Button>
+
 
           {event.isUserRegistered && (
             <Button className="w-full bg-blue-400 hover:bg-blue-500/80 text-white mt-3 cursor-pointer">

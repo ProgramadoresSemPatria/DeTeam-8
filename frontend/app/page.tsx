@@ -27,7 +27,7 @@ export default function Home() {
           <EventList />
         </Suspense>
       </div>
-      {/* CTA Section */}
+ 
       <CallToAction />
     </div>
   );

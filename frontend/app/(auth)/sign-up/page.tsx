@@ -4,9 +4,9 @@ import { AuthLayout } from "@/components/layout/AuthLayout";
 export default function SignUp() {
   return (
     <AuthLayout
-      title="Create an account"
-      subtitle="Sign up to get started with our platform"
-      footerText="Already have an account?"
+      title="Crie sua conta"
+      subtitle="Para organizar seus eventos"
+      footerText="Ja possui uma conta?"
       footerLinkText="Sign in"
       footerLinkHref="/SignIn"
     >

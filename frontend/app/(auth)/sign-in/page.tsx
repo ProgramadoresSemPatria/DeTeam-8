@@ -4,10 +4,10 @@ import { AuthLayout } from "@/components/layout/AuthLayout";
 export default function SignIn() {
   return (
     <AuthLayout
-      title="Welcome back"
-      subtitle="Sign in to your account to continue"
-      footerText="Don't have an account?"
-      footerLinkText="Create an account"
+      title="Bem-vindo de volta"
+      subtitle="Entre com suas credenciais"
+      footerText="Não possui uma conta?"
+      footerLinkText="Crie uma"
       footerLinkHref="/SignUp"
     >
       <SignInForm />
