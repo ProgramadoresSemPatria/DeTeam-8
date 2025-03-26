@@ -18,7 +18,7 @@ export default function PublicEvents() {
     });
 
     return (
-      <main className="container mx-auto py-8 px-4 space-y-5">
+      <main className="max-w-7xl mx-auto py-8 px-4 space-y-5">
           <div className="">
             <h1 className="text-3xl font-bold">Eventos Públicos</h1>
             <p className="text-gray-700">Descubra eventos interessantes para participar</p>
