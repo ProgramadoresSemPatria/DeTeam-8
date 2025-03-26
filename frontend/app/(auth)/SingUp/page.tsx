@@ -1,7 +1,16 @@
-export default function signUp() {
+import { AuthLayout } from "@/app/components/general/AuthLayout";
+import { SignUpForm } from "@/app/components/general/AuthForm";
+
+export default function SignUp() {
   return (
-    <div>
-      <h1>Sign Up</h1>
-    </div>
+    <AuthLayout
+      title="Create an account"
+      subtitle="Sign up to get started with our platform"
+      footerText="Already have an account?"
+      footerLinkText="Sign in"
+      footerLinkHref="/SignIn"
+    >
+      <SignUpForm />
+    </AuthLayout>
   );
 }
