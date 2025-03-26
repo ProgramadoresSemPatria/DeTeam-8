@@ -1,6 +1,6 @@
 
-import { AuthLayout } from "@/app/components/general/AuthLayout";
-import { SignInForm } from "@/app/components/general/AuthForm";
+import { AuthLayout } from "@/components/general/AuthLayout";
+import { SignInForm } from "@/components/general/AuthForm";
 
 export default function SignIn() {
   return (

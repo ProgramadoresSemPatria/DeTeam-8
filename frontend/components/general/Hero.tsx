@@ -3,9 +3,8 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import {Link} from "next-view-transitions";
-import { cn } from "../../lib/utils";
-import { Button } from "../ui/button";
-import Modal from "@/app/components/general/Modal";
+import { cn } from '@/lib/utils';
+import { Button } from "@/components/ui/button";
 
 export default function Hero() {
   return (
@@ -45,7 +44,6 @@ export default function Hero() {
                   <Link href="/">
                     Criar Evento
                     <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
-                    <Modal />
                   </Link>
                 </Button>
                 <Button

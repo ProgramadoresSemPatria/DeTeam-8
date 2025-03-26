@@ -1,13 +1,13 @@
 "use client"
 import { Filter, Search, } from "lucide-react";
-import { EventCard } from "../components/general/EventCard";
-import { Button } from "../components/ui/button";
+import { EventCard } from "@/components/general/EventCard";
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { upcomingEvents } from "@/mockedData";
 
 
 export default function PublicEvents() {
-    
+
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState('');
 
@@ -26,17 +26,17 @@ export default function PublicEvents() {
           <div className="flex flex-col sm:flex-row gap-8 mb-8">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <input 
-                value={search} 
-                onChange={(e) => setSearch(e.target.value)} 
-                type="text" 
-                placeholder="Buscar eventos..." 
-                className="w-full rounded-md border border-input bg-background px-8 py-2 text-sm pl-10" 
+              <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                type="text"
+                placeholder="Buscar eventos..."
+                className="w-full rounded-md border border-input bg-background px-8 py-2 text-sm pl-10"
               />
             </div>
-            <Button 
-                variant="outline" 
-                onClick={() => setFilter('presencial')} 
+            <Button
+                variant="outline"
+                onClick={() => setFilter('presencial')}
                 className="cursor-pointer">
                   <Filter className="mr-2 h-4 w-4" />
                   Filtros
