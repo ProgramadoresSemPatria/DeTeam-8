@@ -1,0 +1,43 @@
+type EventType = 'Presencial' | 'Online';
+export const upcomingEvents = [
+  {
+    id: "1",
+    title: "Maratona de Programação",
+    date: "2025-04-15T09:00:00",
+    location: "Convention Center, San Francisco",
+    type: "Presencial" as EventType,
+    capacity: 500,
+    registered: 342,
+    imageUrl: "https://images.unsplash.com/photo-1605379399642-870262d3d051?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
+  },
+  {
+    id: "2",
+    title: "Churrasco de Aniversário do Léo",
+    date: "2025-05-10T14:00:00",
+    location: "Rua Augusta, Centro, Rio de Janeiro",
+    type: "Presencial" as EventType,
+    capacity: 50,
+    registered: 32,
+    imageUrl: "https://images.unsplash.com/photo-1504564321107-4aa3efddb5bd?q=80&w=3988&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: "3",
+    title: "Palestra sobre Tecnologia em Nuvem",
+    date: "2025-04-05T18:00:00",
+    location: "Online (Zoom)",
+    type: "Online" as EventType,
+    capacity: 1000,
+    registered: 456,
+    imageUrl: "https://plus.unsplash.com/premium_photo-1677093905912-a653c6301260?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDIwfHx8ZW58MHx8fHx8",
+  },
+  {
+    id: "4",
+    title: "Surf na Praia",
+    date: "2025-04-05T18:00:00",
+    location: "Praia do Campeche, Florianópolis",
+    type: "Presencial" as EventType,
+    capacity: 1000,
+    registered: 456,
+    imageUrl: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3VyZnxlbnwwfHwwfHx8MA%3D%3D",
+  },
+]
