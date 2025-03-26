@@ -7,8 +7,8 @@ export default function SignUp() {
       title="Crie sua conta"
       subtitle="Para organizar seus eventos"
       footerText="Ja possui uma conta?"
-      footerLinkText="Sign in"
-      footerLinkHref="/SignIn"
+      footerLinkText="Entre agora"
+      footerLinkHref="/sign-in"
     >
       <SignUpForm />
     </AuthLayout>

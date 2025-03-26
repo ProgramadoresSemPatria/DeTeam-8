@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 export default function LayoutWrapper({
   children,
@@ -9,12 +10,13 @@ export default function LayoutWrapper({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isAuthPage = pathname.startsWith("/Sign");
+  const isAuthPage = pathname.startsWith("/sign");
 
   return (
     <>
       {!isAuthPage && <Navbar />}
       {children}
+      {!isAuthPage && <Footer />}
     </>
   );
 }

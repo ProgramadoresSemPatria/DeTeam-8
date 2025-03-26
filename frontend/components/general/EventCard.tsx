@@ -4,13 +4,8 @@ import Image from "next/image";
 
 import { Event } from "@/types/event";
 import { Link } from "next-view-transitions";
-
 import { Button } from "@/components/ui/button";
-
-import { formattedDate } from "@/util/functions/formattedDate";
-
 import { Badge } from "../ui/badge";
-import { Button } from "../ui/button";
 import { EventCardSkeleton } from "./EventCardSkeleton";
 
 

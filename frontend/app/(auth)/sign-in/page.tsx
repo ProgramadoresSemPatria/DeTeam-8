@@ -8,7 +8,7 @@ export default function SignIn() {
       subtitle="Entre com suas credenciais"
       footerText="Não possui uma conta?"
       footerLinkText="Crie uma"
-      footerLinkHref="/SignUp"
+      footerLinkHref="/sign-up"
     >
       <SignInForm />
     </AuthLayout>
