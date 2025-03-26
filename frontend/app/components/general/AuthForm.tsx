@@ -166,9 +166,8 @@ export function SignInForm() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid gap-4">
         <SocialButton>Google</SocialButton>
-        <SocialButton>Apple</SocialButton>
       </div>
     </form>
   );
@@ -221,7 +220,7 @@ export function SignUpForm() {
         <input
           type="checkbox"
           id="terms"
-          className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+          className="h-4 w-4 rounded border-gray-300 text-blue-500 focus:ring-primary"
         />
         <label
           htmlFor="terms"
@@ -230,14 +229,14 @@ export function SignUpForm() {
           I agree to the{" "}
           <a
             href="#"
-            className="text-primary hover:text-primary/80 transition-colors"
+            className="text-blue-500 hover:text-blue-500/80 transition-colors"
           >
             Terms of Service
           </a>{" "}
           and{" "}
           <a
             href="#"
-            className="text-primary hover:text-primary/80 transition-colors"
+            className="text-blue-500 hover:text-blue-500/80 transition-colors"
           >
             Privacy Policy
           </a>
@@ -257,9 +256,8 @@ export function SignUpForm() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid gap-4">
         <SocialButton>Google</SocialButton>
-        <SocialButton>Apple</SocialButton>
       </div>
     </form>
   );
