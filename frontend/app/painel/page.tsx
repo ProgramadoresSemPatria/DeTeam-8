@@ -7,7 +7,7 @@ import { upcomingEvents } from "@/mockedData";
 import { formattedDate } from "@/util/functions/formattedDate";
 import { EventStatus } from "@/util/types/event";
 import EventModal from "@/components/general/EventModal";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 
 export default function Painel() {
 
