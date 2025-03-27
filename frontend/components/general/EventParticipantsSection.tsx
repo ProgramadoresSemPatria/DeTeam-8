@@ -13,6 +13,7 @@ export default function EventParticipantsSection() {
                     <thead className="bg-gray-100">
                     <tr>
                         <th className="px-4 py-2 text-left text-gray-700">Nome</th>
+                        <th className="px-4 py-2 text-left text-gray-700">Email</th>
                         <th className="px-4 py-2 text-left text-gray-700">Telefone</th>
                     </tr>
                     </thead>
@@ -20,6 +21,7 @@ export default function EventParticipantsSection() {
                         {mockedParticipants.map((participant) => (
                             <tr key={participant.id} className="border-t border-gray-200">
                             <td className="px-4 py-2 font-semibold">{participant.name}</td>
+                            <td className="px-4 py-2 font-semibold">{participant.email}</td>
                             <td className="px-4 py-2 font-semibold">{participant.phone}</td>
                             </tr>
                         ))}
