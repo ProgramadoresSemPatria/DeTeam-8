@@ -44,15 +44,15 @@ const EventModal = ({ isOpen, setIsOpen, onSubmit }: EventModalProps) => {
   };
 
   const [formData, setFormData] = useState<EventFormData>(initialFormData);
-  const [showEventLink, setShowEventLink] = useState(false);
+  const [isOnlineEvent, setIsOnlineEvent] = useState(false);
   const [newGift, setNewGift] = useState<{ name: string, value: string }>({ name: '', value: '' });
 
   useEffect(() => {
     if (formData.eventType === 'online') {
-      setShowEventLink(true);
-    } else {
-      setShowEventLink(false);
-      // Clear the event link if the event type is not online
+      setIsOnlineEvent(true);
+    } 
+    else {
+      setIsOnlineEvent(false);
       if (formData.eventLink) {
         setFormData(prev => ({ ...prev, eventLink: '' }));
       }
@@ -106,7 +106,6 @@ const EventModal = ({ isOpen, setIsOpen, onSubmit }: EventModalProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validações básicas
     if (!formData.name.trim()) {
       toast.error('Nome do evento é obrigatório');
       return;
@@ -147,7 +146,7 @@ const EventModal = ({ isOpen, setIsOpen, onSubmit }: EventModalProps) => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[650px] p-0 max-h-[90vh] overflow-hidden bg-white rounded-xl border border-blue-100">
         <DialogHeader className="px-6 pt-6 pb-2 border-b border-blue-100 sticky top-0 bg-white z-10">
-          <DialogTitle className="text-2xl font-bold text-center cursor-pointer text-blue-800">
+          <DialogTitle className="text-2xl font-bold text-center cursor-pointer text-blue-500">
             Criação do Evento
           </DialogTitle>
           <DialogDescription className="sr-only">
@@ -158,7 +157,7 @@ const EventModal = ({ isOpen, setIsOpen, onSubmit }: EventModalProps) => {
         <ScrollArea className="max-h-[calc(90vh-8rem)] px-6 py-4">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="name" className="text-blue-900 font-medium">
+              <Label htmlFor="name" className="text-blue-500 font-medium">
                 Nome do Evento
               </Label>
               <Input
@@ -172,7 +171,7 @@ const EventModal = ({ isOpen, setIsOpen, onSubmit }: EventModalProps) => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="description" className="text-blue-900 font-medium">
+              <Label htmlFor="description" className="text-blue-500 font-medium">
                 Descrição do Evento
               </Label>
               <Textarea
@@ -187,7 +186,7 @@ const EventModal = ({ isOpen, setIsOpen, onSubmit }: EventModalProps) => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="date" className="text-blue-900 font-medium flex items-center">
+                <Label htmlFor="date" className="text-blue-500 font-medium flex items-center">
                   <Calendar className="h-4 w-4 mr-1 text-blue-500" />
                   Data
                 </Label>
@@ -220,7 +219,7 @@ const EventModal = ({ isOpen, setIsOpen, onSubmit }: EventModalProps) => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="time" className="text-blue-900 font-medium flex items-center">
+                <Label htmlFor="time" className="text-blue-500 font-medium flex items-center">
                   <Clock className="h-4 w-4 mr-1 text-blue-500" />
                   Horário <span className="text-red-500 ml-1">*</span>
                 </Label>
@@ -236,24 +235,9 @@ const EventModal = ({ isOpen, setIsOpen, onSubmit }: EventModalProps) => {
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="location" className="text-blue-900 font-medium flex items-center">
-                <MapPin className="h-4 w-4 mr-1 text-blue-500" />
-                Local
-              </Label>
-              <Input
-                id="location"
-                name="location"
-                value={formData.location}
-                onChange={handleInputChange}
-                className="border-blue-200 focus:border-blue-500 focus:ring-blue-500"
-                placeholder="Digite o local do evento"
-              />
-            </div>
-
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="eventType" className="text-blue-900 font-medium">
+                <Label htmlFor="eventType" className="text-blue-500 font-medium">
                   Tipo
                 </Label>
                 <Select
@@ -271,7 +255,7 @@ const EventModal = ({ isOpen, setIsOpen, onSubmit }: EventModalProps) => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="capacity" className="text-blue-900 font-medium">
+                <Label htmlFor="capacity" className="text-blue-500 font-medium">
                   Capacidade Máxima <span className="text-red-500 ml-1">*</span>
                 </Label>
                 <Input
@@ -287,6 +271,41 @@ const EventModal = ({ isOpen, setIsOpen, onSubmit }: EventModalProps) => {
               </div>
             </div>
 
+            {!isOnlineEvent && (
+              <div className="space-y-2 w-full">
+                <Label htmlFor="location" className="text-blue-500 font-medium flex items-center">
+                  <MapPin className="h-4 w-4 mr-1 text-blue-500" />
+                  Local 
+                </Label>
+                <Input
+                  id="location"
+                  name="location"
+                  value={formData.location}
+                  onChange={handleInputChange}
+                  className="border-blue-200 focus:border-blue-500 focus:ring-blue-500"
+                  placeholder="Digite o local do evento"
+                />
+              </div>
+            )}
+
+
+            {isOnlineEvent && (
+              <div className="space-y-2 fade-in">
+                <Label htmlFor="eventLink" className="text-blue-500 font-medium">
+                  Link do Evento <span className="text-red-500 ml-1">*</span>
+                </Label>
+                <Input
+                  id="eventLink"
+                  name="eventLink"
+                  value={formData.eventLink}
+                  onChange={handleInputChange}
+                  className="border-blue-200 focus:border-blue-500 focus:ring-blue-500"
+                  placeholder="Cole o link da reunião (Zoom, Teams, etc)"
+                  required={formData.eventType === 'online'}
+                />
+              </div>
+            )}
+
             <div className="flex items-center space-x-2">
               <Switch
                 id="isPublic"
@@ -295,7 +314,7 @@ const EventModal = ({ isOpen, setIsOpen, onSubmit }: EventModalProps) => {
                 className="data-[state=checked]:bg-blue-500 cursor-pointer"
               />
               <div className="flex items-center">
-                <Label htmlFor="isPublic" className="text-blue-900 font-medium mr-1 cursor-pointer">
+                <Label htmlFor="isPublic" className="text-blue-500 font-medium mr-1 cursor-pointer">
                   {formData.isPublic ?
                     <span className="flex items-center"><Globe className="h-4 w-4 mr-1" /> Evento Público</span> :
                     <span className="flex items-center"><Lock className="h-4 w-4 mr-1" /> Evento Privado</span>
@@ -314,26 +333,9 @@ const EventModal = ({ isOpen, setIsOpen, onSubmit }: EventModalProps) => {
               </div>
             </div>
 
-            {showEventLink && (
-              <div className="space-y-2 fade-in">
-                <Label htmlFor="eventLink" className="text-blue-900 font-medium">
-                  Link do Evento <span className="text-red-500 ml-1">*</span>
-                </Label>
-                <Input
-                  id="eventLink"
-                  name="eventLink"
-                  value={formData.eventLink}
-                  onChange={handleInputChange}
-                  className="border-blue-200 focus:border-blue-500 focus:ring-blue-500"
-                  placeholder="Cole o link da reunião (Zoom, Teams, etc)"
-                  required={formData.eventType === 'online'}
-                />
-              </div>
-            )}
-
             <div className="space-y-3 pt-1">
               <div className="flex justify-between items-center">
-                <Label className="text-blue-900 font-medium">
+                <Label className="text-blue-500 font-medium">
                   Presentes ou Contribuições
                 </Label>
               </div>
@@ -344,7 +346,7 @@ const EventModal = ({ isOpen, setIsOpen, onSubmit }: EventModalProps) => {
                     {formData.gifts.map((gift) => (
                       <div key={gift.id} className="flex items-center justify-between p-3 bg-blue-50 rounded-md">
                         <div>
-                          <p className="font-medium text-blue-900">{gift.name}</p>
+                          <p className="font-medium text-blue-500">{gift.name}</p>
                           <p className="text-sm text-blue-700">R$ {gift.value}</p>
                         </div>
                         <Button
@@ -364,7 +366,7 @@ const EventModal = ({ isOpen, setIsOpen, onSubmit }: EventModalProps) => {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <div className="sm:col-span-2">
                     <Input
-                      placeholder="Nome do presente"
+                      placeholder="Título do presente ou contribuição"
                       value={newGift.name}
                       onChange={(e) => setNewGift({ ...newGift, name: e.target.value })}
                       className="border-blue-200 focus:border-blue-500 focus:ring-blue-500"
@@ -375,6 +377,7 @@ const EventModal = ({ isOpen, setIsOpen, onSubmit }: EventModalProps) => {
                       <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">R$</span>
                       <Input
                         placeholder="Valor"
+                        type="number"
                         value={newGift.value}
                         onChange={(e) => setNewGift({ ...newGift, value: e.target.value })}
                         className="pl-10 border-blue-200 focus:border-blue-500 focus:ring-blue-500"
@@ -404,7 +407,7 @@ const EventModal = ({ isOpen, setIsOpen, onSubmit }: EventModalProps) => {
           </DialogClose>
           <Button
             type="button"
-            className="bg-green-500 cursor-pointer hover:bg-green-600 transition-colors"
+            className="bg-green-600 cursor-pointer hover:bg-green-600/90 transition-colors"
             onClick={handleSubmit}
           >
             Criar Evento
