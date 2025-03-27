@@ -1,6 +1,7 @@
 "use client";
 
 import ContactForm from "@/components/general/Contact";
+import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 import { Globe, Mail } from "lucide-react";
 import Image from "next/image";
@@ -10,7 +11,7 @@ const PageHeader = () => (
     <div className="container mx-auto px-4 md:px-6 relative z-10">
       <div className="max-w-3xl mx-auto text-center">
         <motion.span
-          className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4"
+          className="inline-block px-3 py-1 rounded-full bg-blue-500/10 text-blue-500 text-sm font-medium mb-4"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -73,7 +74,12 @@ const Team = () => {
     },
   ];
   return (
-    <section className="py-16 md:py-24">
+    <motion.section
+      className="py-16 md:py-24"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
           {teamMembers.map((member, index) => (
@@ -114,17 +120,21 @@ const Team = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
 const Values = () => (
-  <section className=" md:py-24">
+  <motion.section
+      className="py-16 md:py-24"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}>
     <div className="container mx-auto px-4 md:px-6">
       <div className="text-center mb-16">
-        <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+        <Badge className="inline-block px-3 py-1 rounded-full bg-blue-500/10 text-blue-500 text-sm font-medium mb-4">
           Nossos Valores
-        </span>
+        </Badge>
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
           O que guia nossas decisões
         </h2>
@@ -135,7 +145,7 @@ const Values = () => (
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white p-8 rounded-xl shadow-card">
+        <div className="bg-white p-2 rounded-xl shadow-card">
           <div className="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
             <span className="text-primary text-xl font-bold">1</span>
           </div>
@@ -147,7 +157,7 @@ const Values = () => (
           </p>
         </div>
 
-        <div className="bg-white p-8 rounded-xl shadow-card">
+        <div className="bg-white p-2 rounded-xl shadow-card">
           <div className="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
             <span className="text-primary text-xl font-bold">2</span>
           </div>
@@ -160,7 +170,7 @@ const Values = () => (
           </p>
         </div>
 
-        <div className="bg-white p-8 rounded-xl shadow-card">
+        <div className="bg-white p-2 rounded-xl shadow-card">
           <div className="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
             <span className="text-primary text-xl font-bold">3</span>
           </div>
@@ -172,7 +182,7 @@ const Values = () => (
           </p>
         </div>
 
-        <div className="bg-white p-8 rounded-xl shadow-card">
+        <div className="bg-white p-2 rounded-xl shadow-card">
           <div className="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
             <span className="text-primary text-xl font-bold">4</span>
           </div>
@@ -186,7 +196,7 @@ const Values = () => (
         </div>
       </div>
     </div>
-  </section>
+  </motion.section>
 );
 
 const Equipe = () => {

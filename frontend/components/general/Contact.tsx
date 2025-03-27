@@ -1,11 +1,14 @@
+import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
+
 export default function ContactForm() {
   return (
     <section className="py-16 md:py-24">
     <div className="container mx-auto px-4 md:px-6">
       <div className="text-center mb-16">
-        <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+        <Badge className="inline-block px-3 py-1 rounded-full bg-blue-500/10 text-blue-500 text-sm font-medium mb-4">
           Contato
-        </span>
+        </Badge>
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
           Entre em contato com nossa equipe
         </h2>
@@ -17,7 +20,7 @@ export default function ContactForm() {
 
       <div className="max-w-3xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-          <div className="bg-white p-6 rounded-xl shadow-subtle">
+          <div className="bg-gray-50/90 p-6 rounded-xl shadow-subtle">
             <h3 className="text-xl font-semibold mb-4">Suporte</h3>
             <p className="text-muted-foreground mb-4">
               Precisa de ajuda com algo? Nossa equipe de suporte está pronta
@@ -25,13 +28,13 @@ export default function ContactForm() {
             </p>
             <a
               href="mailto:suporte@easyevent.com"
-              className="text-primary hover:text-primary/80 font-medium"
+              className="text-blue-500 hover:text-blue-500/80 font-medium"
             >
-              suporte@easyevent.com
+              suporte@eventofacil.com
             </a>
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-subtle">
+          <div className="bg-gray-50/90 p-6 rounded-xl shadow-subtle">
             <h3 className="text-xl font-semibold mb-4">Imprensa</h3>
             <p className="text-muted-foreground mb-4">
               Para solicitações de imprensa e mídia, entre em contato através do
@@ -39,9 +42,9 @@ export default function ContactForm() {
             </p>
             <a
               href="mailto:imprensa@easyevent.com"
-              className="text-primary hover:text-primary/80 font-medium"
+              className="text-blue-500 hover:text-blue-500/80 font-medium"
             >
-              imprensa@easyevent.com
+              imprensa@eventofacil.com
             </a>
           </div>
         </div>
@@ -111,12 +114,12 @@ export default function ContactForm() {
               ></textarea>
             </div>
 
-            <button
+            <Button
               type="submit"
-              className="px-6 py-3 bg-primary text-white font-medium rounded-lg shadow-button hover:shadow-md transition-all hover:bg-primary/90"
+              className="px-6 py-3 bg-blue-500 cursor-pointer text-white font-medium rounded-lg shadow-button hover:shadow-md transition-all hover:bg-blue-500/90"
             >
               Enviar mensagem
-            </button>
+            </Button>
           </form>
         </div>
       </div>
