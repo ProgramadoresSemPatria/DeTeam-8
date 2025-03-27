@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
@@ -17,6 +17,14 @@ export class UserService {
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     try {
+      const existingUser = await this.userRepository.findOne({
+        where: { email:  createUserDto.email},
+      });
+      
+      if (existingUser) {
+        throw new ConflictException("E-mail já está em uso");
+      }
+
       const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
       const newUser = this.userRepository.create({
         ...createUserDto,
