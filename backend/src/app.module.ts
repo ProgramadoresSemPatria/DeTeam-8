@@ -6,6 +6,7 @@ import { DatabaseModule } from './database/database.module';
 import { EventsModule } from './events/events.module';
 import { GuestsModule } from './guests/guests.module';
 import { GiftsModule } from './gifts/gifts.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { GiftsModule } from './gifts/gifts.module';
     DatabaseModule,
     EventsModule,
     GuestsModule,
-    GiftsModule
+    GiftsModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
