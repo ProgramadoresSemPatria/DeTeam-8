@@ -2,6 +2,9 @@ import CallToAction from "@/components/general/CallToAction";
 import { EventCard } from "@/components/general/EventCard";
 import { EventCardSkeleton } from "@/components/general/EventCardSkeleton";
 import Hero from "@/components/general/Hero";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+import { Link } from "next-view-transitions";
 import { Suspense } from "react";
 
 export default function Home() {
@@ -11,9 +14,16 @@ export default function Home() {
 
       {/* Eventos Section */}
       <div className="container py-12 mx-auto max-w-6xl">
-        <h1 className="text-3xl font-bold tracking-tight mb-8">
-          Ultimos Eventos{" "}
-        </h1>
+        <div className="flex justify-between">
+          <h1 className="text-3xl font-bold tracking-tight mb-8">
+            Ultimos Eventos{" "}
+          </h1>
+          <Button className="text-sm cursor-pointer font-medium transition-colors disabled:opacity-50 h-11 w-full text-white sm:w-auto rounded-full bg-blue-500 hover:bg-blue-600 px-6 sm:px-8">
+            <Link href="/eventos-publicos">Ver todos</Link>
+
+            <ArrowRight />
+          </Button>
+        </div>
 
         <Suspense
           fallback={
@@ -77,7 +87,10 @@ async function EventList() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {events.map((event) => (
-        <EventCard key={event.id} event={{...event, type: event.type as "Presencial" | "Online"}} />
+        <EventCard
+          key={event.id}
+          event={{ ...event, type: event.type as "Presencial" | "Online" }}
+        />
       ))}
     </div>
   );

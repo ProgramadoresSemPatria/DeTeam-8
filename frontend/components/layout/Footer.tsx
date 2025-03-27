@@ -3,7 +3,7 @@ import { Link } from "next-view-transitions";
 
 export default function Footer() {
   return (
-    <footer className="max-w-7xl mx-auto border-t border-gray-200 bg-white py-12 sm:py-16">
+    <footer className="max-w-7xl mx-auto border-t border-gray-200 bg-white py-12 sm:py-20">
       <div className="container mx-auto max-w-6xl px-4 sm:px-6">
         <div className="flex justify-between">
           {/* Logo */}
@@ -22,7 +22,7 @@ export default function Footer() {
               <ul className="space-y-2">
                 <li>
                   <Link
-                    href="/institucional/equipe"
+                    href="/institucional/team"
                     className="text-sm text-gray-500 hover:text-gray-700"
                   >
                     Nossa Equipe
@@ -80,7 +80,7 @@ export default function Footer() {
               <ul className="space-y-2">
                 <li>
                   <Link
-                    href="/contato"
+                    href="/contact"
                     className="text-sm text-gray-500 hover:text-gray-700"
                   >
                     Contact
