@@ -1,6 +1,5 @@
 import LayoutWrapper from "@/components/layout/LayoutWrapper";
 import type { Metadata } from "next";
-import { ViewTransitions } from "next-view-transitions";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import { Toaster } from "@/components/ui/sonner";
@@ -36,9 +35,9 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased
          max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}
         >
-          <ViewTransitions>
-              <LayoutWrapper>{children}</LayoutWrapper>
-          </ViewTransitions>
+            <LayoutWrapper>
+              {children}
+            </LayoutWrapper> 
         </body>
       </html>
     </>
