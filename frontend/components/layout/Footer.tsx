@@ -22,23 +22,15 @@ export default function Footer() {
               <ul className="space-y-2">
                 <li>
                   <Link
-                    href="/docs"
+                    href="/institucional/equipe"
                     className="text-sm text-gray-500 hover:text-gray-700"
                   >
-                    Documentação
+                    Nossa Equipe
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="/connect"
-                    className="text-sm text-gray-500 hover:text-gray-700"
-                  >
-                    Conecte-se
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="https://github.com"
+                    href="https://github.com/programdores-sem-patria"
                     className="text-sm text-gray-500 hover:text-gray-700"
                   >
                     GitHub
