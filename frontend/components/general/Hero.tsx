@@ -15,7 +15,7 @@ export default function Hero() {
       className="pt-20 sm:pt-24 md:pt-32 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6"
     >
       <div className="container mx-auto max-w-6xl">
-        <div className="mx-auto w-fit sm:mx-0 sm:w-auto sm:inline-block sm:text-center px-4 py-1 rounded-full bg-green-100 text-green-600 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+        <div className="mx-auto w-fit sm:mx-0 sm:w-auto sm:inline-block sm:text-center px-4 py-1 rounded-full bg-green-100 text-green-600 text-xs sm:text-sm font-medium mb-2 sm:mb-0">
           Convide. Confirme. Conecte.
         </div>
         <div className="flex flex-col lg:flex-row items-center">
@@ -27,8 +27,8 @@ export default function Hero() {
               className="text-center lg:text-left"
             >
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold md:leading-15 text-gray-900 mb-4 sm:mb-6">
-                Organize <span className="text-blue-500">Eventos Pequenos</span>{" "}
-                sem Complicação
+                Organize Seus <span className="text-blue-500">Eventos</span>{" "}
+                Sem Complicação
               </h1>
               <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-8">
                 Uma plataforma simples e intuitiva para criar e gerenciar
