@@ -1,6 +1,5 @@
 "use client";
 
-import ContactForm from "@/components/general/Contact";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 import { Globe, Mail } from "lucide-react";
@@ -205,7 +204,6 @@ const Equipe = () => {
       <PageHeader />
       <Team />
       <Values />
-      <ContactForm />
     </div>
   );
 };
