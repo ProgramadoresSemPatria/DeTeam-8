@@ -2,7 +2,7 @@
 import { CalendarDays, MapPin, Users } from "lucide-react";
 import Image from "next/image";
 import { Event } from "@/util/types/event";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "../ui/badge";
 import { EventCardSkeleton } from "./EventCardSkeleton";
