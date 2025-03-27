@@ -1,12 +1,12 @@
+"use client";
 import { CalendarDays, MapPin, Users } from "lucide-react";
 import Image from "next/image";
-
-
-import { Event } from "@/types/event";
+import { Event } from "@/util/types/event";
 import { Link } from "next-view-transitions";
 import { Button } from "@/components/ui/button";
 import { Badge } from "../ui/badge";
 import { EventCardSkeleton } from "./EventCardSkeleton";
+import { formattedDate } from "@/util/functions/formattedDate";
 
 
 interface EventCardProps {
@@ -14,23 +14,16 @@ interface EventCardProps {
   isLoading?: boolean;
 }
 
-export function EventCard({ event, isLoading = false }: EventCardProps) {
+export default function EventCard({ event, isLoading = false }: EventCardProps) {
   if (isLoading) {
     return <EventCardSkeleton />;
   }
-  const formattedDate = new Date(event.date).toLocaleDateString("pt-BR", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
 
   return (
     <div className=" bg-white rounded-md border border-gray-200">
       <div className="flex-1 h-[12rem] relative">
         <Image
-          src={event.imageUrl}
+          src={event.imageUrl || "/placeholder.png"}
           width={400}
           height={400}
           alt="Imagem do evento"
@@ -54,7 +47,7 @@ export function EventCard({ event, isLoading = false }: EventCardProps) {
           <h3 className="text-xl font-bold line-clamp-2">{event.title}</h3>
           <div className="flex items-center">
             <CalendarDays className="h-4 w-4 mr-2 text-muted-foreground" />
-            <span>{formattedDate}</span>
+            <span>{formattedDate(event.date)}</span>
           </div>
           <div className="flex items-center">
             <MapPin className="h-4 w-4 mr-2 text-muted-foreground" />
@@ -69,7 +62,7 @@ export function EventCard({ event, isLoading = false }: EventCardProps) {
         </div>
         <div className="flex gap-2">
           <Button className="w-full bg-blue-500 hover:bg-blue-500/80 text-white mt-3 cursor-pointer">
-            <Link href={`/eventos-publicos/${event.id}`}>
+            <Link href={`/eventos/${event.id}`}>
               <span>Ver detalhes</span>
             </Link>
           </Button>
@@ -77,7 +70,7 @@ export function EventCard({ event, isLoading = false }: EventCardProps) {
 
           {event.isUserRegistered && (
             <Button className="w-full bg-blue-400 hover:bg-blue-500/80 text-white mt-3 cursor-pointer">
-              <Link href={`/eventos-publicos/${event.id}`}>
+              <Link href={`/eventos/${event.id}`}>
                 <span>Add to calendar</span>
               </Link>
             </Button>

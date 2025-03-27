@@ -1,12 +1,13 @@
 "use client"
-import { Plus, Search } from "lucide-react";
+import { BarChart3, CheckSquare, Edit, Plus, Search, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { cn } from "../../lib/utils";
 import { upcomingEvents } from "@/mockedData";
 import { formattedDate } from "@/util/functions/formattedDate";
-import { EventStatus } from "@/util/types";
+import { EventStatus } from "@/util/types/event";
 import EventModal from "@/components/general/EventModal";
+import { Link } from "next-view-transitions";
 
 export default function Painel() {
 
@@ -20,7 +21,6 @@ export default function Painel() {
     
     return statusMatch && titleMatch;
   });
-  
   const eventsToDisplay = filteredEvents;
 
   return (
@@ -91,13 +91,14 @@ export default function Painel() {
                   </Button>
               </div>
               <div className="overflow-x-auto">
-                  <table className="w-full border-collapse border border-gray-200 rounded-md">
+                  <table className="w-full border-collapse border border-gray-200 rounded-md overflow-x-scroll">
                     <thead className="bg-gray-100">
                       <tr>
                         <th className="px-4 py-2 text-left text-gray-700">Evento</th>
                         <th className="px-4 py-2 text-left text-gray-700">Data</th>
                         <th className="px-4 py-2 text-left text-gray-700">Local</th>
                         <th className="px-4 py-2 text-left text-gray-700">Inscrições</th>
+                        <th className="px-4 py-2 text-left text-gray-700">Ações</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -115,6 +116,28 @@ export default function Painel() {
                           <td className="px-4 py-2">{formattedDate(event.date)}</td>
                           <td className="px-4 py-2">{event.location}</td>
                           <td className="px-4 py-2">{event.registered}</td>
+                          <td className="p-4 align-middle">
+                            <div className="flex items-center gap-2">
+                              <Button variant="ghost" size="icon" asChild>
+                                <Link href={`/eventos/${event.id}`}>
+                                  <BarChart3 className="h-4 w-4" />
+                                </Link>
+                              </Button>
+                              <Button variant="ghost" size="icon" asChild>
+                                <Link href={`/eventos/${event.id}/`}>
+                                  <CheckSquare className="h-4 w-4" />
+                                </Link>
+                              </Button>
+                              <Button variant="ghost" size="icon" asChild>
+                                <Link href={`/eventos/${event.id}/editar`}>
+                                  <Edit className="h-4 w-4" />
+                                </Link>
+                              </Button>
+                              <Button variant="ghost" size="icon">
+                                <Trash2 className="h-4 w-4" />
+                              </Button>
+                            </div>
+                         </td>
                         </tr>
                       ))}
                     </tbody>

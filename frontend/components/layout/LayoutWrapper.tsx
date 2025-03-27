@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Navbar from "./Navbar";
+import Header from "./Header";
 import Footer from "./Footer";
 
 export default function LayoutWrapper({
@@ -14,7 +14,7 @@ export default function LayoutWrapper({
 
   return (
     <>
-      {!isAuthPage && <Navbar />}
+      {!isAuthPage && <Header />}
       {children}
       {!isAuthPage && <Footer />}
     </>
