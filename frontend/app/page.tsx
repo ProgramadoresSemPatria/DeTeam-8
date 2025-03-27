@@ -15,9 +15,9 @@ export default function Home() {
 
       <div className="container py-12 mx-auto max-w-6xl">
       <div className="flex justify-between">
-          <h1 className="text-3xl font-bold tracking-tight mb-8">
+          <h2 className="text-3xl font-bold tracking-tight mb-8">
             Eventos Públicos em Destaque
-          </h1>
+          </h2>
           <Button className="text-sm cursor-pointer font-medium transition-colors disabled:opacity-50 h-11 w-full text-white sm:w-auto rounded-full bg-blue-500 hover:bg-blue-600 px-6 sm:px-8">
             <Link href="/eventos/publicos">Ver todos</Link>
             <ArrowRight />
