@@ -27,9 +27,9 @@ export const upcomingEvents = [
     capacity: 50,
     registered: 32,
     isPublic: true,
-    status: "ativo" as EventStatus,  
+    status: "ativo" as EventStatus,
     description: "Um churrasco de aniversário para celebrar o aniversário de Léo.",
-    organizer: "Léo Alves",  
+    organizer: "Léo Alves",
     hasContribution: [
       {
         id: 1,
@@ -107,12 +107,12 @@ export const mockedParticipants = [
     id: 5,
     name: "Lucas Silva",
     email: "4i2yZ@example.com",
-    phone: "(11) 99999-9999",   
+    phone: "(11) 99999-9999",
   },
   {
     id: 6,
     name: "Fernanda Tibet",
     email: "4i2yZ@example.com",
-    phone: "(11) 99999-9999", 
+    phone: "(11) 99999-9999",
   }
 ]
