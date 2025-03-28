@@ -1,6 +1,7 @@
 import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ClassSerializerInterceptor, Logger, ValidationPipe } from '@nestjs/common';
+import { AllExceptionsFilter } from './commom/filters/all-exceptions.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,12 +14,14 @@ async function bootstrap() {
 
   // TODO: em produção: https://eventofacil.vercel.app/
   app.enableCors({
-    origin: '*', 
-    methods: 'GET,POST,PUT,DELETE,OPTIONS', 
-    allowedHeaders: 'Content-Type, Authorization', 
+    origin: '*',
+    methods: 'GET,POST,PUT,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type, Authorization',
   });
 
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
+
+  app.useGlobalFilters(new AllExceptionsFilter());
 
   await app.listen(process.env.PORT ?? 3000);
 
