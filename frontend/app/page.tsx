@@ -27,14 +27,14 @@ export default function Home() {
         <Suspense
           fallback={
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {Array.from({ length: 4 }).map((_, index) => (
+              {Array.from({ length: 3 }).map((_, index) => (
                 <EventCardSkeleton key={index} />
               ))}
             </div>
           }
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {upcomingEvents.map((event) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {upcomingEvents.slice(0, 3).map((event) => (
               <EventCard key={event.id} event={event} />
             ))}
           </div>
