@@ -105,7 +105,7 @@ export default function Painel() {
                       {eventsToDisplay.map((event) => (
                         <tr key={event.id} className="border-t border-gray-200">
                           <td className="px-4 py-2 font-semibold flex flex-col gap-1">
-                            {event.title} 
+                            <Link href={`/eventos/${event.id}`}>{event.title} </Link>
                             <span 
                               className={`px-3 max-w-fit py-[0.15rem] rounded-2xl text-[.75rem] font-bold
                               ${event.type === "Presencial" ? "bg-black text-white" : "bg-slate-100 text-black"}`}

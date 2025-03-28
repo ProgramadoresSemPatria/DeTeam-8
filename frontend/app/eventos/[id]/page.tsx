@@ -19,7 +19,7 @@ export default function EventPage() {
     const { id } = params;
     if (!id) return <p>Carregando...</p>;
 
-    const event = upcomingEvents.find((event) => event.id === id);
+    const event = upcomingEvents.find((event) => event.id === Number(id));
     if (!event) return <p className="text-center mt-5">Evento não encontrado</p>;
 
     return (
@@ -65,7 +65,7 @@ export default function EventPage() {
 
                 <div className="flex flex-wrap gap-3 mb-8">
                     <Button asChild className="bg-blue-500 hover:bg-blue-500/90 cursor-pointer">
-                        <Link href={`/eventos/${id}/inscrever`}>Inscrever-se</Link>
+                        <Link href={`/eventos/${id}/inscricao`}>Inscrever-se</Link>
                     </Button>
                     {/* TODO: adicionar link do evento para compartilhar */}
                     <Button variant="outline" className="cursor-pointer">

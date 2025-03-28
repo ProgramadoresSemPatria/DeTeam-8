@@ -1,5 +1,5 @@
 export interface Event {
-  id: string;
+  id: number;
   title: string;
   description: string;
   date: string;
@@ -13,6 +13,11 @@ export interface Event {
   imageUrl: string;
   isUserRegistered?: boolean;
   isPublic: boolean;
+  hasContribution: {
+    id: number;
+    name: string;
+    value: number;
+  }[];
 }
 
 export type EventType = 'Presencial' | 'Online';

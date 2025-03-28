@@ -1,3 +1,4 @@
+import { Calendar } from "lucide-react";
 import Link from "next/link";
 
 export default function Navbar() {
@@ -6,7 +7,8 @@ export default function Navbar() {
       <nav className='flex items-center justify-between'>
         <div className="flex items-center gap-6">
           <Link href="/">
-            <p className="text-3xl font-semibold">
+            <p className="text-3xl font-semibold flex items-center gap-1">
+              <Calendar className="h-6 w-6 text-blue-500" />
               <span className="text-blue-500">EventoFacil</span>
             </p>
           </Link>
