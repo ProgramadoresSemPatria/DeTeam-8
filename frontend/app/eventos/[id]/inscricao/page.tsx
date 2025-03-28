@@ -40,7 +40,7 @@ const EventSubscriptionPage: React.FC = () => {
     <main className="container mx-auto py-8 px-4 max-w-7xl">
       <div className="mx-auto">
         <div className="mb-6 text-center">
-          <h1 className="text-3xl font-bold text-blue-700">{event.title}</h1>
+          <h1 className="text-3xl font-bold text-blue-600">{event.title}</h1>
           <p className="text-muted-foreground">Confirme sua presença no evento</p>
         </div>
 

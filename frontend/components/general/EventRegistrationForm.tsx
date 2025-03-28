@@ -63,7 +63,7 @@ const EventRegistrationForm: React.FC<EventRegistrationFormProps> = ({ event, on
   return (
     <Card className="border-blue-200 border-1">
       <CardHeader>
-        <CardTitle className="text-2xl font-semibold text-blue-700">
+        <CardTitle className="text-2xl font-semibold text-blue-600">
           Informações Pessoais
         </CardTitle>
         <p className="text-sm text-muted-foreground">
@@ -164,7 +164,7 @@ const EventRegistrationForm: React.FC<EventRegistrationFormProps> = ({ event, on
 
           <Button
             type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-600"
+            className="w-full cursor-pointer bg-blue-500 hover:bg-blue-600/80"
           >
             Confirmar Presença
           </Button>

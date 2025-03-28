@@ -27,10 +27,10 @@ export default function EventPage() {
         <div className="grid grid-cols-1 gap-8">
             <div className="lg:col-span-2 space-y-8">
             <div className="relative rounded-xl overflow-hidden">
-                <Image 
-                    src={event?.imageUrl || "/placeholder.svg"} 
-                    alt={event?.title || "Imagem do evento"} className="w-full h-[300px] object-cover" 
-                    width={400} 
+                <Image
+                    src={event?.imageUrl || "/placeholder.svg"}
+                    alt={event?.title || "Imagem do evento"} className="w-full h-[300px] object-cover"
+                    width={400}
                     height={400}
                     />
                 <div className="absolute top-4 right-4 flex gap-2">
@@ -76,20 +76,20 @@ export default function EventPage() {
 
                 <div>
                 <div className="flex flex-1 bg-slate-200 rounded-md p-1 mb-4">
-                    <Button 
+                    <Button
                         className={cn(
-                        "w-full cursor-pointer", 
+                        "w-full cursor-pointer",
                         eventInfo === 'detalhes' ? "bg-white text-black hover:bg-white" : "bg-transparent text-slate-500 hover:bg-slate-100"
-                        )}                
+                        )}
                         onClick={() => setEventInfo('detalhes')}
                         >
                         Detalhes
                     </Button>
-                    <Button 
+                    <Button
                         className={cn(
-                        "w-full cursor-pointer", 
+                        "w-full cursor-pointer",
                         eventInfo === 'participantes' ? "bg-white text-black hover:bg-white" : "bg-transparent text-slate-500 hover:bg-slate-100"
-                        )}                 
+                        )}
                         onClick={() => setEventInfo('participantes')}
                         >
                         Participantes
@@ -98,7 +98,7 @@ export default function EventPage() {
                 {eventInfo === 'detalhes' && <EventDetailsSection event={event} />}
                 {eventInfo === 'participantes' && <EventParticipantsSection />}
                 <div className="">
-                        
+
                 </div>
             </div>
 

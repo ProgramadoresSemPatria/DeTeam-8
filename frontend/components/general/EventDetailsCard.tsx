@@ -25,7 +25,7 @@ const EventDetailsCard: React.FC<EventDetailsCardProps> = ({ event }) => {
   return (
     <Card className="h-full border-blue-200 border-1">
       <CardHeader>
-        <CardTitle className="text-2xl font-semibold text-blue-700">
+        <CardTitle className="text-2xl font-semibold text-blue-600">
           Detalhes do Evento
         </CardTitle>
       </CardHeader>
