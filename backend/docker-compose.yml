@@ -1,9 +1,24 @@
+version: "3.9"
+
 services:
-  api-solid:
-    image: bitnami/postgresql
-    ports:
-      - 5433:5432
+  database:
+    image: postgres:latest
+    container_name: team8_database
+    env_file:
+      - .env
     environment:
-      - POSTGRESQL_USERNAME=time8
-      - POSTGRESQL_PASSWORD=time8
-      - POSTGRESQL_DATABASE=time8
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - team8_network
+
+volumes:
+  db-data:
+
+networks:
+  team8_network: {}

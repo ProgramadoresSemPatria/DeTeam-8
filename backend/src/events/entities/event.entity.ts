@@ -1,6 +1,7 @@
 import { Gift } from "src/gifts/entities/gift.entity";
 import { Guest } from "src/guests/entities/guest.entity";
 import { User } from "src/user/entities/user.entity";
+import { Exclude } from "class-transformer";
 import {
     Entity,
     PrimaryGeneratedColumn,
@@ -13,43 +14,69 @@ import {
     OneToMany,
 } from "typeorm";
 
+export enum EventType {
+    IN_PERSON = "in-person",
+    ONLINE = "online",
+}
+
+export enum EventStatus {
+    ACTIVE = "active",
+    COMPLETED = "completed",
+    CANCELLED = "cancelled",
+}
+
 @Entity("events")
-export class Event {
+export class EventEntity {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
     @Column()
-    name: string;
+    title: string;
 
-    @Column({ type: "timestamp" })
+    @Column({ type: "timestamp", comment: "Event date and time" })
     date: Date;
 
-    @Column()
+    @Column({ comment: "Event location" })
     location: string;
 
-    @Column({ type: "text", nullable: true })
+    @Column({ type: "text", nullable: true, comment: "Event description" })
     description: string;
 
     @Column({
         type: "enum",
-        enum: ["public", "private"],
+        enum: EventType,
+        comment: "Type of event: in-person or online",
     })
-    type: "public" | "private";
+    type: EventType;
 
-    @Column({ name: "maximum_capacity", nullable: true })
-    maximumCapacity: number;
+    @Column({
+        type: "enum",
+        enum: EventStatus,
+        comment: "Event status: active, completed or cancelled",
+    })
+    status: EventStatus;
 
+    @Column({ name: "image_url", comment: "URL of the event image" })
+    image_url: string;
+
+    @Column({ name: "is_public", comment: "Indicates if the event is public" })
+    is_public: boolean;
+
+    @Exclude()
     @Column({ type: "uuid", name: "user_id" })
-    userId: string;
+    user_id: string;
 
+    @Exclude()
     @CreateDateColumn({ name: "created_at" })
-    createdAt: Date;
+    created_at: Date;
 
+    @Exclude()
     @UpdateDateColumn({ name: "updated_at" })
-    updatedAt: Date;
+    updated_at: Date;
 
+    @Exclude()
     @DeleteDateColumn({ name: "deleted_at", nullable: true })
-    deletedAt?: Date;
+    deleted_at?: Date;
 
     @ManyToOne(() => User, user => user.events)
     @JoinColumn({ name: "user_id" })

@@ -1,4 +1,4 @@
-import { Event } from "src/events/entities/event.entity";
+import { EventEntity } from "src/events/entities/event.entity";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity("gifts")
@@ -33,7 +33,7 @@ export class Gift {
     @DeleteDateColumn({ name: 'deleted_at', nullable: true })
     deletedAt: Date;
 
-    @ManyToOne(() => Event, event => event.gifts)
+    @ManyToOne(() => EventEntity, event => event.gifts)
     @JoinColumn({ name: 'event_id' })
-    event: Event;
+    event: EventEntity;
 }

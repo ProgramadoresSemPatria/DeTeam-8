@@ -8,7 +8,7 @@ import {
     UpdateDateColumn,
     DeleteDateColumn,
 } from 'typeorm';
-import { Event } from 'src/events/entities/event.entity';
+import { EventEntity } from 'src/events/entities/event.entity';
 import { User } from 'src/user/entities/user.entity';
 
 @Entity('guests')
@@ -37,9 +37,9 @@ export class Guest {
     @DeleteDateColumn({ type: 'timestamp', name: 'deleted_at', nullable: true })
     deletedAt?: Date;
 
-    @ManyToOne(() => Event, event => event.guests)
+    @ManyToOne(() => EventEntity, event => event.guests)
     @JoinColumn({ name: 'event_id' })
-    event: Event;
+    event: EventEntity;
 
     @ManyToOne(() => User, user => user.guests, { nullable: true })
     @JoinColumn({ name: 'user_id' })

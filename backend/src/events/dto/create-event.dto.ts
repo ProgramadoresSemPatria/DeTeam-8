@@ -1,38 +1,40 @@
-import {
-    IsNotEmpty,
-    IsOptional,
-    IsUUID,
-    IsEnum,
-    IsDateString,
-    MaxLength,
-    IsInt
-} from 'class-validator';
+import { IsBoolean, IsDateString, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { EventType, EventStatus } from '../entities/event.entity';
 
 export class CreateEventDto {
     @IsNotEmpty()
-    @MaxLength(255)
-    name: string;
+    @IsString()
+    title: string;
 
     @IsNotEmpty()
     @IsDateString()
-    date: Date;
+    date: string;
 
     @IsNotEmpty()
-    @MaxLength(255)
+    @IsString()
     location: string;
 
     @IsOptional()
+    @IsString()
     description?: string;
 
     @IsNotEmpty()
-    @IsEnum(["public", "private"])
-    type: "public" | "private";
-
-    @IsOptional()
-    @IsInt()
-    maximumCapacity?: number;
+    @IsEnum(EventType)
+    type: EventType;
 
     @IsNotEmpty()
-    @IsUUID()
-    userId: string;
+    @IsEnum(EventStatus)
+    status: EventStatus;
+
+    @IsNotEmpty()
+    @IsString()
+    image_url: string;
+
+    @IsNotEmpty()
+    @IsBoolean()
+    is_public: boolean;
+
+    @IsNotEmpty()
+    @IsString()
+    user_id: string;
 }

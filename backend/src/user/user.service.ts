@@ -18,11 +18,11 @@ export class UserService {
   async create(createUserDto: CreateUserDto): Promise<User> {
     try {
       const existingUser = await this.userRepository.findOne({
-        where: { email:  createUserDto.email},
+        where: { email: createUserDto.email },
       });
-      
+
       if (existingUser) {
-        throw new ConflictException("E-mail já está em uso");
+        throw new ConflictException("Email is already in use");
       }
 
       const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
