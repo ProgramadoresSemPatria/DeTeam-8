@@ -15,12 +15,18 @@ export default function Home() {
 
       <div className="container py-12 mx-auto max-w-6xl">
       <div className="flex justify-between">
-          <h2 className="text-3xl font-bold tracking-tight mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-6 sm:mb-8">
             Eventos Públicos em Destaque
           </h2>
-          <Button className="text-sm cursor-pointer font-medium transition-colors disabled:opacity-50 h-11 w-full text-white sm:w-auto rounded-full bg-blue-500 hover:bg-blue-600 px-6 sm:px-8">
-            <Link href="/eventos/publicos">Ver todos</Link>
-            <ArrowRight />
+          <Button
+            asChild
+            className="text-sm font-medium transition-colors disabled:opacity-50 h-11 rounded-full bg-blue-500 hover:bg-blue-600 px-4 sm:px-6"
+          >
+            <Link href="/eventos/publicos" className="flex items-center gap-2">
+              <span className="hidden sm:inline">Ver todos</span>
+              <span className="sm:hidden">Ver todos</span>
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </Button>
         </div>
 
