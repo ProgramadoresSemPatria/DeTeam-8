@@ -1,12 +1,13 @@
 "use client";
+import { Button } from "@/components/ui/button";
+import { formattedDate } from "@/util/functions/formattedDate";
+import { Event } from "@/util/types/event";
+import { motion } from "framer-motion";
 import { CalendarDays, MapPin, Users } from "lucide-react";
 import Image from "next/image";
-import { Event } from "@/util/types/event";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { Badge } from "../ui/badge";
 import { EventCardSkeleton } from "./EventCardSkeleton";
-import { formattedDate } from "@/util/functions/formattedDate";
 
 
 interface EventCardProps {
@@ -20,7 +21,11 @@ export default function EventCard({ event, isLoading = false }: EventCardProps) 
   }
 
   return (
-    <div className=" bg-white rounded-md border border-gray-200">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className=" bg-white rounded-md border border-gray-200">
       <div className="flex-1 h-[12rem] relative">
         <Image
           src={event.imageUrl || "/placeholder.png"}
@@ -77,6 +82,6 @@ export default function EventCard({ event, isLoading = false }: EventCardProps) 
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
