@@ -3,7 +3,14 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { ChevronDown, ChevronUp, Github, Mail, X } from "lucide-react";
+import {
+  CalendarIcon,
+  ChevronDown,
+  ChevronUp,
+  Github,
+  Mail,
+  X,
+} from "lucide-react";
 import { Link } from "next-view-transitions";
 import { useState } from "react";
 
@@ -19,7 +26,7 @@ export default function Footer() {
           {/* Logo - visible on desktop */}
           <div className="hidden md:block">
             <Link href="/" className="inline-block">
-              lUIZAO
+              <CalendarIcon className="h-6 w-6 text-gray-500" />
             </Link>
           </div>
 
@@ -120,7 +127,7 @@ export default function Footer() {
           <div className="flex flex-col w-full md:hidden">
             <div className="flex justify-center mb-8">
               <Link href="/" className="inline-block">
-                lUIZAO
+                <CalendarIcon className="h-6 w-6 text-gray-500" />
               </Link>
             </div>
 
@@ -129,9 +136,9 @@ export default function Footer() {
               <Collapsible
                 open={openDevelopers}
                 onOpenChange={setOpenDevelopers}
-                className="w-full border border-gray-200 rounded-md overflow-hidden"
+                className="w-full  rounded-md overflow-hidden"
               >
-                <CollapsibleTrigger className="flex items-center justify-between w-full p-3 bg-gray-50 hover:bg-gray-100">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-3">
                   <h3 className="text-sm font-medium text-gray-900">
                     Developers
                   </h3>
@@ -145,23 +152,15 @@ export default function Footer() {
                   <ul className="space-y-2">
                     <li>
                       <Link
-                        href="/docs"
-                        className="text-sm text-gray-500 hover:text-gray-700 block"
+                        href="/institucional/team"
+                        className="text-sm text-gray-500 hover:text-gray-700"
                       >
-                        Documentação
+                        Nossa Equipe
                       </Link>
                     </li>
                     <li>
                       <Link
-                        href="/connect"
-                        className="text-sm text-gray-500 hover:text-gray-700 block"
-                      >
-                        Conecte-se
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="https://github.com"
+                        href="https://github.com/"
                         className="text-sm text-gray-500 hover:text-gray-700 block"
                       >
                         GitHub
@@ -175,9 +174,9 @@ export default function Footer() {
               <Collapsible
                 open={openResources}
                 onOpenChange={setOpenResources}
-                className="w-full border border-gray-200 rounded-md overflow-hidden"
+                className="w-full rounded-md overflow-hidden"
               >
-                <CollapsibleTrigger className="flex items-center justify-between w-full p-3 bg-gray-50 hover:bg-gray-100">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-3">
                   <h3 className="text-sm font-medium text-gray-900">
                     Resources
                   </h3>
@@ -189,14 +188,6 @@ export default function Footer() {
                 </CollapsibleTrigger>
                 <CollapsibleContent className="p-3">
                   <ul className="space-y-2">
-                    <li>
-                      <Link
-                        href="/"
-                        className="text-sm text-gray-500 hover:text-gray-700 block"
-                      >
-                        Audit Report
-                      </Link>
-                    </li>
                     <li>
                       <Link
                         href="/"
@@ -221,9 +212,9 @@ export default function Footer() {
               <Collapsible
                 open={openCompany}
                 onOpenChange={setOpenCompany}
-                className="w-full border border-gray-200 rounded-md overflow-hidden"
+                className="w-full rounded-md overflow-hidden"
               >
-                <CollapsibleTrigger className="flex items-center justify-between w-full p-3 bg-gray-50 hover:bg-gray-100">
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-3">
                   <h3 className="text-sm font-medium text-gray-900">Company</h3>
                   {openCompany ? (
                     <ChevronUp className="h-4 w-4 text-gray-500" />
@@ -263,7 +254,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="mt-8 md:flex justify-between items-center hidden">
+          <div className="mt-8 sm:mt-0 md:flex justify-between items-center hidden">
             <div className="flex space-x-4">
               <Link
                 href="https://github.com/"
