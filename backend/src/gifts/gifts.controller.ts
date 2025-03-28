@@ -1,8 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { GiftsService } from './gifts.service';
 import { CreateGiftDto } from './dto/create-gift.dto';
 import { UpdateGiftDto } from './dto/update-gift.dto';
+import { AuthGuard } from '@nestjs/passport';
 
+// TODO: implementar autenticação
+//@UseGuards(AuthGuard('jwt'))
 @Controller('gifts')
 export class GiftsController {
   constructor(private readonly giftsService: GiftsService) {}
