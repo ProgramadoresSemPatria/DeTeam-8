@@ -26,21 +26,19 @@ export class AuthService {
             throw new UnauthorizedException("Credenciais inválidas.");
         }
 
-        // 2. Validar a senha fornecida
         const isPasswordValid = await bcrypt.compare(loginDto.password, user.password);
 
         if (!isPasswordValid) {
             throw new UnauthorizedException("Credenciais inválidas.");
         }
 
-        // 3. Gerar o token
-        const token = this.generateToken({ id: user.id, email: user.email }); // Método para criar o token
-
-        return { token };
+        const token = this.generateToken({ id: user.id, email: user.email }); 
+        const { name } = user;
+        return { name, token };
     }
 
     generateToken(payload: { id: string; email: string }): string {
-        return this.jwtService.sign(payload); // Gera o token usando o JwtService
+        return this.jwtService.sign(payload); 
     }
 
     async validateToken(token: string) {
