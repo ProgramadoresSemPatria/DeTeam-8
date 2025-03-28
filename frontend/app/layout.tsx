@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <>
       <Tooltip />
-      <Toaster />
+      <Toaster richColors />
       <html lang="pt-BR">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased
@@ -37,7 +37,7 @@ export default function RootLayout({
         >
             <LayoutWrapper>
               {children}
-            </LayoutWrapper> 
+            </LayoutWrapper>
         </body>
       </html>
     </>
