@@ -49,6 +49,9 @@ export class EventEntity {
     })
     type: EventType;
 
+    @Column()
+    capacity: number;
+
     @Column({
         type: 'enum',
         enum: EventStatus,

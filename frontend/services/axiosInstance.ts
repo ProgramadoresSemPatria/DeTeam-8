@@ -14,7 +14,6 @@ console.log(process.env.NEXT_PUBLIC_API_BASE_URL)
 axiosInstance.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem(projectConstants.token);
-        console.log('token', token)
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -31,7 +30,6 @@ axiosInstance.interceptors.response.use(
     },
     (error) => {
         const token = localStorage.getItem(projectConstants.token);
-        console.log('token', token)
         if (token && error.response && error.response.status === 401) {
           localStorage.removeItem(projectConstants.token);
           window.location.href = '/sign-in';

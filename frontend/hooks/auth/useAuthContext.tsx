@@ -1,7 +1,7 @@
 "use client"
 
 import React, { createContext, useContext } from 'react'
-import AuthFunctions from './AuthFunctions'
+import AuthFunctions from '../../services/authFunctions'
 import { User } from '@/util/types/userReturnedData'
 
 interface AuthContextProps {
@@ -11,17 +11,19 @@ interface AuthContextProps {
   logout: () => void
   isLoading: boolean
   isLogged: boolean
+  setUser: (user: User | null) => void
+  setIsLogged: (isLogged: boolean) => void
 }
 
 const AuthContext = createContext<AuthContextProps | null>(null)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
 
-  const { user, login, logout, isLoading, isLogged, register } = AuthFunctions()
+  const { user, setUser, register, login, logout, isLoading, isLogged, setIsLogged } = AuthFunctions()
   
   
   return (
-    <AuthContext.Provider value={{ user, login, logout, isLoading, isLogged, register }}>
+    <AuthContext.Provider value={{ user, login, logout, isLoading, isLogged, register, setUser, setIsLogged }}>
       {children}
     </AuthContext.Provider>
   )

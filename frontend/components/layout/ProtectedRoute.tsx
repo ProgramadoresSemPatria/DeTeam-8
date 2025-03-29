@@ -11,6 +11,7 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
         if (!isLogged) {
             router.push('/sign-in'); 
         }
+        console.log('isLogged', isLogged)
     }, [isLogged, router]);
 
     if (!isLogged) {
