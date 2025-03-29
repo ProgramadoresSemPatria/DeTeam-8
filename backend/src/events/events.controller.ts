@@ -28,12 +28,15 @@ export class EventsController {
     return event;
   }
 
-  @UseGuards(AuthGuard('jwt'))
   @Get()
   async findAll(): Promise<EventEntity[]> {
+
     this.logger.log(`Fetching all events`);
+
     const events = await this.eventsService.findAll();
+
     this.logger.log(`Total events fetched: ${events.length}`);
+    
     return events;
   }
 
