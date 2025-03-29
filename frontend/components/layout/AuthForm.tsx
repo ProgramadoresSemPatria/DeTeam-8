@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import useAuthContext from "@/hooks/auth/useAuthContext";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useState } from "react";
 
@@ -112,13 +113,14 @@ export function SocialButton({
 }
 
 export function SignInForm() {
+  const { login, isLoading } = useAuthContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
+    await login(email, password);
   };
 
   return (
@@ -174,14 +176,15 @@ export function SignInForm() {
 }
 
 export function SignUpForm() {
+
+  const { register, isLoading } = useAuthContext()
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
+    register(name, email, password)
   };
 
   return (
