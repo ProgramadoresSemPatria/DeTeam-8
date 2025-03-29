@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
@@ -7,6 +7,7 @@ import { EventsModule } from './events/events.module';
 import { GuestsModule } from './guests/guests.module';
 import { GiftsModule } from './gifts/gifts.module';
 import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -17,9 +18,10 @@ import { AuthModule } from './auth/auth.module';
     EventsModule,
     GuestsModule,
     GiftsModule,
-    AuthModule
+    AuthModule,
+    UserModule
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,38 +1,101 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException, Logger } from '@nestjs/common';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EventEntity } from './entities/event.entity';
+import { User } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class EventsService {
+  private readonly logger = new Logger(EventsService.name);
+
   constructor(
     @InjectRepository(EventEntity)
     private readonly eventRepository: Repository<EventEntity>,
   ) { }
 
   async create(createEventDto: CreateEventDto): Promise<EventEntity> {
-    const event = this.eventRepository.create(createEventDto);
-
-    return await this.eventRepository.save(event);
+    try {
+      const event = this.eventRepository.create(createEventDto);
+      const savedEvent = await this.eventRepository.save(event);
+      this.logger.log(`Event created: ${savedEvent.id}`);
+      return savedEvent;
+    } catch (error) {
+      this.logger.error('Error creating event', error.stack);
+      throw new InternalServerErrorException('Error creating event');
+    }
   }
 
   async findAll(): Promise<EventEntity[]> {
-    return await this.eventRepository.find();
+    try {
+      const events = await this.eventRepository.find({ where: { isPublic: true } });
+
+      this.logger.log(`Fetched ${events.length} events`);
+
+      return events;
+    } catch (error) {
+      this.logger.error('Error fetching events', error.stack);
+      throw new InternalServerErrorException('Error fetching events');
+    }
   }
 
-  async findOne(id: string) {
-    return await this.eventRepository.findOne({ where: { id } });
+  async findEventsByUser(user: User): Promise<EventEntity[]> {
+    try {
+      const events = await this.eventRepository.find({ where: { userId: user.id } });
+      this.logger.log(`Fetched ${events.length} events for user ${user.id}`);
+      return events;
+    } catch (error) {
+      this.logger.error(`Error fetching events for user ${user.id}`, error.stack);
+      throw new InternalServerErrorException('Error fetching user events');
+    }
   }
 
-  async update(id: string, updateEventDto: UpdateEventDto) {
-    await this.eventRepository.update(id, updateEventDto);
+  async findOne(id: string): Promise<EventEntity> {
+    try {
+      const event = await this.eventRepository.findOne({ where: { id } });
+      if (!event) {
+        this.logger.warn(`Event with id ${id} not found`);
+        throw new NotFoundException(`Event with id ${id} not found`);
+      }
+      this.logger.log(`Event with id ${id} fetched successfully`);
+      return event;
+    } catch (error) {
+      this.logger.error(`Error fetching event with id ${id}`, error.stack);
+      if (error instanceof NotFoundException) throw error;
+      throw new InternalServerErrorException('Error fetching event');
+    }
+  }
 
-    return await this.findOne(id);
+  async update(id: string, updateEventDto: UpdateEventDto): Promise<EventEntity> {
+    try {
+      const result = await this.eventRepository.update(id, updateEventDto);
+      if (result.affected === 0) {
+        this.logger.warn(`Event with id ${id} not found for update`);
+        throw new NotFoundException(`Event with id ${id} not found`);
+      }
+      const updatedEvent = await this.findOne(id);
+      this.logger.log(`Event ${id} updated successfully`);
+      return updatedEvent;
+    } catch (error) {
+      this.logger.error(`Error updating event with id ${id}`, error.stack);
+      if (error instanceof NotFoundException) throw error;
+      throw new InternalServerErrorException('Error updating event');
+    }
   }
 
   async remove(id: string): Promise<void> {
-    await this.eventRepository.delete(id);
+    try {
+      const result = await this.eventRepository.delete(id);
+      if (result.affected === 0) {
+        this.logger.warn(`Event with id ${id} not found for deletion`);
+        throw new NotFoundException(`Event with id ${id} not found`);
+      }
+      this.logger.log(`Event ${id} deleted successfully`);
+    } catch (error) {
+      this.logger.error(`Error deleting event with id ${id}`, error.stack);
+      if (error instanceof NotFoundException) throw error;
+      throw new InternalServerErrorException('Error deleting event');
+    }
   }
 }
