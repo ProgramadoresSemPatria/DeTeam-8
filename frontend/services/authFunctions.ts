@@ -1,5 +1,5 @@
 "use client"
-import axiosInstance from '@/axios/axiosInstance'
+import axiosInstance from '@/services/axiosInstance'
 import { projectConstants } from '@/util/constants'
 import { User } from '@/util/types/userReturnedData'
 import axios from 'axios'
@@ -43,13 +43,11 @@ export default function AuthFunctions() {
       try {
         setIsLoading(true)
         const res = await axiosInstance.post('/auth/login', { email, password })
-        console.log(res.data)
         
         if (res.status !== 201) {
           throw new Error('Erro ao fazer login')
         }
         if (typeof window !== 'undefined') {
-          console.log('SETOU TOKEN LOCALSTORAGE')
           localStorage.setItem(projectConstants.token, res.data.token);
         }        
         setIsLogged(true)
@@ -76,15 +74,17 @@ export default function AuthFunctions() {
       localStorage.removeItem(projectConstants.token)
       setIsLogged(false)
       setUser(null)
-      router.push('/auth/login')
+      router.push('/sign-in')
     }
 
     return {
         register,
         user, 
+        setUser,
         login, 
         logout, 
         isLoading, 
-        isLogged
+        isLogged,
+        setIsLogged
     }
 }
