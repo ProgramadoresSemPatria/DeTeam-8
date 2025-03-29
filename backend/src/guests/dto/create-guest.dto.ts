@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsEmail, IsUUID, MaxLength, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsEmail, IsUUID, MaxLength, IsOptional, ValidateIf } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateGuestDto {
@@ -24,7 +24,8 @@ export class CreateGuestDto {
         example: 'Name',
         maxLength: 150,
     })
-    @IsNotEmpty()
+    @ValidateIf((o) => !o.userId)
+    @IsNotEmpty({ message: 'Name is required if not logged in' })
     @MaxLength(150)
     name: string;
 
@@ -32,6 +33,7 @@ export class CreateGuestDto {
         description: 'Email of the guest',
         example: 'email@example.com',
     })
+    @ValidateIf((o) => !o.userId)
     @IsNotEmpty()
     @IsEmail()
     email: string;

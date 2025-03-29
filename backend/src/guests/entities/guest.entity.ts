@@ -7,19 +7,24 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     DeleteDateColumn,
+    Check,
+    Unique,
 } from 'typeorm';
+
 import { EventEntity } from 'src/events/entities/event.entity';
 import { User } from 'src/user/entities/user.entity';
 
 @Entity('guests')
+@Unique('UQ_guest_user_event', ['userId', 'eventId'])
+@Check(`("user_id" IS NOT NULL) OR ("name" IS NOT NULL AND "email" IS NOT NULL)`)
 export class Guest {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ length: 150 })
+    @Column({ length: 150, nullable: true })
     name: string;
 
-    @Column({ length: 100 })
+    @Column({ length: 100, nullable: true })
     email: string;
 
     @Column({ type: 'uuid', nullable: true, name: 'user_id' })
@@ -27,6 +32,9 @@ export class Guest {
 
     @Column({ type: 'uuid', name: 'event_id' })
     eventId: string;
+
+    @Column({ type: 'boolean', name: 'is_attending', default: false })
+    isAttending: boolean;
 
     @CreateDateColumn({ type: 'timestamp', name: 'created_at' })
     createdAt: Date;
@@ -43,5 +51,5 @@ export class Guest {
 
     @ManyToOne(() => User, user => user.guests, { nullable: true })
     @JoinColumn({ name: 'user_id' })
-    user?: User;
+    user_id?: User;
 }
