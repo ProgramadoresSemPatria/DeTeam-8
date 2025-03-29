@@ -6,12 +6,14 @@ import { Button } from "../ui/button";
 import { MobileMenu } from "./MobileMenu";
 import { useEffect, useState } from "react";
 import { Menu, X } from 'lucide-react';
+import { useAutoLogin } from "@/hooks/auth/useAutoLogin";
 
 export default function Header() {
 
+    useAutoLogin();
     const { isLogged, user, logout } = useAuthContext();
     const [isMenuOpen, setIsMenuOpen] = useState(false); 
-     const [isMobile, setIsMobile] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
       const handleResize = () => {
