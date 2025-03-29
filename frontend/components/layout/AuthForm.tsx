@@ -1,8 +1,6 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import useAuthContext from "@/hooks/auth/useAuthContext";
-import { motion } from "framer-motion";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useState } from "react";
 
@@ -29,10 +27,7 @@ export function InputField({
   const isPassword = type === "password";
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+    <div
       className="space-y-1 mb-4"
     >
       <label htmlFor={id} className="auth-label">
@@ -62,7 +57,7 @@ export function InputField({
           </button>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }
 

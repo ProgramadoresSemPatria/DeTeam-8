@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { ReactNode } from "react";
 
@@ -22,10 +21,7 @@ export function AuthLayout({
   footerLinkHref,
 }: AuthLayoutProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+    <div
       className="flex min-h-screen items-center justify-center bg-gradient-to-b from-background to-secondary/30 p-4 antialiased"
     >
       <div className="w-full max-w-md space-y-8 animate-fade-in">
@@ -64,6 +60,6 @@ export function AuthLayout({
           </Link>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
