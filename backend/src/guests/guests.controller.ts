@@ -22,13 +22,22 @@ export class GuestsController {
   @Get()
   async findAll(): Promise<Guest[]> {
     this.logger.log('Fetching all guests');
+
     return await this.guestsService.findAll();
   }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Get('by-event/:id')
+  async findAllByEvent(@Param('id') id: string): Promise<{ total: number; message: string }> {
+    return await this.guestsService.findAllByEvent(id);
+  }
+
 
   @UseGuards(AuthGuard('jwt'))
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<Guest> {
     this.logger.log(`Fetching guest with id: ${id}`);
+
     return await this.guestsService.findOne(id);
   }
 
@@ -36,6 +45,7 @@ export class GuestsController {
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateGuestDto: UpdateGuestDto): Promise<Guest> {
     this.logger.log(`Updating guest with id: ${id} using data: ${JSON.stringify(updateGuestDto)}`);
+
     return await this.guestsService.update(id, updateGuestDto);
   }
 
@@ -43,6 +53,7 @@ export class GuestsController {
   @Delete(':id')
   async remove(@Param('id') id: string): Promise<void> {
     this.logger.log(`Deleting guest with id: ${id}`);
+
     return await this.guestsService.remove(id);
   }
 }
