@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EventEntity } from './entities/event.entity';
 import { User } from 'src/user/entities/user.entity';
+import { AuthService } from 'src/auth/auth.service';
 
 @Injectable()
 export class EventsService {
@@ -13,13 +14,22 @@ export class EventsService {
   constructor(
     @InjectRepository(EventEntity)
     private readonly eventRepository: Repository<EventEntity>,
+    private readonly authService: AuthService,
   ) { }
 
-  async create(createEventDto: CreateEventDto): Promise<EventEntity> {
+  async create(createEventDto: CreateEventDto, token: string): Promise<EventEntity> {
+    const user = await this.authService.validateToken(token);
+
     try {
-      const event = this.eventRepository.create(createEventDto);
+      const event = this.eventRepository.create({
+        ...createEventDto,
+        userId: user.id,
+      });
+
       const savedEvent = await this.eventRepository.save(event);
-      this.logger.log(`Event created: ${savedEvent.id}`);
+
+      this.logger.log(`Event created`);
+
       return savedEvent;
     } catch (error) {
       this.logger.error('Error creating event', error.stack);

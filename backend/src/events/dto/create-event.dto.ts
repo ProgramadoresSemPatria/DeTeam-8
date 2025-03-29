@@ -1,4 +1,4 @@
-import { IsBoolean, IsDateString, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsDateString, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { EventType, EventStatus } from '../entities/event.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -55,6 +55,14 @@ export class CreateEventDto {
     status: EventStatus;
 
     @ApiProperty({
+        description: 'Maximum capacity for the event',
+        example: 100,
+    })
+    @IsNotEmpty()
+    @IsNumber()
+    capacity: number;
+
+    @ApiProperty({
         description: 'Image URL of the event',
         example: 'http://example.com/event.jpg',
     })
@@ -69,12 +77,4 @@ export class CreateEventDto {
     @IsNotEmpty()
     @IsBoolean()
     isPublic: boolean;
-
-    @ApiProperty({
-        description: 'User UUID of the event creator(UUID)',
-        example: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
-    })
-    @IsNotEmpty()
-    @IsString()
-    userId: string;
 }

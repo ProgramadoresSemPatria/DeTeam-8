@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req, Logger } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req, Logger, Headers } from '@nestjs/common';
 import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
@@ -6,6 +6,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { User } from 'src/user/entities/user.entity';
 import { EventEntity } from './entities/event.entity';
 import { ApiBearerAuth } from '@nestjs/swagger';
+import { Token } from 'src/commom/decorators/token.decorator';
 
 @ApiBearerAuth()
 @Controller('events')
@@ -16,8 +17,11 @@ export class EventsController {
 
   @UseGuards(AuthGuard('jwt'))
   @Post()
-  async create(@Body() createEventDto: CreateEventDto): Promise<EventEntity> {
-    const event = await this.eventsService.create(createEventDto);
+  async create(
+    @Body() createEventDto: CreateEventDto,
+    @Token() token: string,
+  ) {
+    const event = await this.eventsService.create(createEventDto, token);
 
     this.logger.log(`Event created with id: ${event.id}`);
 
