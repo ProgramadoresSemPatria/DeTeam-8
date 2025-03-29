@@ -28,7 +28,7 @@ export class EventsController {
     return event;
   }
 
-  @Get()
+  @Get('public')
   async findAll(): Promise<EventEntity[]> {
 
     this.logger.log(`Fetching all events`);
