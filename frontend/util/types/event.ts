@@ -11,7 +11,6 @@ export interface Event {
   status: "ativo" | "concluido" | "cancelado";
   organizer: string;
   imageUrl: string;
-  isUserRegistered?: boolean;
   isPublic: boolean;
   hasContribution: {
     id: number;
