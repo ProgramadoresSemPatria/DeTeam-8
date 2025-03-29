@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { ReactNode } from "react";
 
@@ -19,7 +20,12 @@ export function AuthLayout({
   footerLinkHref,
 }: AuthLayoutProps) {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-background to-secondary/30 p-4 antialiased">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="flex min-h-screen items-center justify-center bg-gradient-to-b from-background to-secondary/30 p-4 antialiased"
+    >
       <div className="w-full max-w-md space-y-8 animate-fade-in">
         <div className="text-center">
           <h2
@@ -56,6 +62,6 @@ export function AuthLayout({
           </Link>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

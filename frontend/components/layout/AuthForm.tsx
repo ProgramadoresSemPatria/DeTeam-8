@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import useAuthContext from "@/hooks/auth/useAuthContext";
+import { motion } from "framer-motion";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useState } from "react";
 
@@ -28,7 +29,12 @@ export function InputField({
   const isPassword = type === "password";
 
   return (
-    <div className="space-y-1 mb-4">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="space-y-1 mb-4"
+    >
       <label htmlFor={id} className="auth-label">
         {label}
         {required && <span className="text-destructive"> *</span>}
@@ -56,7 +62,7 @@ export function InputField({
           </button>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -117,7 +123,6 @@ export function SignInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await login(email, password);
@@ -176,15 +181,14 @@ export function SignInForm() {
 }
 
 export function SignUpForm() {
-
-  const { register, isLoading } = useAuthContext()
+  const { register, isLoading } = useAuthContext();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    register(name, email, password)
+    register(name, email, password);
   };
 
   return (
@@ -246,7 +250,9 @@ export function SignUpForm() {
         </label>
       </div>
 
-      <SubmitButton className="cursor-pointer" isLoading={isLoading}>Criar conta</SubmitButton>
+      <SubmitButton className="cursor-pointer" isLoading={isLoading}>
+        Criar conta
+      </SubmitButton>
 
       <div className="relative my-6">
         <div className="absolute inset-0 flex items-center">
