@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsEmail, IsUUID, MaxLength, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsEmail, IsUUID, MaxLength, IsOptional, ValidateIf } from 'class-validator';
 
 export class CreateGuestDto {
     @IsOptional()
@@ -9,11 +9,13 @@ export class CreateGuestDto {
     @IsUUID()
     eventId: string;
 
-    @IsNotEmpty()
+    @ValidateIf((o) => !o.userId)
+    @IsNotEmpty({ message: 'Name is required if not logged in' })
     @MaxLength(150)
     name: string;
 
-    @IsNotEmpty()
+    @ValidateIf((o) => !o.userId)
+    @IsNotEmpty({ message: 'Email is required if not logged in' })
     @IsEmail()
     email: string;
 }
