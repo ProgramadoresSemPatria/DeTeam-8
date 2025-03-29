@@ -2,6 +2,7 @@ import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ClassSerializerInterceptor, Logger, ValidationPipe } from '@nestjs/common';
 import { AllExceptionsFilter } from './commom/filters/all-exceptions.filter';
+import { setupSwagger } from './commom/swagger/swagger.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -22,6 +23,8 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
   app.useGlobalFilters(new AllExceptionsFilter());
+
+  setupSwagger(app);
 
   await app.listen(process.env.PORT ?? 3000);
 
