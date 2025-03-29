@@ -37,7 +37,7 @@ export default function CallToAction() {
                 className="w-full sm:w-auto rounded-full bg-blue-500 hover:bg-blue-600 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg"
               >
                 <Link
-                  href="/dashboard"
+                  href="/painel"
                   className="flex text-white items-center justify-center gap-2"
                 >
                   Comece agora
