@@ -19,7 +19,7 @@ export class GuestsService {
     try {
       if (createGuestDto.userId) {
         const userEvent = await this.findByUserAndEvent(createGuestDto.userId, createGuestDto.eventId);
-        
+
         if (userEvent) {
           throw new BadRequestException('This user is already registered for the event');
         }
@@ -30,7 +30,7 @@ export class GuestsService {
       const savedGuest = await this.guestRepository.save(guest);
 
       this.logger.log(`Guest created: ${savedGuest.id}`);
-      
+
       return savedGuest;
     } catch (error) {
       this.logger.error('Error creating guest', error.stack);
@@ -44,13 +44,38 @@ export class GuestsService {
   async findAll(): Promise<Guest[]> {
     try {
       const guests = await this.guestRepository.find({ relations: ['event', 'user'] });
+
       this.logger.log(`Fetched ${guests.length} guests`);
+
       return guests;
     } catch (error) {
       this.logger.error('Error fetching guests', error.stack);
+
       throw new InternalServerErrorException('Error fetching guests');
     }
   }
+
+  async findAllByEvent(id: string): Promise<{ total: number; message: string }> {
+    try {
+      const guests = await this.guestRepository.find({
+        where: { eventId: id },
+      });
+
+      const total = guests.length;
+      
+      this.logger.log(`Fetched ${total} guests for event ${id}`);
+
+      return {
+        total,
+        message: `Found ${total} guests for event ${id}.`,
+      };
+    } catch (error) {
+      this.logger.error(`Error fetching guests for event ${id}`, error.stack);
+
+      throw new InternalServerErrorException(`Error fetching guests for event ${id}`);
+    }
+  }
+
 
   async findOne(id: string): Promise<Guest> {
     try {

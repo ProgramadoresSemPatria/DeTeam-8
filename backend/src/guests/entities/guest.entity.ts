@@ -51,5 +51,5 @@ export class Guest {
 
     @ManyToOne(() => User, user => user.guests, { nullable: true })
     @JoinColumn({ name: 'user_id' })
-    user_id?: User;
+    user?: User;
 }

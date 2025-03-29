@@ -36,6 +36,6 @@ export class User {
     @OneToMany(() => EventEntity, event => event.user)
     events: EventEntity[];
 
-    @OneToMany(() => Guest, guest => guest.user_id)
+    @OneToMany(() => Guest, guest => guest.user)
     guests: Guest[];
 }
