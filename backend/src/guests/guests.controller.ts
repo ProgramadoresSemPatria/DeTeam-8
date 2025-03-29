@@ -2,13 +2,12 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { GuestsService } from './guests.service';
 import { CreateGuestDto } from './dto/create-guest.dto';
 import { UpdateGuestDto } from './dto/update-guest.dto';
-import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
-  // TODO: implementar autenticação
-  //@UseGuards(AuthGuard('jwt'))
+@ApiBearerAuth()
 @Controller('guests')
 export class GuestsController {
-  constructor(private readonly guestsService: GuestsService) {}
+  constructor(private readonly guestsService: GuestsService) { }
 
   @Post()
   create(@Body() createGuestDto: CreateGuestDto) {

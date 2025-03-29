@@ -2,10 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { GiftsService } from './gifts.service';
 import { CreateGiftDto } from './dto/create-gift.dto';
 import { UpdateGiftDto } from './dto/update-gift.dto';
-import { AuthGuard } from '@nestjs/passport';
-
-// TODO: implementar autenticação
-//@UseGuards(AuthGuard('jwt'))
+import { ApiBearerAuth } from '@nestjs/swagger';
+@ApiBearerAuth()
 @Controller('gifts')
 export class GiftsController {
   constructor(private readonly giftsService: GiftsService) {}
