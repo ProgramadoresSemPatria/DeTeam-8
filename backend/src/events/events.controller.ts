@@ -5,7 +5,10 @@ import { UpdateEventDto } from './dto/update-event.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from 'src/user/entities/user.entity';
 import { EventEntity } from './entities/event.entity';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('events')
+@ApiBearerAuth('access-token')
 @Controller('events')
 export class EventsController {
   private readonly logger = new Logger(EventsController.name);
