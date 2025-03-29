@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "../ui/badge";
 import { EventCardSkeleton } from "./EventCardSkeleton";
+import useAuthContext from "@/hooks/auth/useAuthContext";
 
 
 interface EventCardProps {
@@ -16,6 +17,9 @@ interface EventCardProps {
 }
 
 export default function EventCard({ event, isLoading = false }: EventCardProps) {
+
+  const { isLogged } = useAuthContext();
+
   if (isLoading) {
     return <EventCardSkeleton />;
   }
@@ -73,7 +77,7 @@ export default function EventCard({ event, isLoading = false }: EventCardProps) 
           </Button>
 
 
-          {event.isUserRegistered && (
+          {isLogged && (
             <Button className="w-full bg-blue-400 hover:bg-blue-500/80 text-white mt-3 cursor-pointer">
               <Link href={`/eventos/${event.id}`}>
                 <span>Add to calendar</span>
