@@ -5,10 +5,9 @@ import { UpdateEventDto } from './dto/update-event.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from 'src/user/entities/user.entity';
 import { EventEntity } from './entities/event.entity';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
-@ApiTags('events')
-@ApiBearerAuth('access-token')
+@ApiBearerAuth()
 @Controller('events')
 export class EventsController {
   private readonly logger = new Logger(EventsController.name);
@@ -25,6 +24,7 @@ export class EventsController {
     return event;
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   async findAll(): Promise<EventEntity[]> {
     this.logger.log(`Fetching all events`);

@@ -6,14 +6,7 @@ export function setupSwagger(app: INestApplication): void {
     .setTitle('Your Project Title')
     .setDescription('API description')
     .setVersion('1.0')
-    .addBearerAuth(
-      {
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-      },
-      'access-token',
-    )
+    .addBearerAuth()
     .build();
 
   const documentFactory = () => SwaggerModule.createDocument(app, config);
