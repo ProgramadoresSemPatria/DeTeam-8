@@ -13,7 +13,6 @@ export default function Home() {
       <Hero />
 
       <div className="container py-12 mx-auto max-w-6xl">
-
         <TextButton />
         <Suspense
           fallback={

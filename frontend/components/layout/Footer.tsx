@@ -23,7 +23,6 @@ export default function Footer() {
     <footer className="max-w-7xl mx-auto border-t border-gray-200 bg-white py-12 sm:py-20">
       <div className="container mx-auto max-w-6xl px-4 sm:px-6">
         <div className="flex flex-col md:flex-row justify-between">
-          {/* Logo - visible on desktop */}
           <div className="hidden md:block">
             <Link href="/" className="inline-block">
               <CalendarIcon className="h-6 w-6 text-gray-500" />
@@ -31,7 +30,6 @@ export default function Footer() {
           </div>
 
           <div className="hidden md:flex space-x-16">
-            {/* Developers Column */}
             <div>
               <h3 className="text-sm font-medium text-gray-900 mb-3">
                 Developers
@@ -56,28 +54,11 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Resources Column */}
             <div>
               <h3 className="text-sm font-medium text-gray-900 mb-3">
                 Resources
               </h3>
               <ul className="space-y-2">
-                <li>
-                  <Link
-                    href="/"
-                    className="text-sm text-gray-500 hover:text-gray-700"
-                  >
-                    Audit Report
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/"
-                    className="text-sm text-gray-500 hover:text-gray-700"
-                  >
-                    Changelog
-                  </Link>
-                </li>
                 <li>
                   <Link
                     href="/"
@@ -89,7 +70,6 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Company Column */}
             <div>
               <h3 className="text-sm font-medium text-gray-900 mb-3">
                 Company
@@ -109,14 +89,6 @@ export default function Footer() {
                     className="text-sm text-gray-500 hover:text-gray-700"
                   >
                     X (Twitter)
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/legal"
-                    className="text-sm text-gray-500 hover:text-gray-700"
-                  >
-                    Legal
                   </Link>
                 </li>
               </ul>
