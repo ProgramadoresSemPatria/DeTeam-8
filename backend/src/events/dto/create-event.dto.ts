@@ -28,13 +28,13 @@ export class CreateEventDto {
 
     @IsNotEmpty()
     @IsString()
-    image_url: string;
+    imageUrl: string;
 
     @IsNotEmpty()
     @IsBoolean()
-    is_public: boolean;
+    isPublic: boolean;
 
     @IsNotEmpty()
     @IsString()
-    user_id: string;
+    userId: string;
 }
