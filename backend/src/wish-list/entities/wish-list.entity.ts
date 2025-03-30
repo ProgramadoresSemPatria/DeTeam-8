@@ -1,4 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    CreateDateColumn,
+    UpdateDateColumn,
+    DeleteDateColumn,
+    ManyToOne,
+    JoinColumn
+} from 'typeorm';
 import { IsNotEmpty, IsOptional, IsString, IsNumber } from 'class-validator';
 import { Exclude } from 'class-transformer';
 import { Catalog } from 'src/catalog/entities/catalog.entity';
@@ -9,7 +18,6 @@ export class WishList {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-
     @Column({ default: 1 })
     @IsOptional()
     @IsNumber()
@@ -19,11 +27,6 @@ export class WishList {
     @IsOptional()
     @IsString()
     priority?: string;
-
-    @Column({ default: 'pending' })
-    @IsNotEmpty()
-    @IsString()
-    status: string;
 
     @Column({ name: 'event_id' })
     @IsNotEmpty()

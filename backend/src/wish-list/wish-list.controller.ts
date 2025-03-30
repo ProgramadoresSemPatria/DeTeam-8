@@ -1,9 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { WishListService } from './wish-list.service';
 import { CreateWishListDto } from './dto/create-wish-list.dto';
 import { UpdateWishListDto } from './dto/update-wish-list.dto';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
+@UseGuards(AuthGuard('jwt'))
 @ApiBearerAuth()
 @Controller('wish-list')
 export class WishListController {
@@ -14,23 +16,22 @@ export class WishListController {
     return this.wishListService.create(createWishListDto);
   }
 
-  @Get()
-  findAll() {
-    return this.wishListService.findAll();
+  @Get('event/:eventId')
+  findAllByEvent(@Param('eventId') eventId: string) {
+    return this.wishListService.findAllByEvent(eventId);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.wishListService.findOne(+id);
+  findOneWishListItem(@Param('id') id: string) {
+    return this.wishListService.findOneWishListItem(id);
   }
-
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateWishListDto: UpdateWishListDto) {
-    return this.wishListService.update(+id, updateWishListDto);
+  updateWishList(@Param('id') id: string, @Body() updateWishListDto: UpdateWishListDto) {
+    return this.wishListService.update(id, updateWishListDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.wishListService.remove(+id);
+  removeWishList(@Param('id') id: string) {
+    return this.wishListService.remove(id);
   }
 }

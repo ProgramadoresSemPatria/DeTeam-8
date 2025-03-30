@@ -1,48 +1,37 @@
 import { IsNotEmpty, IsOptional, IsString, IsNumber } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateWishListDto {
-    @ApiProperty({
-        description: 'Title of the wishlist item',
-        example: 'Projector',
-    })
-    @IsNotEmpty()
-    @IsString()
-    title: string;
-
-    @ApiProperty({
-        description: 'Description of the wishlist item',
-        example: 'High quality projector for presentations',
-        required: false,
-    })
-    @IsOptional()
-    @IsString()
-    description?: string;
-
-    @ApiProperty({
-        description: 'Category of the wishlist item',
-        example: 'Equipment',
-        required: false,
-    })
-    @IsOptional()
-    @IsString()
-    category?: string;
-
-    @ApiProperty({
-        description: 'Desired quantity for the wishlist item',
+    @ApiPropertyOptional({
+        description: 'Quantity of items desired',
         example: 1,
-        required: false,
+        default: 1,
     })
     @IsOptional()
     @IsNumber()
-    quantity?: number;
+    quantity?: number = 1;
 
-    @ApiProperty({
-        description: 'Priority level of the wishlist item',
-        example: 'high',
-        required: false,
+    @ApiPropertyOptional({
+        description: 'Priority of the item',
+        example: 'High',
     })
     @IsOptional()
     @IsString()
     priority?: string;
+
+    @ApiProperty({
+        description: 'ID of the event',
+        example: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+    })
+    @IsNotEmpty()
+    @IsString()
+    eventId: string;
+
+    @ApiProperty({
+        description: 'ID of the catalog item',
+        example: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+    })
+    @IsNotEmpty()
+    @IsString()
+    catalogId: string;
 }
