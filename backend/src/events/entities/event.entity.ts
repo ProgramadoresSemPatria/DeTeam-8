@@ -12,6 +12,7 @@ import {
     JoinColumn,
     OneToMany,
 } from 'typeorm';
+import { WishList } from 'src/wish-list/entities/wish-list.entity';
 
 export enum EventType {
     IN_PERSON = 'in-person',
@@ -86,4 +87,7 @@ export class EventEntity {
 
     @OneToMany(() => Guest, guest => guest.event)
     guests: Guest[];
+
+    @OneToMany(() => WishList, wishList => wishList.event)
+    wishLists: WishList[];
 }
