@@ -1,4 +1,3 @@
-import { Gift } from 'src/gifts/entities/gift.entity';
 import { Guest } from 'src/guests/entities/guest.entity';
 import { User } from 'src/user/entities/user.entity';
 import { Exclude } from 'class-transformer';
@@ -13,6 +12,7 @@ import {
     JoinColumn,
     OneToMany,
 } from 'typeorm';
+import { WishList } from 'src/wish-list/entities/wish-list.entity';
 
 export enum EventType {
     IN_PERSON = 'in-person',
@@ -88,6 +88,6 @@ export class EventEntity {
     @OneToMany(() => Guest, guest => guest.event)
     guests: Guest[];
 
-    @OneToMany(() => Gift, gift => gift.event)
-    gifts: Gift[];
+    @OneToMany(() => WishList, wishList => wishList.event)
+    wishLists: WishList[];
 }

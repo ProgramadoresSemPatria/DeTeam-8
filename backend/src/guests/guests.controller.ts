@@ -4,7 +4,9 @@ import { CreateGuestDto } from './dto/create-guest.dto';
 import { UpdateGuestDto } from './dto/update-guest.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { Guest } from './entities/guest.entity';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiBearerAuth()
 @Controller('guests')
 export class GuestsController {
   private readonly logger = new Logger(GuestsController.name);
