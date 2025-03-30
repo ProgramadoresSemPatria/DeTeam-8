@@ -5,6 +5,7 @@ import { EventsModule } from './events/events.module';
 import { GuestsModule } from './guests/guests.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { CatalogModule } from './catalog/catalog.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { UserModule } from './user/user.module';
     GuestsModule,
     AuthModule,
     UserModule,
+    CatalogModule,
   ],
 })
 
