@@ -2,20 +2,29 @@
 import { Filter, Search, } from "lucide-react";
 import EventCard from "@/components/general/EventCard";
 import { Button } from "@/components/ui/button";
-import { Suspense, useState } from "react";
-import { upcomingEvents } from "@/mockedData";
+import { Suspense, useEffect, useState } from "react";
 import { EventCardSkeleton } from "@/components/general/EventCardSkeleton";
+import { useGetAllEvents } from "@/services/eventFunctions";
+import { EventTypes } from "@/util/types/event";
 
 export default function PublicEvents() {
 
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState('');
+    const [filteredEvents, setFilteredEvents] = useState<EventTypes[]>([]);
 
-    const filteredEvents = upcomingEvents.filter((event) => {
-      const titleMatch = event.title.toLowerCase().includes(search.toLowerCase());
-      const typeMatch = event.type === filter;
-      return titleMatch || typeMatch;
-    });
+    const { data: allEvents } = useGetAllEvents();
+
+    useEffect(() => {
+      if (!allEvents) return;
+      const filtered = allEvents?.filter((event: EventTypes) => {
+        const titleMatch = event.title.toLowerCase().includes(search.toLowerCase());
+        const typeMatch = event.type === filter;
+        return titleMatch || typeMatch;
+      });
+      setFilteredEvents(filtered || []);
+    }, [allEvents, filter, search]);
+    
 
     return (
       <main className="max-w-7xl mx-auto py-8 px-4 space-y-5">
