@@ -1,26 +1,84 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException, InternalServerErrorException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateEventWishListDto } from './dto/create-event-wish-list.dto';
 import { UpdateEventWishListDto } from './dto/update-event-wish-list.dto';
+import { EventWishList } from './entities/event-wish-list.entity';
+import { WishList } from 'src/wish-list/entities/wish-list.entity';
 
 @Injectable()
 export class EventWishListService {
-  create(createEventWishListDto: CreateEventWishListDto) {
-    return 'This action adds a new eventWishList';
+  constructor(
+    @InjectRepository(EventWishList)
+    private readonly eventWishListRepository: Repository<EventWishList>,
+
+    @InjectRepository(WishList)
+    private readonly wishListRepository: Repository<WishList>,
+  ) { }
+
+  async create(createEventWishListDto: CreateEventWishListDto): Promise<EventWishList> {
+    try {
+      const wishList = await this.wishListRepository.findOne({ where: { id: createEventWishListDto.wishListId } });
+      if (!wishList) {
+        throw new NotFoundException(`Wish list item with id ${createEventWishListDto.wishListId} not found`);
+      }
+
+      const eventWishListItem = this.eventWishListRepository.create(createEventWishListDto);
+      return await this.eventWishListRepository.save(eventWishListItem);
+    } catch (error) {
+      throw new InternalServerErrorException('Error creating event wish list item');
+    }
   }
 
-  findAll() {
-    return `This action returns all eventWishList`;
+  async findByList(wishListId: string) {
+    try {
+      const wishListData = await this.wishListRepository.findOne({
+        where: { id: wishListId },
+        relations: ['eventWishLists'],
+      });
+
+      if (!wishListData) {
+        throw new NotFoundException(`Wish list with id ${wishListId} not found`);
+      }
+
+      return wishListData;
+    } catch (error) {
+      console.error('findByList error:', error);
+      throw new InternalServerErrorException('Error retrieving wish list items');
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} eventWishList`;
+
+  async update(id: string, updateEventWishListDto: UpdateEventWishListDto): Promise<EventWishList> {
+    try {
+      const eventWishListItem = await this.eventWishListRepository.findOne({ where: { id } });
+      if (!eventWishListItem) {
+        throw new NotFoundException(`Event wish list item with id ${id} not found`);
+      }
+
+      if (updateEventWishListDto.wishListId) {
+        const wishList = await this.wishListRepository.findOne({ where: { id: updateEventWishListDto.wishListId } });
+        if (!wishList) {
+          throw new NotFoundException(`Wish list item with id ${updateEventWishListDto.wishListId} not found`);
+        }
+      }
+
+      const updatedItem = this.eventWishListRepository.merge(eventWishListItem, updateEventWishListDto);
+      return await this.eventWishListRepository.save(updatedItem);
+    } catch (error) {
+      throw new InternalServerErrorException('Error updating event wish list item');
+    }
   }
 
-  update(id: number, updateEventWishListDto: UpdateEventWishListDto) {
-    return `This action updates a #${id} eventWishList`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} eventWishList`;
+  async remove(id: string): Promise<void> {
+    try {
+      const eventWishListItem = await this.eventWishListRepository.findOne({ where: { id } });
+      if (!eventWishListItem) {
+        throw new NotFoundException(`Event wish list item with id ${id} not found`);
+      }
+      await this.eventWishListRepository.remove(eventWishListItem);
+    } catch (error) {
+      throw new InternalServerErrorException('Error deleting event wish list item');
+    }
   }
 }

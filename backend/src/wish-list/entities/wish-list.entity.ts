@@ -6,12 +6,14 @@ import {
     UpdateDateColumn,
     DeleteDateColumn,
     ManyToOne,
+    OneToMany,
     JoinColumn
 } from 'typeorm';
 import { IsNotEmpty, IsOptional, IsString, IsNumber } from 'class-validator';
 import { Exclude } from 'class-transformer';
 import { Catalog } from 'src/catalog/entities/catalog.entity';
 import { EventEntity } from 'src/events/entities/event.entity';
+import { EventWishList } from 'src/event-wish-list/entities/event-wish-list.entity';
 
 @Entity('wish_list')
 export class WishList {
@@ -57,4 +59,7 @@ export class WishList {
     @JoinColumn({ name: 'catalog_id' })
     @IsNotEmpty()
     catalog: Catalog;
+
+    @OneToMany(() => EventWishList, eventWishList => eventWishList.wishList)
+    eventWishLists: EventWishList[];
 }

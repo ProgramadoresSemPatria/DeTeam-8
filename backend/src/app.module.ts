@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { CatalogModule } from './catalog/catalog.module';
 import { WishListModule } from './wish-list/wish-list.module';
+import { EventWishListModule } from './event-wish-list/event-wish-list.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { WishListModule } from './wish-list/wish-list.module';
     UserModule,
     CatalogModule,
     WishListModule,
+    EventWishListModule
   ],
 })
 

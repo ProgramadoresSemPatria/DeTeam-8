@@ -29,8 +29,7 @@ export class EventWishList {
     @DeleteDateColumn({ name: 'deleted_at', nullable: true })
     deletedAt?: Date;
 
-    @ManyToOne(() => WishList)
+    @ManyToOne(() => WishList, wishList => wishList.eventWishLists)
     @JoinColumn({ name: 'wish_list_id' })
-    @IsNotEmpty()
     wishList: WishList;
 }
