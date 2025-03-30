@@ -1,26 +1,49 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException, InternalServerErrorException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateCatalogDto } from './dto/create-catalog.dto';
-import { UpdateCatalogDto } from './dto/update-catalog.dto';
+import { Catalog } from './entities/catalog.entity';
 
 @Injectable()
 export class CatalogService {
-  create(createCatalogDto: CreateCatalogDto) {
-    return 'This action adds a new catalog';
+  constructor(
+    @InjectRepository(Catalog)
+    private readonly catalogRepository: Repository<Catalog>,
+  ) { }
+
+  async create(createCatalogDto: CreateCatalogDto): Promise<Catalog> {
+    try {
+      const catalog = this.catalogRepository.create(createCatalogDto);
+
+      return await this.catalogRepository.save(catalog);
+    } catch (error) {
+      throw new InternalServerErrorException('Error creating catalog');
+    }
   }
 
-  findAll() {
-    return `This action returns all catalog`;
+  async findAll(): Promise<Catalog[]> {
+    try {
+      return await this.catalogRepository.find();
+    } catch (error) {
+      throw new InternalServerErrorException('Error retrieving catalogs');
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} catalog`;
-  }
+  async findOne(id: string): Promise<Catalog> {
+    try {
+      const catalog = await this.catalogRepository.findOne({ where: { id } });
 
-  update(id: number, updateCatalogDto: UpdateCatalogDto) {
-    return `This action updates a #${id} catalog`;
-  }
+      if (!catalog) {
+        throw new NotFoundException(`Catalog with id ${id} not found`);
+      }
 
-  remove(id: number) {
-    return `This action removes a #${id} catalog`;
+      return catalog;
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+
+      throw new InternalServerErrorException('Error retrieving catalog');
+    }
   }
 }

@@ -1,39 +1,28 @@
-import { IsNotEmpty, IsOptional, IsString, IsNumber } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateCatalogDto {
     @ApiProperty({
         description: 'Name of the catalog item',
-        example: 'Projector',
+        example: 'Decorations',
     })
     @IsNotEmpty()
     @IsString()
     name: string;
 
-    @ApiProperty({
-        description: 'Description of the catalog item',
-        example: 'High quality projector for presentations',
-        required: false,
+    @ApiPropertyOptional({
+        description: 'Detailed description of the catalog item',
+        example: 'Various decoration items for events',
     })
     @IsOptional()
     @IsString()
     description?: string;
 
-    @ApiProperty({
+    @ApiPropertyOptional({
         description: 'Category of the catalog item',
-        example: 'Equipment',
-        required: false,
+        example: 'Decoration',
     })
     @IsOptional()
     @IsString()
     category?: string;
-
-    @ApiProperty({
-        description: 'Default quantity for the catalog item',
-        example: 1,
-        required: false,
-    })
-    @IsOptional()
-    @IsNumber()
-    defaultQuantity?: number;
 }
