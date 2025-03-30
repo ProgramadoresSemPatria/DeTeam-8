@@ -1,3 +1,5 @@
+import { EventType, EventTypes } from "./event";
+
 interface Gift {
   id: string;
   name: string;
@@ -5,14 +7,15 @@ interface Gift {
 }
 
 export interface EventFormData {
-  name: string;
+  title: string;
   description: string;
-  date: Date | undefined;
+  date: Date;
   time: string;
   location: string;
-  eventType: string;
-  capacity: string;
+  type: EventType;
+  capacity: number;
   isPublic: boolean;
+  status: string;
   eventLink: string;
   gifts: Gift[];
 }
@@ -20,5 +23,6 @@ export interface EventFormData {
 export interface EventModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
-  onSubmit?: (data: EventFormData) => void;
+  eventToEdit?: EventTypes;
+  refetchMyEvents: () => void
 }

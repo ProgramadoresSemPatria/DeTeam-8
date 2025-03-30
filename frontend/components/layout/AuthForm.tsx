@@ -120,8 +120,12 @@ export function SignInForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await login(email, password);
-  };
+    try {
+       login(email, password);
+    } catch (error) {
+        console.log("Erro ao enviar formulário:", error);
+    }
+  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -183,7 +187,12 @@ export function SignUpForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    register(name, email, password);
+    
+    try {
+      register(name, email, password);
+    } catch (error) {
+        console.log("Erro ao enviar formulário:", error);
+    }
   };
 
   return (

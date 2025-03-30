@@ -1,29 +1,62 @@
 "use client"
-import EventModal from "@/components/general/EventModal";
+import EventModal from "@/components/general/EventModal/EventModal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { upcomingEvents } from "@/mockedData";
 import { formattedDate } from "@/util/functions/formattedDate";
-import { EventStatus } from "@/util/types/event";
+import { EventStatus, EventTypes } from "@/util/types/event";
 import { BarChart3, CheckSquare, Edit, Plus, Search, Trash2 } from "lucide-react";
 import Link from "next/link";
 import ProtectedRoute from "@/components/layout/ProtectedRoute";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { deleteEvent, useGetMyEvents } from "@/services/eventFunctions";
+import { statusMap } from "@/util/constants";
 
 export default function Painel() {
 
     const [search, setSearch] = useState('');
     const [eventStatus, setEventStatus] = useState<EventStatus>('ativo');
     const [isCreateEventModalOpen, setIsCreateEventModalOpen] = useState(false);
+    const [eventsToDisplay, setEventsToDisplay] = useState<EventTypes[]>([]);
+    const [eventToEdit, setEventToEdit] = useState<EventTypes | undefined>();
+    const { data: MyEvents, refetch: refetchMyEvents } = useGetMyEvents();
+    
+    useEffect(() => {
+      if (!MyEvents || MyEvents.length === 0) {
+          return;
+      }
+    
+      const filteredEvents = MyEvents.filter((event) => {
+          const statusMatch = event.status === statusMap[eventStatus];
+          const titleMatch = event.title.toLowerCase().includes(search.toLowerCase());
+          return statusMatch && titleMatch;
+      });
+  
+      setEventsToDisplay(filteredEvents);
+    }, [MyEvents, eventStatus, search]);
 
-    const filteredEvents = upcomingEvents.filter((event) => {
-      const statusMatch = event.status === eventStatus;
-      const titleMatch = event.title.toLowerCase().includes(search.toLowerCase());
-      
-      return statusMatch && titleMatch;
-    });
-    const eventsToDisplay = filteredEvents;
+    function handleEditEvent(id: string): void {
+      const eventToEdit = MyEvents?.find((event) => event.id === id) || undefined;
+      setEventToEdit(eventToEdit);
+      setIsCreateEventModalOpen(true);
+    }
+
+    function handleDeleteEvent(id: string): void {
+      try {
+        deleteEvent(id);
+        refetchMyEvents();
+      }
+      catch (error) {
+        console.error("Erro ao deletar evento:", error); 
+      }
+    }
+
+    useEffect(() => {
+      if (!isCreateEventModalOpen) {
+        refetchMyEvents();
+        setEventToEdit(undefined);
+      }
+    }, [isCreateEventModalOpen, refetchMyEvents]);
 
     return (
       <ProtectedRoute>
@@ -41,7 +74,13 @@ export default function Painel() {
                         <span className="ml-1 sm:ml-2">Criar evento</span>
                   </Button>
                   {
-                    isCreateEventModalOpen && <EventModal isOpen={isCreateEventModalOpen} setIsOpen={setIsCreateEventModalOpen}/>
+                    isCreateEventModalOpen &&
+                    <EventModal 
+                      isOpen={isCreateEventModalOpen} 
+                      setIsOpen={setIsCreateEventModalOpen} 
+                      eventToEdit={eventToEdit}
+                      refetchMyEvents={refetchMyEvents}
+                      />
                   }
                 </div>
                 <div className="flex flex-col sm:flex-row gap-8 mb-8">
@@ -113,17 +152,17 @@ export default function Painel() {
                                     variant="secondary"
                                     className={`top-2 text-[.65rem]
                                     ${
-                                      event.type === "Presencial"
+                                      event.type === "presencial"
                                         ? "border-gray-300 bg-gray-100/90 black"
                                         : "text-blue-800 bg-blue-100/90 border-blue-300"
                                     }`}
                                   >
-                                    {event.type}
+                                    {event.type === "presencial" ? "Presencial" : "Online"}
                                   </Badge>
                                 </td>
                                 <td className="px-4 py-2">{formattedDate(event.date)}</td>
                                 <td className="px-4 py-2">{event.location}</td>
-                                <td className="px-4 py-2">{event.registered}</td>
+                                <td className="px-4 py-2">{/* event.registered || */ 0}</td>{/* TODO */}
                                 <td className="p-4 align-middle">
                                   <div className="flex items-center gap-2">
                                     <Button variant="ghost" size="icon" asChild>
@@ -136,12 +175,20 @@ export default function Painel() {
                                         <CheckSquare className="h-4 w-4" />
                                       </Link>
                                     </Button>
-                                    <Button variant="ghost" size="icon" asChild>
-                                      <Link href={`/eventos/${event.id}/editar`}>
+                                    <Button 
+                                      variant="ghost" 
+                                      size="icon" 
+                                      onClick={() => handleEditEvent(event.id)}
+                                      className="cursor-pointer"
+                                      >
                                         <Edit className="h-4 w-4" />
-                                      </Link>
                                     </Button>
-                                    <Button variant="ghost" size="icon">
+                                    <Button 
+                                      variant="ghost" 
+                                      size="icon" 
+                                      onClick={() => handleDeleteEvent(event.id)}
+                                      className="cursor-pointer"
+                                      >
                                       <Trash2 className="h-4 w-4" />
                                     </Button>
                                   </div>

@@ -15,7 +15,15 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'github.com',
       },
-    ],
+      {
+        protocol: 'http',
+        hostname: 'example.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.pexels.com',
+      },
+    ],  
   },
   experimental: {
     viewTransition: true,

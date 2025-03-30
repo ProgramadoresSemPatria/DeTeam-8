@@ -3,24 +3,50 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { CalendarDays, MapPin, Users, Clock, Share2 } from "lucide-react"
 import Image from "next/image"
-import { upcomingEvents } from "@/mockedData"
 import { formattedDate } from "@/util/functions/formattedDate"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useParams } from "next/navigation"
 import { cn } from "@/lib/utils"
 import EventDetailsSection from "@/components/general/EventDetailsSection"
 import EventParticipantsSection from "@/components/general/EventParticipantsSection"
+import { useGetSpecificEvent } from "@/services/eventFunctions"
+import { EventTypes } from "@/util/types/event"
+import { defaultImgUrl } from "@/util/constants"
+import { useGetEventImgUrl } from "@/hooks/useGetEventImgUrl"
 
 export default function EventPage() {
 
     const [eventInfo, setEventInfo] = useState<'detalhes' | 'participantes' | 'contribuicoes'>('detalhes');
-
+    const [SpecificEvent, setSpecificEvent] = useState<EventTypes[]>([]);
+    const [imageUrl, setImageUrl] = useState<string>(defaultImgUrl);
     const params = useParams();
     const { id } = params;
+
+    const { data: event } = useGetSpecificEvent(id as string);
+    const { data: pexelsImageUrl } = useGetEventImgUrl(event?.title as string);
+
+    console.log('event', event);
+    console.log('id', id);
+    
+    useEffect(() => {
+        if(!event) return
+        setSpecificEvent([event]);
+    }, [event]);
+
+
+    useEffect(() => {
+        if(!event?.title) return
+        
+        if(pexelsImageUrl) {
+            setImageUrl(pexelsImageUrl);
+        }
+    }, [event?.title, pexelsImageUrl]);
+
+    
+    console.log('id', id);
     if (!id) return <p>Carregando...</p>;
 
-    const event = upcomingEvents.find((event) => event.id === Number(id));
-    if (!event) return <p className="text-center mt-5">Evento não encontrado</p>;
+    if (!SpecificEvent) return <p className="text-center mt-5">Evento não encontrado</p>;
 
     return (
         <main className="container max-w-7xl mx-auto py-8 px-4">
@@ -28,37 +54,37 @@ export default function EventPage() {
                 <div className="lg:col-span-2 space-y-8">
                 <div className="relative rounded-xl overflow-hidden">
                     <Image 
-                        src={event?.imageUrl || "/placeholder.svg"} 
-                        alt={event?.title || "Imagem do evento"} className="w-full h-[300px] object-cover" 
+                        src={imageUrl} 
+                        alt={SpecificEvent[0]?.title || "Imagem do evento"} className="w-full h-[300px] object-cover" 
                         width={400} 
                         height={400}
                         />
                     <div className="absolute top-4 right-4 flex gap-2">
-                    <div className={`px-2 py-1 rounded ${event?.type === "Presencial" ? "bg-primary text-primary-foreground" : "bg-secondary text-secondary-foreground"}`}>
-                        {event?.type === "Presencial" ? "Presencial" : "Online"}
+                    <div className={`px-2 py-1 rounded ${SpecificEvent[0]?.type === "presencial" ? "bg-primary text-primary-foreground" : "bg-secondary text-secondary-foreground"}`}>
+                        {SpecificEvent[0]?.type === "presencial" ? "Presencial" : "Online"}
                     </div>
                     </div>
                 </div>
 
                 <div>
-                    <h1 className="text-3xl font-bold mb-4">{event?.title}</h1>
+                    <h1 className="text-3xl font-bold mb-4">{SpecificEvent[0]?.title}</h1>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                         <div className="flex items-center">
                             <CalendarDays className="h-5 w-5 mr-2 text-primary" />
-                            <span>{formattedDate(event?.date || new Date().toLocaleString())}</span>
+                            <span>{formattedDate(SpecificEvent[0]?.date || new Date().toLocaleString())}</span>
                         </div>
                         <div className="flex items-center">
                             <Clock className="h-5 w-5 mr-2 text-primary" />
-                            <span>{event?.time}</span>
+                            <span>{(SpecificEvent[0]?.date)?.split("T")[1].slice(0, 5)}</span>
                         </div>
                         <div className="flex items-center">
                             <MapPin className="h-5 w-5 mr-2 text-primary" />
-                            <span>{event?.location}</span>
+                            <span>{SpecificEvent[0]?.location}</span>
                         </div>
                         <div className="flex items-center">
                             <Users className="h-5 w-5 mr-2 text-primary" />
                             <span>
-                            {event?.registered} / {event?.capacity} participantes
+                            {/* {SpecificEvent[0]?.registered} */} / {SpecificEvent[0]?.capacity} participantes
                             </span>
                         </div>
                     </div>
@@ -95,7 +121,7 @@ export default function EventPage() {
                             Participantes
                         </Button>
                     </div>
-                    {eventInfo === 'detalhes' && <EventDetailsSection event={event} />}
+                    {eventInfo === 'detalhes' && <EventDetailsSection event={SpecificEvent[0]} />}
                     {eventInfo === 'participantes' && <EventParticipantsSection />}
                     <div className="">
                             
