@@ -13,6 +13,7 @@ import { EventWishListModule } from './event-wish-list/event-wish-list.module';
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env',
+      isGlobal: true
     }),
     DatabaseModule,
     EventsModule,
