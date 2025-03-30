@@ -10,7 +10,7 @@ import ProtectedRoute from "@/components/layout/ProtectedRoute";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { deleteEvent, useGetMyEvents } from "@/services/eventFunctions";
-import { statusMap } from "@/util/constants";
+import { getTypeKeyByValue, statusMap } from "@/util/constants";
 
 export default function Painel() {
 
@@ -41,10 +41,10 @@ export default function Painel() {
       setIsCreateEventModalOpen(true);
     }
 
-    function handleDeleteEvent(id: string): void {
+    async function handleDeleteEvent(id: string): Promise<void> {
       try {
-        deleteEvent(id);
-        refetchMyEvents();
+        await deleteEvent(id);
+        await refetchMyEvents();
       }
       catch (error) {
         console.error("Erro ao deletar evento:", error); 
@@ -57,6 +57,7 @@ export default function Painel() {
         setEventToEdit(undefined);
       }
     }, [isCreateEventModalOpen, refetchMyEvents]);
+
 
     return (
       <ProtectedRoute>
@@ -152,12 +153,12 @@ export default function Painel() {
                                     variant="secondary"
                                     className={`top-2 text-[.65rem]
                                     ${
-                                      event.type === "presencial"
+                                      getTypeKeyByValue(event.type) === "presencial"
                                         ? "border-gray-300 bg-gray-100/90 black"
                                         : "text-blue-800 bg-blue-100/90 border-blue-300"
                                     }`}
                                   >
-                                    {event.type === "presencial" ? "Presencial" : "Online"}
+                                    {getTypeKeyByValue(event.type) === "presencial" ? "Presencial" : "Online"}
                                   </Badge>
                                 </td>
                                 <td className="px-4 py-2">{formattedDate(event.date)}</td>
