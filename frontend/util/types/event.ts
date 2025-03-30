@@ -1,23 +1,15 @@
-export interface Event {
-  id: number;
+export interface EventTypes {
+  id: string;
   title: string;
   description: string;
   date: string;
-  time: string;
   location: string;
-  type: "Presencial" | "Online";
+  type: "presencial" | "online";
   capacity: number;
-  registered: number;
   status: "ativo" | "concluido" | "cancelado";
-  organizer: string;
   imageUrl: string;
   isPublic: boolean;
-  hasContribution: {
-    id: number;
-    name: string;
-    value: number;
-  }[];
 }
 
-export type EventType = 'Presencial' | 'Online';
-export type EventStatus = 'ativo' | 'cancelado' | 'concluido';
+export type EventType = 'presencial' | 'online';
+export type EventStatus = 'ativo' | 'cancelado' | 'concluido';  
