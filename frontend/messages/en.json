@@ -25,5 +25,10 @@
     "terms": "Terms of Use",
     "privacy": "Privacy Policy",
     "help": "Help"
+  },
+
+  "LocaleSwicher": {
+    "label": "Change language",
+    "locale": "{locale, select, en {English} pt-br {Portuguese} es {Spanish} fr {French} other {Unknown}}"
   }
 }
