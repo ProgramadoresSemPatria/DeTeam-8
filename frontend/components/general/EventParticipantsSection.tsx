@@ -36,7 +36,7 @@ export default function EventParticipantsSection({ event, guestsOnEvent }: { eve
                 </table>
             )}
             {
-                (guestsOnEvent.total === 0 && (
+                (isAdmin &&  guestsOnEvent.total === 0 && (
                     <p className='py-5 md:py-10 text-center'>Nenhum participante ainda</p>
                 ))
             }
