@@ -26,9 +26,14 @@
     "privacy": "Política de privacidade",
     "help": "Ajuda"
   },
-
+  "Header": {
+    "title": "EventoFacil",
+    "sign-in": "Login",
+    "sign-up": "Cadastre-se",
+    "sign-out": "Sair"
+  },
   "LocaleSwicher": {
-    "label": "Change language",
+    "label": "Mudar idioma",
      "locale": "{locale, select, en {English} pt-br {Portuguese} es {Spanish} fr {French} other {Unknown}}"
   }
 }

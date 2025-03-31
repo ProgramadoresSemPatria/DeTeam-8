@@ -8,8 +8,11 @@ import { useEffect, useState } from "react";
 import { Menu, X } from 'lucide-react';
 import { useAutoLogin } from "@/hooks/auth/useAutoLogin";
 import LocaleSwicher from "../general/LocaleSwicher";
+import { useTranslations } from "next-intl";
 
 export default function Header() {
+
+  const t = useTranslations("Header");
 
     useAutoLogin();
     const { isLogged, user, logout } = useAuthContext();
@@ -32,7 +35,7 @@ export default function Header() {
               <Link href="/">
                 <p className="text-3xl font-semibold flex items-center gap-1">
                   <Calendar className="h-6 w-6 text-blue-500" />
-                  <span className="text-blue-500">EventoFacil</span>
+                  <span className="text-blue-500">{t("title")}</span>
                 </p>
               </Link>
             </div>
@@ -65,7 +68,7 @@ export default function Header() {
                         onClick={() => logout()}
                         className="cursor-pointer sm:px-8"
                       >
-                        Sair
+                        {t("sign-out")}
                       </Button>
                     </div>
                   )
@@ -78,7 +81,7 @@ export default function Header() {
                             className="text-md font-medium hover:text-blue-500 transition-colors"
                             href="/sign-in"
                           >
-                            Entrar
+                            {t("sign-in")}
                           </Link>
                       </Button>
                       <Button asChild className="md:px-8 bg-blue-400 hover:bg-blue-500">
@@ -86,7 +89,7 @@ export default function Header() {
                             className="text-md font-medium hover:text-white transition-colors"
                             href="/sign-up"
                           >
-                            Cadastrar
+                            {t("sign-up")}
                           </Link>
                       </Button>
                     </div>

@@ -26,6 +26,12 @@
     "privacy": "Privacy Policy",
     "help": "Help"
   },
+  "Header": {
+    "title": "EasyEvent",
+    "sign-in": "Sign in",
+    "sign-up": "Sign up",
+    "sign-out": "Sign out"
+  },
 
   "LocaleSwicher": {
     "label": "Change language",
