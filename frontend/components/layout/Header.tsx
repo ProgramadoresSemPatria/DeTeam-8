@@ -7,13 +7,12 @@ import { MobileMenu } from "./MobileMenu";
 import { useEffect, useState } from "react";
 import { Menu, X } from 'lucide-react';
 import { useAutoLogin } from "@/hooks/auth/useAutoLogin";
-import LocaleSwicher from "../general/LocaleSwicher";
 
 export default function Header() {
 
     useAutoLogin();
     const { isLogged, user, logout } = useAuthContext();
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false); 
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
@@ -26,7 +25,7 @@ export default function Header() {
     }, []);
 
     return (
-      <header className="max-w-7xl mx-auto py-5 sticky top-0 z-50 bg-white">
+      <header className="max-w-7xl mx-auto py-5 sticky top-0 z-50 bg-white"> 
         <div className="w-full flex items-center justify-between">
             <div className="flex items-center justify-between gap-6">
               <Link href="/">
@@ -36,7 +35,6 @@ export default function Header() {
                 </p>
               </Link>
             </div>
-            <LocaleSwicher />
             {isMobile && (
                 <button
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -54,7 +52,7 @@ export default function Header() {
               <MobileMenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen}/>
             )}
 
-            {!isMobile && (
+            {!isMobile && (  
               <nav className='hidden md:flex items-center justify-between'>
 
                 {
@@ -91,7 +89,7 @@ export default function Header() {
                       </Button>
                     </div>
                   )
-                }
+                }      
               </nav>
             )}
 
