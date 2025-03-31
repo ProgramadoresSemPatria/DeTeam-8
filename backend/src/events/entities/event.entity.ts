@@ -65,7 +65,6 @@ export class EventEntity {
     @Column({ name: 'is_public', comment: 'Indicates if the event is public' })
     isPublic: boolean;
 
-    @Exclude()
     @Column({ type: 'uuid', name: 'user_id' })
     userId: string;
 
