@@ -5,7 +5,7 @@ import { useAutoLogin } from "@/hooks/auth/useAutoLogin";
 import { useTranslations } from "next-intl";
 
 export default function SignIn() {
-  const t = useTranslation("Auth");
+  const t = useTranslations("Auth");
 
     useAutoLogin();
 
