@@ -4,8 +4,8 @@ import EventCard from "@/components/general/EventCard";
 import { Button } from "@/components/ui/button";
 import { Suspense, useEffect, useState } from "react";
 import { EventCardSkeleton } from "@/components/general/EventCardSkeleton";
-import { useGetAllEvents } from "@/services/eventFunctions";
 import { EventTypes } from "@/util/types/event";
+import { useGetAllPublicEvents } from "@/services/eventFunctions";
 
 export default function PublicEvents() {
 
@@ -13,7 +13,7 @@ export default function PublicEvents() {
     const [filter, setFilter] = useState('');
     const [filteredEvents, setFilteredEvents] = useState<EventTypes[]>([]);
 
-    const { data: allEvents } = useGetAllEvents();
+    const { data: allEvents } = useGetAllPublicEvents();
 
     useEffect(() => {
       if (!allEvents) return;

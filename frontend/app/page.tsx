@@ -5,19 +5,19 @@ import { EventCardSkeleton } from "@/components/general/EventCardSkeleton";
 import Hero from "@/components/general/Hero";
 import { Suspense, useEffect, useState } from "react";
 import TextButton from "@/components/general/TextButton";
-import { useGetMyEvents } from "@/services/eventFunctions";
 import { EventTypes } from "@/util/types/event";
+import { useGetAllPublicEvents } from "@/services/eventFunctions";
 
 
 export default function Home() {
 
-    const [myEvent, setMyEvent] = useState<EventTypes[]>([]);
+    const [eventPublic, setPublicEvents] = useState<EventTypes[]>([]);
 
-    const { data: MyEvents } = useGetMyEvents();
+    const { data: events } = useGetAllPublicEvents();
     
     useEffect(() => {
-        setMyEvent(MyEvents || []);
-    }, [MyEvents]);
+        setPublicEvents(events || []);
+    }, [events]);
 
     return (
       <div className="min-h-screen flex flex-col">
@@ -35,8 +35,8 @@ export default function Home() {
             }
           >
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {myEvent?.slice(0, 3).map((event, index) => (
-                <EventCard key={event.id} event={myEvent[index]} />
+              {eventPublic?.slice(0, 3).map((event, index) => (
+                <EventCard key={event.id} event={eventPublic[index]} />
               ))}
             </div>
           </Suspense>
@@ -46,3 +46,4 @@ export default function Home() {
       </div>
     );
 }
+

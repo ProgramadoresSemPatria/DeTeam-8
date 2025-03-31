@@ -16,7 +16,7 @@ export const createEvent = async (event: Omit<EventFormData, "eventLink" | "gift
     }
 };
 
-const getAllEvents = async () => {
+const getAllPublicEvents = async () => {
     try {
         const { data } = await axiosInstance.get('/events/public');
         return data as EventTypes[];
@@ -25,10 +25,10 @@ const getAllEvents = async () => {
         throw error;
     }
 };
-export const useGetAllEvents = () => {
+export const useGetAllPublicEvents = () => {
     const query = useQuery({
         queryKey: ['all-events'],
-        queryFn: getAllEvents
+        queryFn: getAllPublicEvents
     })
 
     return query
