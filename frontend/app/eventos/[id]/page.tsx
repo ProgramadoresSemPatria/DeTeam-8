@@ -29,7 +29,6 @@ export default function EventPage() {
     const { data: pexelsImageUrl } = useGetEventImgUrl(event?.title as string);
     const { data: guestsOnEvent } = useGetGuestsByEvent(event?.id || '');
 
-    
     useEffect(() => {
         if(!event) return
         setSpecificEvent([event]);
@@ -86,7 +85,7 @@ export default function EventPage() {
                         <div className="flex items-center">
                             <Users className="h-5 w-5 mr-2 text-primary" />
                             <span>
-                            {guestsOnEvent?.total} / {SpecificEvent[0]?.capacity} participantes
+                            {guestsOnEvent !== 0 ? guestsOnEvent?.total : 0} / {SpecificEvent[0]?.capacity} participantes
                             </span>
                         </div>
                     </div>
@@ -95,7 +94,6 @@ export default function EventPage() {
                         <Button asChild className="bg-blue-500 hover:bg-blue-500/90 cursor-pointer">
                             <Link href={`/eventos/${id}/inscricao`}>Inscrever-se</Link>
                         </Button>
-                        {/* TODO: adicionar link do evento para compartilhar */}
                         <Button variant="outline" className="cursor-pointer" onClick={() => setShowShareModal(true)}>
                             <Share2 className="h-4 w-4 mr-2" />
                             Compartilhar
