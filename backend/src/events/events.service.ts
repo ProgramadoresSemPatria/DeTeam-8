@@ -53,8 +53,10 @@ export class EventsService {
 
   async findEventsByUser(id: string): Promise<EventEntity[]> {
     try {
-      const events = await this.eventRepository.find({ where: { userId: id } });
-      this.logger.log(`Fetched ${events.length} events for user ${id}`);
+      const events = await this.eventRepository.find({
+        where: { userId: id },
+        relations: ['user'], 
+      });      this.logger.log(`Fetched ${events.length} events for user ${id}`);
       const updatedEvents = await this.updateExpiredEvents(events);
 
       return updatedEvents;
