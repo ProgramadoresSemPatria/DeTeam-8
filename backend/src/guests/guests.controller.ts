@@ -34,7 +34,6 @@ export class GuestsController {
     return await this.guestsService.findAllByEvent(id);
   }
 
-
   @UseGuards(AuthGuard('jwt'))
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<Guest> {
@@ -42,7 +41,7 @@ export class GuestsController {
 
     return await this.guestsService.findOne(id);
   }
-
+  
   @UseGuards(AuthGuard('jwt'))
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateGuestDto: UpdateGuestDto): Promise<Guest> {
