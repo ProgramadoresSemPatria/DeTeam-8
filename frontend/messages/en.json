@@ -25,7 +25,12 @@
     "sign-in": "Sign in",
     "sign-up": "Sign up",
     "sign-out": "Sign out",
-    "continue": "Or Continue with"
+    "continue": "Or Continue with",
+
+    "title": "Welcome back",
+    "subtitle": "Enter your credentials",
+    "footer-text": "Don't have an account?",
+    "footer-link": "Create one"
   },
   "Footer": {
     "about": "About",

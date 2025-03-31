@@ -25,7 +25,13 @@
     "sign-in": "Entrar",
     "sign-up": "Cadastrar",
     "sign-out": "Sair",
-    "continue": "Ou continue com"
+    "continue": "Ou continue com",
+
+    "title": "Bem-vindo de volta",
+    "subtitle": "Entre com suas credenciais",
+    "footer-text": "Não possui uma conta?",
+    "footer-link": "Crie uma"
+
   },
   "Footer": {
     "about": "Sobre",
