@@ -41,12 +41,12 @@ export class EventsController {
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Get('my-events')
-  async getUserEvents(@Req() req): Promise<EventEntity[]> {
-    const user: User = req.user;
-    this.logger.log(`User ${user.id} requested their events`);
-    const events = await this.eventsService.findEventsByUser(user);
-    this.logger.log(`Found ${events.length} events for user ${user.id}`);
+  @Get('my-events/:id')
+  async getUserEvents(@Param('id') id: string): Promise<EventEntity[]> {
+    console.log('User from request:', id);
+    this.logger.log(`User ${id} requested their events`);
+    const events = await this.eventsService.findEventsByUser(id);
+    this.logger.log(`Found ${events.length} events for user ${id}`);
     return events;
   }
 
