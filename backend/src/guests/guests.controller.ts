@@ -30,7 +30,7 @@ export class GuestsController {
 
   @UseGuards(AuthGuard('jwt'))
   @Get('by-event/:id')
-  async findAllByEvent(@Param('id') id: string): Promise<{ total: number; message: string }> {
+  async findAllByEvent(@Param('id') id: string): Promise<{ total: number; message: string, guests: Guest[] }> {
     return await this.guestsService.findAllByEvent(id);
   }
 

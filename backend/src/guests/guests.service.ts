@@ -55,7 +55,7 @@ export class GuestsService {
     }
   }
 
-  async findAllByEvent(id: string): Promise<{ total: number; message: string }> {
+  async findAllByEvent(id: string): Promise<{ total: number; message: string, guests: Guest[] }> {
     try {
       const guests = await this.guestRepository.find({
         where: { eventId: id },
@@ -68,6 +68,7 @@ export class GuestsService {
       return {
         total,
         message: `Found ${total} guests for event ${id}.`,
+        guests
       };
     } catch (error) {
       this.logger.error(`Error fetching guests for event ${id}`, error.stack);
