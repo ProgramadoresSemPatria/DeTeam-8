@@ -19,6 +19,14 @@
     "grade-9": "CALENDÁRIO",
     "grade-9-calendar": "Evento: 15 de Junho"
   },
+  "Auth": {
+    "create-account": "Criar conta",
+    "login": "Entrar",
+    "sign-in": "Entrar",
+    "sign-up": "Cadastrar",
+    "sign-out": "Sair",
+    "continue": "Ou continue com"
+  },
   "Footer": {
     "about": "Sobre",
     "contact": "Contato",
