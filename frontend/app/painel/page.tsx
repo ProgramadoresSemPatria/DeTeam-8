@@ -1,26 +1,31 @@
 "use client"
 import EventModal from "@/components/general/EventModal/EventModal";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { formattedDate } from "@/util/functions/formattedDate";
 import { EventStatus, EventTypes } from "@/util/types/event";
-import { BarChart3, CheckSquare, Edit, Plus, Search, Trash2 } from "lucide-react";
-import Link from "next/link";
+import { Plus, Search,  } from "lucide-react";
 import ProtectedRoute from "@/components/layout/ProtectedRoute";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
-import { deleteEvent, useGetMyEvents } from "@/services/eventFunctions";
-import { getTypeKeyByValue, statusMap } from "@/util/constants";
+import { useGetMyEvents } from "@/services/eventFunctions";
+import { getStatusKeyByValue, statusMap } from "@/util/constants";
+import useAuthContext from "@/hooks/auth/useAuthContext";
+import EventsTable from "@/components/general/EventsTable";
+import { useGetGuestsForEvents } from "@/services/guestFunctions";
+import { GuestOnEvent } from "@/util/types/guest";
 
 export default function Painel() {
 
     const [search, setSearch] = useState('');
     const [eventStatus, setEventStatus] = useState<EventStatus>('ativo');
     const [isCreateEventModalOpen, setIsCreateEventModalOpen] = useState(false);
-    const [eventsToDisplay, setEventsToDisplay] = useState<EventTypes[]>([]);
     const [eventToEdit, setEventToEdit] = useState<EventTypes | undefined>();
-    const { data: MyEvents, refetch: refetchMyEvents } = useGetMyEvents();
+    const [activeEvents, setActiveEvents] = useState<EventTypes[]>([]);
+    const [completedEvents, setCompletedEvents] = useState<EventTypes[]>([]);
+    const [eventsToDisplay, setEventsToDisplay] = useState<EventTypes[]>([]);
     
+    const { user } = useAuthContext();
+    const { data: MyEvents, refetch: refetchMyEvents } = useGetMyEvents(user?.id || '');
+
     useEffect(() => {
       if (!MyEvents || MyEvents.length === 0) {
           return;
@@ -31,25 +36,33 @@ export default function Painel() {
           const titleMatch = event.title.toLowerCase().includes(search.toLowerCase());
           return statusMatch && titleMatch;
       });
+
+      setActiveEvents(MyEvents.filter((event) => getStatusKeyByValue(event.status) === 'ativo'));
+      setCompletedEvents(MyEvents.filter((event) => getStatusKeyByValue(event.status) === 'concluido'));
   
       setEventsToDisplay(filteredEvents);
-    }, [MyEvents, eventStatus, search]);
+    }, [MyEvents, eventStatus, search])
 
-    function handleEditEvent(id: string): void {
-      const eventToEdit = MyEvents?.find((event) => event.id === id) || undefined;
-      setEventToEdit(eventToEdit);
-      setIsCreateEventModalOpen(true);
-    }
 
-    async function handleDeleteEvent(id: string): Promise<void> {
-      try {
-        await deleteEvent(id);
-        await refetchMyEvents();
-      }
-      catch (error) {
-        console.error("Erro ao deletar evento:", error); 
-      }
-    }
+    const guestQueries = useGetGuestsForEvents(MyEvents || []);
+
+    const guestsAmountPerEvent: GuestOnEvent[] = guestQueries.map(query => {
+        return query.data && typeof query.data === 'object' && 'total' in query.data
+            ? query.data
+            : { total: 0, message: '', guests: [] };
+    });
+
+    const eventsWithGuests = eventsToDisplay.map(event => {
+      const guestData = guestsAmountPerEvent.find(guest => guest.guests.length > 0 && guest.guests[0].eventId === event.id);
+      
+      return {
+          ...event,
+          totalGuests: guestData ? guestData.total : 0
+      };
+  });
+
+  const totalGuestsCount = guestsAmountPerEvent.reduce((sum, guestData) => sum + guestData.total, 0);
+
 
     useEffect(() => {
       if (!isCreateEventModalOpen) {
@@ -57,7 +70,6 @@ export default function Painel() {
         setEventToEdit(undefined);
       }
     }, [isCreateEventModalOpen, refetchMyEvents]);
-
 
     return (
       <ProtectedRoute>
@@ -86,18 +98,18 @@ export default function Painel() {
                 </div>
                 <div className="flex flex-col sm:flex-row gap-8 mb-8">
                     <div className="rounded-md border border-gray-200 px-6 py-8 w-full">
-                      <h2 className="text-3xl font-bold">{3}</h2>
+                      <h2 className="text-3xl font-bold">{activeEvents.length || 0}</h2>
                       <p className="text-gray-700">Eventos ativos</p>
                       <p className="text-gray-700">Eventos publicados e abertos 
                       para inscrições</p>
                     </div>
                     <div className="rounded-md border border-gray-200 px-6 py-8 w-full">
-                      <h2 className="text-3xl font-bold">{68}</h2>
+                      <h2 className="text-3xl font-bold">{totalGuestsCount || 0}</h2>
                       <p className="text-gray-700">Total de inscriçoes</p>
                       <p className="text-gray-700">Participantes confirmados em todos os eventos</p>
                     </div>
                     <div className="rounded-md border border-gray-200 px-6 py-8 w-full">
-                      <h2 className="text-3xl font-bold">{1}</h2>
+                      <h2 className="text-3xl font-bold">{completedEvents.length || 0}</h2>
                       <p className="text-gray-700">Eventos Realizados</p>
                       <p className="text-gray-700">Eventos concluídos com sucesso</p>
                     </div>
@@ -134,70 +146,19 @@ export default function Painel() {
                         </Button>
                     </div>
                     <div className="overflow-x-auto">
-                        <table className="w-full border-collapse border border-gray-200 rounded-md overflow-x-scroll">
-                          <thead className="bg-gray-100">
-                            <tr>
-                              <th className="px-4 py-2 text-left text-gray-700">Evento</th>
-                              <th className="px-4 py-2 text-left text-gray-700">Data</th>
-                              <th className="px-4 py-2 text-left text-gray-700">Local</th>
-                              <th className="px-4 py-2 text-left text-gray-700">Inscrições</th>
-                              <th className="px-4 py-2 text-left text-gray-700">Ações</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {eventsToDisplay.map((event) => (
-                              <tr key={event.id} className="border-t border-gray-200">
-                                <td className="px-4 py-2 font-semibold flex flex-col gap-1">
-                                  <Link href={`/eventos/${event.id}`}>{event.title} </Link>
-                                  <Badge
-                                    variant="secondary"
-                                    className={`top-2 text-[.65rem]
-                                    ${
-                                      getTypeKeyByValue(event.type) === "presencial"
-                                        ? "border-gray-300 bg-gray-100/90 black"
-                                        : "text-blue-800 bg-blue-100/90 border-blue-300"
-                                    }`}
-                                  >
-                                    {getTypeKeyByValue(event.type) === "presencial" ? "Presencial" : "Online"}
-                                  </Badge>
-                                </td>
-                                <td className="px-4 py-2">{formattedDate(event.date)}</td>
-                                <td className="px-4 py-2">{event.location}</td>
-                                <td className="px-4 py-2">{/* event.registered || */ 0}</td>{/* TODO */}
-                                <td className="p-4 align-middle">
-                                  <div className="flex items-center gap-2">
-                                    <Button variant="ghost" size="icon" asChild>
-                                      <Link href={`/eventos/${event.id}`}>
-                                        <BarChart3 className="h-4 w-4" />
-                                      </Link>
-                                    </Button>
-                                    <Button variant="ghost" size="icon" asChild>
-                                      <Link href={`/eventos/${event.id}/`}>
-                                        <CheckSquare className="h-4 w-4" />
-                                      </Link>
-                                    </Button>
-                                    <Button 
-                                      variant="ghost" 
-                                      size="icon" 
-                                      onClick={() => handleEditEvent(event.id)}
-                                      className="cursor-pointer"
-                                      >
-                                        <Edit className="h-4 w-4" />
-                                    </Button>
-                                    <Button 
-                                      variant="ghost" 
-                                      size="icon" 
-                                      onClick={() => handleDeleteEvent(event.id)}
-                                      className="cursor-pointer"
-                                      >
-                                      <Trash2 className="h-4 w-4" />
-                                    </Button>
-                                  </div>
-                              </td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
+                      {
+                        eventsToDisplay.length === 0 && 
+                        <p className="text-gray-700">Nenhum evento encontrado</p>    
+                      }
+                      {
+                        eventsToDisplay.length !== 0 && 
+                        <EventsTable 
+                          eventsToDisplay={eventsWithGuests} 
+                          setEventToEdit={setEventToEdit} 
+                          setIsCreateEventModalOpen={setIsCreateEventModalOpen}
+                          refetchMyEvents={refetchMyEvents}
+                        />
+                      }
                     </div>
                 </div>
           </main>
