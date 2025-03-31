@@ -1,6 +1,29 @@
 {
-  "HomePage": {
-    "title": "Home Page",
-    "description": "Welcome to the home page of the website. This page provides an overview of the website's content and purpose."
+  "Home": {
+    "badges": "Invite. Confirm. Connect.",
+    "title": "Organize Your <span>Events</span> Without Hassle",
+    "description": "A simple and intuitive platform to create and manage free events. Invite friends, track RSVPs and organize contributions in a practical way!",
+    "cta-button": "Create event",
+    "button-know-more": "Know more",
+
+    "grade-1": "GUESTS",
+    "grade-2": "CONFIRMED",
+    "grade-3": "RESPONSE RATE",
+    "grade-4": "DATE ​​AND TIME",
+    "grade-4-span": "Sat, Jun 15",
+    "grade-4-time": "10:00 - 12:00",
+    "grade-5": "CONFIRMATIONS",
+    "grade-6": "LOCATION",
+    "grade-7": "João's House",
+    "grade-8": "WEATHER",
+    "grade-9": "CALENDAR",
+    "grade-9-calendar": "Event: June 15"
+  },
+  "Footer": {
+    "about": "About",
+    "contact": "Contact",
+    "terms": "Terms of Use",
+    "privacy": "Privacy Policy",
+    "help": "Help"
   }
 }

@@ -1,6 +1,29 @@
 {
-  "HomePage": {
-    "title": "Home Page",
-    "description": "Welcome to the home page of the website. This page provides an overview of the website's content and purpose."
+  "Home": {
+    "badges": "Convide. Confirme. Conecte.",
+    "title": "Organize Seus <span>Eventos</span> Sem Complicação",
+    "description": "Uma plataforma simples e intuitiva para criar e gerenciar eventos gratuitos. Convide amigos, acompanhe confirmações de presença e organize contribuições de forma prática!",
+    "cta-button": "Criar evento",
+    "button-know-more": "Saiba mais",
+
+    "grade-1": "CONVIDADOS",
+    "grade-2": "CONFIRMADOS",
+    "grade-3": "TAXA DE RESPOSTA",
+    "grade-4": "DATA E HORA",
+    "grade-4-span": "Sáb, 15 Jun",
+    "grade-4-time": "10:00 - 12:00",
+    "grade-5": "CONFIRMAÇÕES",
+    "grade-6": "LOCALIZAÇÃO",
+    "grade-7": "Casa do João",
+    "grade-8": "CLIMA",
+    "grade-9": "CALENDÁRIO",
+    "grade-9-calendar": "Evento: 15 de Junho"
+  },
+  "Footer": {
+    "about": "Sobre",
+    "contact": "Contato",
+    "terms": "Termos de uso",
+    "privacy": "Política de privacidade",
+    "help": "Ajuda"
   }
 }
