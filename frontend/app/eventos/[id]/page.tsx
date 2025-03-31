@@ -13,21 +13,22 @@ import { useGetSpecificEvent } from "@/services/eventFunctions"
 import { EventTypes } from "@/util/types/event"
 import { defaultImgUrl } from "@/util/constants"
 import { useGetEventImgUrl } from "@/hooks/useGetEventImgUrl"
+import ShareModal from "@/components/general/ShareModal"
+import { useGetGuestsByEvent } from "@/services/guestFunctions"
 
 export default function EventPage() {
 
     const [eventInfo, setEventInfo] = useState<'detalhes' | 'participantes' | 'contribuicoes'>('detalhes');
     const [SpecificEvent, setSpecificEvent] = useState<EventTypes[]>([]);
     const [imageUrl, setImageUrl] = useState<string>(defaultImgUrl);
+    const [showShareModal, setShowShareModal] = useState(false);
     const params = useParams();
     const { id } = params;
 
     const { data: event } = useGetSpecificEvent(id as string);
     const { data: pexelsImageUrl } = useGetEventImgUrl(event?.title as string);
+    const { data: guestsOnEvent } = useGetGuestsByEvent(event?.id || '');
 
-    console.log('event', event);
-    console.log('id', id);
-    
     useEffect(() => {
         if(!event) return
         setSpecificEvent([event]);
@@ -84,7 +85,7 @@ export default function EventPage() {
                         <div className="flex items-center">
                             <Users className="h-5 w-5 mr-2 text-primary" />
                             <span>
-                            {/* {SpecificEvent[0]?.registered} */} / {SpecificEvent[0]?.capacity} participantes
+                            {guestsOnEvent !== 0 ? guestsOnEvent?.total : 0} / {SpecificEvent[0]?.capacity} participantes
                             </span>
                         </div>
                     </div>
@@ -93,40 +94,47 @@ export default function EventPage() {
                         <Button asChild className="bg-blue-500 hover:bg-blue-500/90 cursor-pointer">
                             <Link href={`/eventos/${id}/inscricao`}>Inscrever-se</Link>
                         </Button>
-                        {/* TODO: adicionar link do evento para compartilhar */}
-                        <Button variant="outline" className="cursor-pointer">
+                        <Button variant="outline" className="cursor-pointer" onClick={() => setShowShareModal(true)}>
                             <Share2 className="h-4 w-4 mr-2" />
                             Compartilhar
                         </Button>
                     </div>
 
-                    <div>
-                    <div className="flex flex-1 bg-slate-200 rounded-md p-1 mb-4">
-                        <Button 
-                            className={cn(
-                            "w-full cursor-pointer", 
-                            eventInfo === 'detalhes' ? "bg-white text-black hover:bg-white" : "bg-transparent text-slate-500 hover:bg-slate-100"
-                            )}                
-                            onClick={() => setEventInfo('detalhes')}
-                            >
-                            Detalhes
-                        </Button>
-                        <Button 
-                            className={cn(
-                            "w-full cursor-pointer", 
-                            eventInfo === 'participantes' ? "bg-white text-black hover:bg-white" : "bg-transparent text-slate-500 hover:bg-slate-100"
-                            )}                 
-                            onClick={() => setEventInfo('participantes')}
-                            >
-                            Participantes
-                        </Button>
-                    </div>
-                    {eventInfo === 'detalhes' && <EventDetailsSection event={SpecificEvent[0]} />}
-                    {eventInfo === 'participantes' && <EventParticipantsSection />}
-                    <div className="">
-                            
-                    </div>
+                    {
+                        showShareModal && (
+                            <ShareModal setShowShareModal={setShowShareModal} eventId={id as string} />
+                        )
+                    }
+
+                <div>
+                <div className="flex flex-1 bg-slate-200 rounded-md p-1 mb-4">
+                    <Button
+                        className={cn(
+                        "w-full cursor-pointer",
+                        eventInfo === 'detalhes' ? "bg-white text-black hover:bg-white" : "bg-transparent text-slate-500 hover:bg-slate-100"
+                        )}
+                        onClick={() => setEventInfo('detalhes')}
+                        >
+                        Detalhes
+                    </Button>
+                    <Button
+                        className={cn(
+                        "w-full cursor-pointer",
+                        eventInfo === 'participantes' ? "bg-white text-black hover:bg-white" : "bg-transparent text-slate-500 hover:bg-slate-100"
+                        )}
+                        onClick={() => setEventInfo('participantes')}
+                        >
+                        Participantes
+                    </Button>
                 </div>
+                {event && eventInfo === 'detalhes' && <EventDetailsSection event={event} />}
+                {event && eventInfo === 'participantes' && guestsOnEvent && (
+                  <EventParticipantsSection event={event} guestsOnEvent={guestsOnEvent} />
+                )}
+                <div className="">
+
+                </div>
+            </div>
 
                 </div>
                 </div>

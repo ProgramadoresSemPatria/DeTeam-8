@@ -9,30 +9,21 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+//import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { toast } from 'sonner';
 
 interface EventRegistrationFormProps {
-  event: {
-    title: string;
-    hasContribution: Array<{
-      id: number;
-      name: string;
-      value: number;
-    }>;
-  };
   onSubmit: (formData: {
     name: string;
     email: string;
     phone: string;
-    contribution: string;
     termsAgreed: boolean;
   }) => void;
 }
 
-const EventRegistrationForm: React.FC<EventRegistrationFormProps> = ({ event, onSubmit }) => {
+const EventRegistrationForm: React.FC<EventRegistrationFormProps> = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -112,7 +103,7 @@ const EventRegistrationForm: React.FC<EventRegistrationFormProps> = ({ event, on
 
           <Separator className="bg-blue-200" />
 
-          {event.hasContribution.length > 0 && (
+          {/* {event.hasContribution.length > 0 && (
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-blue-700">Contribuição</h3>
               <p className="text-sm text-muted-foreground">
@@ -145,7 +136,7 @@ const EventRegistrationForm: React.FC<EventRegistrationFormProps> = ({ event, on
                 ))}
               </RadioGroup>
             </div>
-          )}
+          )} */}
 
           <div className="flex items-start space-x-2">
             <Checkbox

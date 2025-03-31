@@ -1,10 +1,7 @@
-import useAuthContext from '@/hooks/auth/useAuthContext'
 import { EventTypes } from '@/util/types/event'
 import React from 'react'
 
 export default function EventDetailsSection({ event }: { event: EventTypes }) {
-
-  const { user } = useAuthContext();
 
   return (
     <section className="space-y-4 py-4">
@@ -15,7 +12,7 @@ export default function EventDetailsSection({ event }: { event: EventTypes }) {
 
         <div>
             <h3 className="text-xl font-semibold mb-2">Organizador</h3>
-            <p className="text-muted-foreground">{user?.name}</p>
+            <p className="text-muted-foreground">{event?.user?.name}</p>
         </div>
     </section>
   )

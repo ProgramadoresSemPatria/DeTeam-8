@@ -171,7 +171,7 @@ interface EventFormProps {
 
       if(eventToEdit) {
           try {
-            updateEvent(eventToEdit.id, formattedDate);            
+            await updateEvent(eventToEdit.id, formattedDate);   
           } 
           catch (error) {
             console.log("Erro ao enviar formulário:", error);
@@ -188,8 +188,10 @@ interface EventFormProps {
 
       try {
         await createEvent(formattedDate);
+        toast.success("Evento criado com sucesso!");         
       } 
       catch (error) {
+        toast.error("Erro ao criar evento.");         
         console.log("Erro ao enviar formulário:", error);
       }
       finally {

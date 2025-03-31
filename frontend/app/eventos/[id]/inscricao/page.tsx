@@ -1,37 +1,39 @@
 "use client"
 import React from 'react';
 import { useParams } from "next/navigation";
-
-import { upcomingEvents } from "@/mockedData";
-
-import { toast } from 'sonner';
 import EventRegistrationForm from '@/components/general/EventRegistrationForm';
 import EventDetailsCard from '@/components/general/EventDetailsCard';
+import { createEventSubscription } from '@/services/eventSubscription';
+import useAuthContext from '@/hooks/auth/useAuthContext';
+import { useGetSpecificEvent } from '@/services/eventFunctions';
 
 const EventSubscriptionPage: React.FC = () => {
   const params = useParams();
   const { id } = params;
 
+  const { user } = useAuthContext();
+  const { data: event } = useGetSpecificEvent(id as string);
+
+
   if (!id) return <p>Carregando...</p>;
 
-  const event = upcomingEvents.find((event) => event.id === Number(id));
   if (!event) return <p className="text-center mt-5">Evento não encontrado</p>;
 
-  const handleSubmit = (formData: {
+  const handleSubmit = async (formData: {
     name: string;
     email: string;
     phone: string;
-    contribution: string;
     termsAgreed: boolean;
   }) => {
-    // Simular envio de inscrição
-    toast.success('Inscrição confirmada!', {
-      description: `Você está inscrito para ${event.title}. Um e-mail de confirmação foi enviado.`,
-      action: {
-        label: 'Fechar',
-        onClick: () => {},
-      },
-    });
+    
+    const formattedSubscriptionData = {
+      name: formData.name,
+      email: formData.email,
+      userId: user?.id as string,
+      eventId: `${event?.id}`,
+    }
+
+    createEventSubscription(formattedSubscriptionData);
 
     console.log('Dados do formulário:', formData);
   };
@@ -47,7 +49,6 @@ const EventSubscriptionPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2">
             <EventRegistrationForm
-              event={event}
               onSubmit={handleSubmit}
             />
           </div>

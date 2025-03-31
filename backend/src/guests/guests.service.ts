@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import { Guest } from './entities/guest.entity';
 import { CreateGuestDto } from './dto/create-guest.dto';
 import { UpdateGuestDto } from './dto/update-guest.dto';
-import { error } from 'console';
 
 @Injectable()
 export class GuestsService {
