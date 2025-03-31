@@ -1,0 +1,67 @@
+{
+  "Home": {
+    "badges": "Invite. Confirm. Connect.",
+    "title": "Organize Your <span>Events</span> Without Hassle",
+    "description": "A simple and intuitive platform to create and manage free events. Invite friends, track RSVPs and organize contributions in a practical way!",
+    "cta-button": "Create event",
+    "button-know-more": "Know more",
+
+    "grade-1": "GUESTS",
+    "grade-2": "CONFIRMED",
+    "grade-3": "RESPONSE RATE",
+    "grade-4": "DATE ​​AND TIME",
+    "grade-4-span": "Sat, Jun 15",
+    "grade-4-time": "10:00 - 12:00",
+    "grade-5": "CONFIRMATIONS",
+    "grade-6": "LOCATION",
+    "grade-7": "João's House",
+    "grade-8": "WEATHER",
+    "grade-9": "CALENDAR",
+    "grade-9-calendar": "Event: June 15"
+  },
+  "Auth": {
+    "create-account": "Create account",
+    "login": "Login",
+    "sign-in": "Sign in",
+    "sign-up": "Sign up",
+    "sign-out": "Sign out",
+    "continue": "Or Continue with",
+
+    "title": "Welcome back",
+    "subtitle": "Enter your credentials",
+    "footer-text": "Don't have an account?",
+    "footer-link": "Create one",
+
+    "title-up": "Create your account",
+    "subtitle-up": "To organize your events",
+    "footer-text-up": "Already have an account?",
+    "footer-link-up": "Sign in now"
+  },
+  "Footer": {
+    "about": "About",
+    "contact": "Contact",
+    "terms": "Terms of Use",
+    "privacy": "Privacy Policy",
+    "help": "Help"
+  },
+  "Header": {
+    "title": "EasyEvent",
+    "sign-in": "Sign in",
+    "sign-up": "Sign up",
+    "sign-out": "Sign out"
+  },
+
+  "LocaleSwicher": {
+    "label": "Change language",
+    "locale": "{locale, select, en {English} pt-br {Portuguese} es {Spanish} fr {French} other {Unknown}}"
+  },
+  "CtaButton": {
+    "title": "Ready to organize your next event easily and quickly?",
+    "description": "Create, manage and share casual events simply, quickly and without bureaucracy, with attendance control and contribution list.",
+    "button": "Start now"
+  },
+  "TextButton": {
+    "title": "Featured Public Events",
+    "button": "View all"
+  }
+}

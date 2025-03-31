@@ -7,12 +7,16 @@ import { MobileMenu } from "./MobileMenu";
 import { useEffect, useState } from "react";
 import { Menu, X } from 'lucide-react';
 import { useAutoLogin } from "@/hooks/auth/useAutoLogin";
+import LocaleSwicher from "../general/LocaleSwicher";
+import { useTranslations } from "next-intl";
 
 export default function Header() {
 
+  const t = useTranslations("Header");
+
     useAutoLogin();
     const { isLogged, user, logout } = useAuthContext();
-    const [isMenuOpen, setIsMenuOpen] = useState(false); 
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
@@ -25,16 +29,17 @@ export default function Header() {
     }, []);
 
     return (
-      <header className="max-w-7xl mx-auto py-5 sticky top-0 z-50 bg-white"> 
+      <header className="max-w-7xl mx-auto py-5 sticky top-0 z-50 bg-white">
         <div className="w-full flex items-center justify-between">
             <div className="flex items-center justify-between gap-6">
               <Link href="/">
                 <p className="text-3xl font-semibold flex items-center gap-1">
                   <Calendar className="h-6 w-6 text-blue-500" />
-                  <span className="text-blue-500">EventoFacil</span>
+                  <span className="text-blue-500">{t("title")}</span>
                 </p>
               </Link>
             </div>
+            <LocaleSwicher />
             {isMobile && (
                 <button
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -52,7 +57,7 @@ export default function Header() {
               <MobileMenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen}/>
             )}
 
-            {!isMobile && (  
+            {!isMobile && (
               <nav className='hidden md:flex items-center justify-between'>
 
                 {
@@ -63,7 +68,7 @@ export default function Header() {
                         onClick={() => logout()}
                         className="cursor-pointer sm:px-8"
                       >
-                        Sair
+                        {t("sign-out")}
                       </Button>
                     </div>
                   )
@@ -76,7 +81,7 @@ export default function Header() {
                             className="text-md font-medium hover:text-blue-500 transition-colors"
                             href="/sign-in"
                           >
-                            Entrar
+                            {t("sign-in")}
                           </Link>
                       </Button>
                       <Button asChild className="md:px-8 bg-blue-400 hover:bg-blue-500">
@@ -84,12 +89,12 @@ export default function Header() {
                             className="text-md font-medium hover:text-white transition-colors"
                             href="/sign-up"
                           >
-                            Cadastrar
+                            {t("sign-up")}
                           </Link>
                       </Button>
                     </div>
                   )
-                }      
+                }
               </nav>
             )}
 

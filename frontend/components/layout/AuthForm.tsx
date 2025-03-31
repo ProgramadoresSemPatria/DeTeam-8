@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import useAuthContext from "@/hooks/auth/useAuthContext";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 export function InputField({
@@ -27,9 +28,7 @@ export function InputField({
   const isPassword = type === "password";
 
   return (
-    <div
-      className="space-y-1 mb-4"
-    >
+    <div className="space-y-1 mb-4">
       <label htmlFor={id} className="auth-label">
         {label}
         {required && <span className="text-destructive"> *</span>}
@@ -114,6 +113,7 @@ export function SocialButton({
 }
 
 export function SignInForm() {
+  const t = useTranslations("Auth");
   const { login, isLoading } = useAuthContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -121,11 +121,11 @@ export function SignInForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-       login(email, password);
+      login(email, password);
     } catch (error) {
-        console.log("Erro ao enviar formulário:", error);
+      console.log("Erro ao enviar formulário:", error);
     }
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -159,7 +159,7 @@ export function SignInForm() {
         </a>
       </div>
 
-      <SubmitButton isLoading={isLoading}>Sign in</SubmitButton>
+      <SubmitButton isLoading={isLoading}>{t("sign-in")}</SubmitButton>
 
       <div className="relative my-6">
         <div className="absolute inset-0 flex items-center">
@@ -167,7 +167,7 @@ export function SignInForm() {
         </div>
         <div className="relative flex justify-center text-xs">
           <span className="bg-card px-2 text-muted-foreground">
-            Ou continue com
+            {t("continue")}
           </span>
         </div>
       </div>
@@ -180,6 +180,7 @@ export function SignInForm() {
 }
 
 export function SignUpForm() {
+  const t = useTranslations("Auth");
   const { register, isLoading } = useAuthContext();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -187,11 +188,11 @@ export function SignUpForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     try {
       register(name, email, password);
     } catch (error) {
-        console.log("Erro ao enviar formulário:", error);
+      console.log("Erro ao enviar formulário:", error);
     }
   };
 
@@ -255,7 +256,7 @@ export function SignUpForm() {
       </div>
 
       <SubmitButton className="cursor-pointer" isLoading={isLoading}>
-        Criar conta
+        {t("create-account")}
       </SubmitButton>
 
       <div className="relative my-6">
@@ -264,7 +265,7 @@ export function SignUpForm() {
         </div>
         <div className="relative flex justify-center text-xs">
           <span className="bg-card px-2 text-muted-foreground">
-            Ou continue com
+            {t("continue")}
           </span>
         </div>
       </div>

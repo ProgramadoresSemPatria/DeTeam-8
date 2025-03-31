@@ -1,11 +1,13 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 export default function CallToAction() {
+  const t = useTranslations("CtaButton");
   return (
     <section className="py-12 sm:py-20 px-4 sm:px-6">
       <div className="container mx-auto max-w-6xl">
@@ -21,13 +23,10 @@ export default function CallToAction() {
           <div className="relative z-10 flex flex-col lg:flex-row items-center">
             <div className="w-full lg:w-2/3 mb-8 lg:mb-0 lg:pr-12 text-center lg:text-left">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 mb-4">
-                Pronto para organizar seu próximo evento de forma fácil e
-                rápida?
+                {t("title")}
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-gray-600">
-                Crie, gerencie e compartilhe eventos casuais de forma simples,
-                rápida e sem burocracia, com controle de presença e lista de
-                contribuições.
+                {t("description")}
               </p>
             </div>
             <div className="w-full lg:w-1/3 flex justify-center">
@@ -40,7 +39,7 @@ export default function CallToAction() {
                   href="/painel"
                   className="flex text-white items-center justify-center gap-2"
                 >
-                  Comece agora
+                  {t("button")}
                   <ArrowRight className="h-4 sm:h-5 w-4 sm:w-5" />
                 </Link>
               </Button>

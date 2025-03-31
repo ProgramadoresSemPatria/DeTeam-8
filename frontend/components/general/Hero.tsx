@@ -5,8 +5,12 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { cn } from '@/lib/utils';
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
+
 
 export default function Hero() {
+  const t = useTranslations("Home");
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -16,7 +20,7 @@ export default function Hero() {
     >
       <div className="container mx-auto max-w-6xl">
         <div className="mx-auto w-fit sm:mx-0 sm:w-auto sm:inline-block sm:text-center px-4 py-1 rounded-full bg-green-100 text-green-600 text-xs sm:text-sm font-medium mb-2 sm:mb-0">
-          Convide. Confirme. Conecte.
+         {t("badges")}
         </div>
         <div className="flex flex-col lg:flex-row items-center">
           <div className="w-full lg:w-1/2 mb-10 lg:mb-0 lg:pr-8 xl:pr-12">
@@ -27,13 +31,12 @@ export default function Hero() {
               className="text-center lg:text-left"
             >
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold md:leading-15 text-gray-900 mb-4 sm:mb-6">
-                Organize Seus <span className="text-blue-500">Eventos</span>{" "}
-                Sem Complicação
+                {t.rich("title", {
+                  span: (chunks) => <span className="text-blue-500">{chunks}</span>
+                })}
               </h1>
               <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-8">
-                Uma plataforma simples e intuitiva para criar e gerenciar
-                eventos gratuitos. Convide amigos, acompanhe confirmações de
-                presença e organize contribuições de forma prática!
+                {t("description")}
               </p>
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center lg:justify-start">
                 <Button
@@ -42,7 +45,7 @@ export default function Hero() {
                   className="w-full text-white sm:w-auto rounded-full bg-blue-500 hover:bg-blue-600 px-6 sm:px-8"
                 >
                   <Link href="/painel">
-                    Criar evento
+                    {t("cta-button")}
                     <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                   </Link>
                 </Button>
@@ -52,7 +55,7 @@ export default function Hero() {
                   size="lg"
                   className="w-full sm:w-auto hover:bg-green-100 hover:text-green-800 rounded-full border-gray-200"
                 >
-                  <Link href="/institucional/saiba-mais">Saiba Mais</Link>
+                  <Link href="/institucional/saiba-mais">{t("button-know-more")}</Link>
                 </Button>
               </div>
             </motion.div>
@@ -119,14 +122,14 @@ export default function Hero() {
                                       <path d="M17 8C17 10.7614 14.7614 13 12 13C9.23858 13 7 10.7614 7 8C7 5.23858 9.23858 3 12 3C14.7614 3 17 5.23858 17 8Z" fill="currentColor"/>
                                       <path d="M12 14C7.58172 14 4 17.5817 4 22H20C20 17.5817 16.4183 14 12 14Z" fill="currentColor"/>
                                     </svg>
-                                    CONVIDADOS
+                                    {t("grade-1")}
                                   </>
                                 ) : (
                                   <>
                                     <svg className="w-2.5 h-2.5 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                       <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                     </svg>
-                                    CONFIRMADOS
+                                    {t("grade-2")}
                                   </>
                                 )}
                               </div>
@@ -146,7 +149,7 @@ export default function Hero() {
                                 <svg className="w-2.5 h-2.5 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                   <path d="M16 8V16M12 11V16M8 14V16M6 20H18C19.1046 20 20 19.1046 20 18V6C20 4.89543 19.1046 4 18 4H6C4.89543 4 4 4.89543 4 6V18C4 19.1046 4.89543 20 6 20Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
-                                TAXA DE RESPOSTA
+                                {t("grade-3")}
                               </div>
                               <div className="text-white font-bold text-sm sm:text-base flex items-center">
                                 87,3%
@@ -166,13 +169,13 @@ export default function Hero() {
                                 <svg className="w-2.5 h-2.5 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                   <path d="M12 8V12L15 15M3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
-                                DATA E HORA
+                                {t("grade-4")}
                               </div>
                               <div className="text-white font-bold text-sm sm:text-base mt-1">
-                                Sáb, 15 Jun
+                               {t("grade-4-span")}
                               </div>
                               <div className="text-blue-300 text-[8px] sm:text-xs flex items-center font-medium">
-                                19:00 - 23:00
+                                {t("grade-4-time")}
                               </div>
                             </div>
                           )}
@@ -183,7 +186,7 @@ export default function Hero() {
                                 <svg className="w-2.5 h-2.5 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                   <path d="M8 13V17M16 11V17M12 7V17M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
-                                CONFIRMAÇÕES
+                                {t("grade-5")}
                               </div>
                               <div className="w-full h-3/4 flex items-end space-x-[2px] sm:space-x-1">
                                 {[4, 6, 5, 7, 9, 8, 10].map((h, idx) => (
@@ -231,7 +234,7 @@ export default function Hero() {
                                 <svg className="w-2.5 h-2.5 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                   <path d="M17 20H22V18C22 16.3431 20.6569 15 19 15C18.0444 15 17.1931 15.4468 16.6438 16.1429M17 20H7M17 20V18C17 17.3438 16.8736 16.717 16.6438 16.1429M7 20H2V18C2 16.3431 3.34315 15 5 15C5.95561 15 6.80686 15.4468 7.35625 16.1429M7 20V18C7 17.3438 7.12642 16.717 7.35625 16.1429M7.35625 16.1429C8.0935 14.301 9.89482 13 12 13C14.1052 13 15.9065 14.301 16.6438 16.1429M15 7C15 8.65685 13.6569 10 12 10C10.3431 10 9 8.65685 9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7ZM21 10C21 11.1046 20.1046 12 19 12C17.8954 12 17 11.1046 17 10C17 8.89543 17.8954 8 19 8C20.1046 8 21 8.89543 21 10ZM7 10C7 11.1046 6.10457 12 5 12C3.89543 12 3 11.1046 3 10C3 8.89543 3.89543 8 5 8C6.10457 8 7 8.89543 7 10Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
-                                CONVIDADOS
+                                {t("grade-1")}
                               </div>
                               <div className="flex -space-x-1.5 overflow-hidden mt-1">
                                 {['João', 'Maria', 'Pedro', 'Ana', 'Lucas'].map((name, idx) => (
@@ -266,7 +269,7 @@ export default function Hero() {
                                   <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                   <path d="M12 22C16 18 20 14.4183 20 10C20 5.58172 16.4183 2 12 2C7.58172 2 4 5.58172 4 10C4 14.4183 8 18 12 22Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
-                                LOCALIZAÇÃO
+                                {t("grade-6")}
                               </div>
                               <div className="absolute inset-4 top-6 rounded-lg overflow-hidden shadow-lg">
                                 <div className="w-full h-full bg-gradient-to-br from-gray-200/80 to-gray-300/80 relative">
@@ -319,7 +322,7 @@ export default function Hero() {
                                   <svg className="w-2 h-2 mr-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M3 21h18v-3H3v3zm3-3h12v-2H6v2zm15-4H3c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h18c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1zm1-7H5c-1.1 0-2 .9-2 2v1h20v-1c0-1.1-.9-2-2-2zM12 5c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z" fill="currentColor"/>
                                   </svg>
-                                  Casa do João
+                                  {t("grade-7")}
                                 </span>
                                 <span className="text-blue-300">2.5km</span>
                               </div>
@@ -332,7 +335,7 @@ export default function Hero() {
                                 <svg className="w-2.5 h-2.5 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                   <path d="M12 3V5M5.63607 5.63604L7.05029 7.05025M3 12H5M5.63607 18.364L7.05029 16.9497M12 19V21M16.9497 16.9497L18.364 18.364M19 12H21M16.9497 7.05025L18.364 5.63604M18 12C18 15.3137 15.3137 18 12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
-                                CLIMA
+                                {t("grade-8")}
                               </div>
                               <div className="flex-1 flex items-center justify-center">
                                 <div className="text-center">
@@ -350,7 +353,7 @@ export default function Hero() {
                                 <svg className="w-2.5 h-2.5 mr-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                   <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
-                                CALENDÁRIO
+                                {t("grade-9")}
                               </div>
                               <div className="w-full flex flex-col mt-1">
                                 <div className="grid grid-cols-7 gap-0.5 bg-gray-500/10 rounded-sm p-0.5">
@@ -378,7 +381,7 @@ export default function Hero() {
                                 </div>
                                 <div className="mt-1 text-[6px] text-white flex items-center">
                                   <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mr-1"></div>
-                                  <span>Evento: 15 de Junho</span>
+                                  <span>{t("grade-9-calendar")}</span>
                                 </div>
                               </div>
                             </div>
