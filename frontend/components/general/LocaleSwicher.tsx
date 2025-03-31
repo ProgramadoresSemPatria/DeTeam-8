@@ -8,16 +8,14 @@ export default function LocaleSwicher() {
   // Helper function to get locale display names directly
   const getLocaleDisplayName = (localeCode: string) => {
     switch(localeCode) {
-      case 'en': return 'English';
       case 'pt-br': return 'Portuguese';
-      case 'es': return 'Spanish';
-      case 'fr': return 'French';
+      case 'en': return 'English';
       default: return localeCode;
     }
   };
 
   return (
-    <LocaleSwicherSelect defaultValues={locale} label={t("label")}>
+    <LocaleSwicherSelect defaultValue={locale} label={t("label")}>
       {locales.map((cur) => (
         <option key={cur} value={cur}>
           {getLocaleDisplayName(cur)}
