@@ -30,8 +30,12 @@
     "title": "Bem-vindo de volta",
     "subtitle": "Entre com suas credenciais",
     "footer-text": "Não possui uma conta?",
-    "footer-link": "Crie uma"
+    "footer-link": "Crie uma",
 
+    "title-up": "Crie sua conta",
+    "subtitle-up": "Para organizar seus eventos",
+    "footer-text-up": "Ja possui uma conta?",
+    "footer-link-up": "Entre agora"
   },
   "Footer": {
     "about": "Sobre",

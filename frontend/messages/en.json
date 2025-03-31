@@ -30,7 +30,12 @@
     "title": "Welcome back",
     "subtitle": "Enter your credentials",
     "footer-text": "Don't have an account?",
-    "footer-link": "Create one"
+    "footer-link": "Create one",
+
+    "title-up": "Create your account",
+    "subtitle-up": "To organize your events",
+    "footer-text-up": "Already have an account?",
+    "footer-link-up": "Sign in now"
   },
   "Footer": {
     "about": "About",
