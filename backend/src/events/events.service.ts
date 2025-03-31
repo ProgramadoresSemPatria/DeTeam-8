@@ -50,26 +50,26 @@ export class EventsService {
     }
   }
 
-  async findEventsByUser(user: User): Promise<EventEntity[]> {
+  async findEventsByUser(id: string): Promise<EventEntity[]> {
     try {
-      const events = await this.eventRepository.find({ where: { userId: user.id } });
-      this.logger.log(`Fetched ${events.length} events for user ${user.id}`);
+      const events = await this.eventRepository.find({ where: { userId: id } });
+      this.logger.log(`Fetched ${events.length} events for user ${id}`);
       return events;
     } catch (error) {
-      this.logger.error(`Error fetching events for user ${user.id}`, error.stack);
+      this.logger.error(`Error fetching events for user ${id}, error.stack`);
       throw new InternalServerErrorException('Error fetching user events');
     }
   }
 
   async findOne(id: string): Promise<EventEntity> {
     try {
-      const event = await this.eventRepository.findOne({ where: { id } });
+      const event = await this.eventRepository.findOne({ where: { id }, relations: ['user'] });
       if (!event) {
         this.logger.warn(`Event with id ${id} not found`);
         throw new NotFoundException(`Event with id ${id} not found`);
       }
       this.logger.log(`Event with id ${id} fetched successfully`);
-      return event;
+      return { ...event, userId: event.user.id };
     } catch (error) {
       this.logger.error(`Error fetching event with id ${id}`, error.stack);
       if (error instanceof NotFoundException) throw error;
