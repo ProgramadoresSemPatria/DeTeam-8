@@ -12,6 +12,10 @@ export interface EventTypes {
   user: UserOnEvent
 }
 
+export type EventWithTotalGuests = EventTypes & {
+  totalGuests: number;
+}
+
 export type UserOnEvent = {
   id: string;
   name: string;
