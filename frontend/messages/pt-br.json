@@ -53,5 +53,10 @@
   "LocaleSwicher": {
     "label": "Mudar idioma",
      "locale": "{locale, select, en {English} pt-br {Portuguese} es {Spanish} fr {French} other {Unknown}}"
+  },
+  "CtaButton": {
+    "title": "Pronto para organizar seu próximo evento de forma fácil e rápida?",
+    "description": "Crie, gerencie e compartilhe eventos casuais de forma simples, rápida e sem burocracia, com controle de presença e lista de contribuições.",
+    "button": "Comece agora"
   }
 }
