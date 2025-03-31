@@ -58,5 +58,9 @@
     "title": "Pronto para organizar seu próximo evento de forma fácil e rápida?",
     "description": "Crie, gerencie e compartilhe eventos casuais de forma simples, rápida e sem burocracia, com controle de presença e lista de contribuições.",
     "button": "Comece agora"
+  },
+  "TextButton": {
+    "title": "Eventos Públicos em Destaque",
+    "button": "Ver todos"
   }
 }

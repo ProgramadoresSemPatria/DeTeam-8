@@ -59,5 +59,9 @@
     "title": "Ready to organize your next event easily and quickly?",
     "description": "Create, manage and share casual events simply, quickly and without bureaucracy, with attendance control and contribution list.",
     "button": "Start now"
+  },
+  "TextButton": {
+    "title": "Featured Public Events",
+    "button": "View all"
   }
 }
