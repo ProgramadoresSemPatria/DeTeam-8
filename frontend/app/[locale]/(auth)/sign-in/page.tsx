@@ -13,7 +13,7 @@ export default function SignIn() {
       <AuthLayout
         title={t("title")}
         subtitle={t("subtitle")}
-        footerText={t("footerText")}
+        footerText={t("footer-text")}
         footerLinkText={t("footer-link")}
         footerLinkHref="/sign-up"
       >
