@@ -34,19 +34,20 @@ export const useGetAllEvents = () => {
     return query
 }
 
-const getMyEvents = async () => {
+const getMyEvents = async (userId: string) => {
     try {
-        const { data } = await axiosInstance.get('/events/my-events');
+        const { data } = await axiosInstance.get(`/events/my-events/${userId}`);
         return data as EventTypes[];
     } catch (error) {
         console.error("Erro ao carregar eventos:", error);
         throw error;
     }
 };
-export const useGetMyEvents = () => {
+export const useGetMyEvents = (userId: string) => {
     const query = useQuery({
         queryKey: ['my-events'],
-        queryFn: getMyEvents
+        queryFn: () => getMyEvents(userId),
+        enabled: !!userId
     })
 
     return query
@@ -62,7 +63,6 @@ export const useGetMyEvents = () => {
     }
 };
 export const useGetSpecificEvent = (eventId: string) => {
-    console.log('IDDDDDDDD', eventId)
     const query = useQuery<EventTypes, Error>({
         queryKey: [`specific-event${eventId}`],
         queryFn: () => getSpecificEvent(eventId),
