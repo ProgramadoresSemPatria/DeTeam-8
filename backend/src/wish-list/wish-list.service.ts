@@ -108,12 +108,12 @@ export class WishListService {
   async remove(id: string): Promise<void> {
     try {
       const wishListItem = await this.wishListRepository.findOne({ where: { id } });
-
+      
       if (!wishListItem) {
         throw new NotFoundException(`Wish list item with id ${id} not found`);
       }
 
-      await this.wishListRepository.remove(wishListItem);
+      await this.wishListRepository.softRemove(wishListItem);
     } catch (error) {
       throw new InternalServerErrorException('Error removing wish list item');
     }

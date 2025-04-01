@@ -73,12 +73,15 @@ export class EventWishListService {
   async remove(id: string): Promise<void> {
     try {
       const eventWishListItem = await this.eventWishListRepository.findOne({ where: { id } });
+      
       if (!eventWishListItem) {
         throw new NotFoundException(`Event wish list item with id ${id} not found`);
       }
-      await this.eventWishListRepository.remove(eventWishListItem);
+
+      await this.eventWishListRepository.softDelete(eventWishListItem);
     } catch (error) {
       throw new InternalServerErrorException('Error deleting event wish list item');
     }
   }
+
 }
