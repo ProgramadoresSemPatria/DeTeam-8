@@ -55,8 +55,8 @@ export class EventsService {
     try {
       const events = await this.eventRepository.find({
         where: { userId: id },
-        relations: ['user'], 
-      });      this.logger.log(`Fetched ${events.length} events for user ${id}`);
+        relations: ['user'],
+      }); this.logger.log(`Fetched ${events.length} events for user ${id}`);
       const updatedEvents = await this.updateExpiredEvents(events);
 
       return updatedEvents;
@@ -103,11 +103,14 @@ export class EventsService {
 
   async remove(id: string): Promise<void> {
     try {
-      const result = await this.eventRepository.delete(id);
-      if (result.affected === 0) {
-        this.logger.warn(`Event with id ${id} not found for deletion`);
+      const event = await this.eventRepository.findOne({ where: { id } });
+
+      if (!event) {
         throw new NotFoundException(`Event with id ${id} not found`);
       }
+
+      await this.eventRepository.softRemove(event);
+
       this.logger.log(`Event ${id} deleted successfully`);
     } catch (error) {
       this.logger.error(`Error deleting event with id ${id}`, error.stack);
@@ -125,7 +128,7 @@ export class EventsService {
       }
       return event;
     });
-  
+
     await this.eventRepository.save(updatedEvents);
     return updatedEvents;
   }
