@@ -6,6 +6,7 @@ import EventDetailsCard from '@/components/general/EventDetailsCard';
 import { createEventSubscription } from '@/services/eventSubscription';
 import useAuthContext from '@/hooks/auth/useAuthContext';
 import { useGetSpecificEvent } from '@/services/eventFunctions';
+import {useRouter} from 'next/navigation';
 
 const EventSubscriptionPage: React.FC = () => {
   const params = useParams();
@@ -13,7 +14,7 @@ const EventSubscriptionPage: React.FC = () => {
 
   const { user } = useAuthContext();
   const { data: event } = useGetSpecificEvent(id as string);
-
+  const router = useRouter();
 
   if (!id) return <p>Carregando...</p>;
 
@@ -33,9 +34,11 @@ const EventSubscriptionPage: React.FC = () => {
       eventId: `${event?.id}`,
     }
 
-    createEventSubscription(formattedSubscriptionData);
+    const response = await createEventSubscription(formattedSubscriptionData);
+    if(response === 201) {
+      router.push('/eventos/inscricoes')
+    }
 
-    console.log('Dados do formulário:', formData);
   };
 
   return (

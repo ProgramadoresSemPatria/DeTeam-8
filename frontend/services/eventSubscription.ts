@@ -18,7 +18,7 @@ export const createEventSubscription = async (guestData: GuestData) => {
               onClick: () => {},
             },
         });
-        return response.data;
+        return response.status;
     }
     catch (error) {
         console.error("Erro ao criar inscrição:", error);

@@ -76,7 +76,7 @@ export default function EventsTable({eventsToDisplay, setEventToEdit, setIsCreat
                         </Link>
                     </Button>
                     <Button variant="ghost" size="icon" asChild>
-                        <Link href={`/eventos/${event.id}/`}>
+                        <Link href={`/eventos/${event.id}/inscricoes`}>
                         <CheckSquare className="h-4 w-4" />
                         </Link>
                     </Button>
