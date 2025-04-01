@@ -8,7 +8,7 @@
 - Valdison Brito
 - Matheus Lima
 
-## Repositórios
+#### Repositórios com documentações e apresentação do projeto *EventoFacil*
 
 ## Backend
 - [Backend](https://github.com/ProgramadoresSemPatria/DeTeam-8/tree/main/backend)
