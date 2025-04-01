@@ -85,7 +85,7 @@ export default function EventPage() {
                         <div className="flex items-center">
                             <Users className="h-5 w-5 mr-2 text-primary" />
                             <span>
-                            {guestsOnEvent !== 0 ? guestsOnEvent?.total : 0} / {SpecificEvent[0]?.capacity} participantes
+                            {guestsOnEvent !== null ? guestsOnEvent?.total : 0} / {SpecificEvent[0]?.capacity} participantes
                             </span>
                         </div>
                     </div>
