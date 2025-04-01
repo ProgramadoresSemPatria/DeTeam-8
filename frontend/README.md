@@ -1,13 +1,13 @@
-# EasyEvent - Plataforma de Gerenciamento de Eventos
+# EventoFacil - Plataforma de Gerenciamento de Eventos
 
 
 ## Introdução
 
-O EasyEvent é uma solução moderna e intuitiva para criação e gerenciamento de eventos, desenvolvida para simplificar o processo de organização e participação em eventos. A plataforma oferece uma experiência completa tanto para organizadores quanto para participantes, desde a criação do evento até a gestão de participantes e relatórios.
+O EventoFacil é uma solução moderna e intuitiva para criação e gerenciamento de eventos, desenvolvida para simplificar o processo de organização e participação em eventos. A plataforma oferece uma experiência completa tanto para organizadores quanto para participantes, desde a criação do evento até a gestão de participantes e relatórios.
 
 ###  Objetivo
 
-O objetivo principal do EasyEvent é democratizar a organização de eventos, tornando o processo mais acessível, eficiente e profissional. A plataforma elimina as barreiras tradicionais na organização de eventos, oferecendo ferramentas intuitivas e recursos avançados para garantir o sucesso de qualquer tipo de evento.
+O objetivo principal do EventoFacil é democratizar a organização de eventos, tornando o processo mais acessível, eficiente e profissional. A plataforma elimina as barreiras tradicionais na organização de eventos, oferecendo ferramentas intuitivas e recursos avançados para garantir o sucesso de qualquer tipo de evento.
 
 ## Tecnologias Utilizadas
 
