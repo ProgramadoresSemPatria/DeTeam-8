@@ -3,7 +3,7 @@
 
 ## Introdução
 
-O EventoFacil é uma solução moderna e intuitiva para criação e gerenciamento de eventos, desenvolvida para simplificar o processo de organização e participação em eventos. A plataforma oferece uma experiência completa tanto para organizadores quanto para participantes, desde a criação do evento até a gestão de participantes e relatórios.
+O EventoFacil é uma solução moderna e intuitiva para criação e gerenciamento de eventos, foi desenvolvida com o intuito simplificar o processo de organização e participação em eventos.
 
 ###  Objetivo
 
