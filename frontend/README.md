@@ -1,50 +1,82 @@
-# DeTeam-8 Frontend
+# EasyEvent - Plataforma de Gerenciamento de Eventos
 
-Este repositório contém o código frontend do projeto DeTeam-8, uma aplicação web desenvolvida com Next.js e TypeScript.
 
-## Design Inicial
+## Introdução
 
-O projeto começou com rascunhos simples para definir a estrutura básica da interface:
+O EasyEvent é uma solução moderna e intuitiva para criação e gerenciamento de eventos, desenvolvida para simplificar o processo de organização e participação em eventos. A plataforma oferece uma experiência completa tanto para organizadores quanto para participantes, desde a criação do evento até a gestão de participantes e relatórios.
 
-![Design Inicial](./public/images/initial-wireframe.png)
+###  Objetivo
 
-Este wireframe inicial estabeleceu os principais elementos da interface:
+O objetivo principal do EasyEvent é democratizar a organização de eventos, tornando o processo mais acessível, eficiente e profissional. A plataforma elimina as barreiras tradicionais na organização de eventos, oferecendo ferramentas intuitivas e recursos avançados para garantir o sucesso de qualquer tipo de evento.
 
-- Cabeçalho com logo e menu de navegação
-- Área principal com conteúdo rolável
-- Painel lateral para wallet/conta do usuário
-- Footer com links e informações de contato
+## Tecnologias Utilizadas
 
-## Arquitetura
+### Frontend
 
-O projeto utiliza as seguintes tecnologias e padrões:
+- **Next.js 15**: Framework React com App Router para construção de interfaces modernas e performáticas
+- **TypeScript**: Superset do JavaScript que oferece segurança de tipos e recursos avançados
+- **React 19**: Biblioteca JavaScript para construção de interfaces de usuário reutilizáveis
+- **Tailwind CSS**: Framework CSS focado em utilidades para estilização ágil
+- **Shadcn/ui**: Biblioteca de componentes baseada em Radix UI para interfaces consistentes
+- **Framer Motion**: Biblioteca para animações e transições suaves
+- **Zustand**: Gerenciamento de estado global eficiente e simples
+- **React Query**: Gerenciamento de cache e requisições otimizado
+- **React Hook Form + Zod**: Validação e gerenciamento de formulários robusto
 
-### Stack Tecnológico
-
-- **Framework**: Next.js 14 (App Router)
-- **Linguagem**: TypeScript
-- **Estilização**: Tailwind CSS
-- **Fontes**: Geist Sans e Geist Mono
-- **Ícones**: Lucide React
-
-### Estrutura de Diretórios
+## 📁 Estrutura do Projeto
 
 ```
-/app
-  /components      # Componentes reutilizáveis
-    /animations    # Animações e transições
-    /general       # Componentes gerais
-    /layout        # Componentes de layout
-    /ui           # Componentes de interface
-  /lib            # Utilitários e funções auxiliares
-  globals.css     # Estilos globais
-  layout.tsx      # Layout principal
-  page.tsx        # Página inicial
-/public           # Arquivos estáticos
-  /images         # Imagens e assets
+├── app/                    # Diretório principal do Next.js (App Router)
+│   ├── (auth)/            # Rotas autenticadas
+│   ├── contact/           # Página de contato
+│   ├── eventos/           # Páginas relacionadas a eventos
+│   ├── institucional/     # Páginas institucionais
+│   ├── painel/           # Painel administrativo
+│   ├── globals.css       # Estilos globais
+│   ├── layout.tsx        # Layout principal
+│   └── page.tsx          # Página inicial
+├── components/           # Componentes reutilizáveis
+│   ├── animations/       # Componentes de animação
+│   ├── general/         # Componentes gerais
+│   ├── layout/          # Componentes de layout
+│   └── ui/              # Componentes base (shadcn)
+├── hooks/               # Custom hooks
+├── lib/                 # Utilitários e configurações
+├── services/            # Serviços e APIs
+├── util/               # Funções utilitárias
+├── public/             # Arquivos estáticos
+└── types/              # Definições de tipos TypeScript
 ```
 
-## Configuração do Ambiente
+##  Funcionalidades Principais
+
+### Para Organizadores
+
+- **Criação de Eventos**: Interface intuitiva para criar eventos com detalhes completos
+- **Gestão de Participantes**: Controle total sobre inscrições e participantes
+- **Relatórios**: Área com métricas e insights sobre o evento
+- **Compartilhamento**: Ferramentas para divulgação e compartilhamento do evento
+
+### Para Participantes
+
+- **Inscrição Simplificada**: Processo de registro otimizado
+- **Informações Detalhadas**: Acesso a todas as informações do evento
+- **Histórico**: Acompanhamento de eventos inscritos
+
+### Recursos Adicionais
+
+- **Agenda**: Gerenciamento de programação e horários
+- **Check-in**: Sistema de presença digital
+- **Analytics**: Métricas e relatórios detalhados
+
+## Instalação
+
+### Pré-requisitos
+
+- Node.js 18+
+- pnpm 8+
+
+### Passos para Instalação
 
 1. Clone o repositório:
 
@@ -59,52 +91,46 @@ cd frontend
 pnpm install
 ```
 
-3. Inicie o servidor de desenvolvimento:
+3. Configure as variáveis de ambiente:
+
+```bash
+cp .env.example .env.local
+```
+
+4. Inicie o servidor de desenvolvimento:
 
 ```bash
 pnpm dev
 ```
 
-## Scripts Disponíveis
+##  Scripts Disponíveis
 
 - `pnpm dev` - Inicia o servidor de desenvolvimento com Turbopack
 - `pnpm build` - Gera a build de produção
 - `pnpm start` - Inicia o servidor de produção
 - `pnpm lint` - Executa a verificação de linting
 
-## Padrões de Código
+## Design System
 
-### Componentes
+O projeto utiliza um design system consistente baseado em:
 
-- Utilize TypeScript para todos os componentes
-- Siga o padrão de composição do Radix UI
-- Implemente animações com Framer Motion
-- Estilize usando Tailwind CSS e class-variance-authority
+- **Tipografia**: Geist Sans para texto e Geist Mono para código
+- **Componentes**: Biblioteca shadcn/ui com customizações
 
-### Convenções de Nomenclatura
+##  Como Contribuir
 
-- Componentes: PascalCase (ex: Button.tsx)
-- Utilitários: camelCase (ex: utils.ts)
-- Constantes: UPPER_SNAKE_CASE
+1. Fork o projeto
+2. Crie sua Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'feat: Add some AmazingFeature'`)
+4. Push para a Branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
 
-## Contribuição
+##  Licença
 
-1. Crie uma branch para sua feature:
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-```bash
-git checkout -b feature/nome-da-feature
-```
+##  Equipe
 
-2. Faça commit das alterações:
-
-```bash
-git commit -m "feat: descrição da alteração"
-```
-
-3. Envie para o repositório:
-
-```bash
-git push origin feature/nome-da-feature
-```
-
-4. Abra um Pull Request com uma descrição clara das alterações
+- [Luiz Renan](https://github.com/luiznwz) - Desenvolvedor Frontend
+- [Vandilson Brito](https://github.com/vandilsonbrito) - Desenvolvedor Full Stack
+- [Patrick Simões](https://github.com/PatrickSimoes) - Desenvolvedor Backend
