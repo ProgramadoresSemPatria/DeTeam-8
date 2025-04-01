@@ -70,15 +70,31 @@ export class UserService {
     if (!user) {
       throw new NotFoundException(`User with id ${id} not found`);
     }
-  
+
     return user;
   }
 
-  update(id: string, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    const result = await this.userRepository.update(id, updateUserDto);
+
+    if (result.affected === 0) {
+      this.logger.warn(`Guest with id ${id} not found for update`)
+        ;
+      throw new NotFoundException(`Guest with id ${id} not found`);
+    }
+
+    const updatedUser = await this.findOne(id);
+
+    this.logger.log(`Guest with id ${id} updated successfully`);
+
+    return updatedUser;
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} user`;
+  async remove(id: string): Promise<void> {
+    const user = await this.findOne(id);
+
+    await this.userRepository.softDelete(user)
+
+    return;
   }
 }
