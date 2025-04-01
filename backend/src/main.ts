@@ -13,11 +13,11 @@ async function bootstrap() {
     transform: true, // transforma os dados para os tipos esperados nos DTOs
   }));
 
-  // TODO: em produção: https://eventofacil.vercel.app/
   app.enableCors({
-    origin: '*',
+    origin: 'https://eventofacil.vercel.app',
     methods: 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
     allowedHeaders: 'Content-Type, Authorization',
+    credentials: true,
   });
 
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
