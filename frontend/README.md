@@ -9,6 +9,8 @@ O EventoFacil é uma solução moderna e intuitiva para criação e gerenciament
 
 O objetivo principal do EventoFacil é democratizar a organização de eventos, tornando o processo mais acessível, eficiente e profissional. A plataforma elimina as barreiras tradicionais na organização de eventos, oferecendo ferramentas intuitivas e recursos avançados para garantir o sucesso de qualquer tipo de evento.
 
+## Deploy: https://eventofacil.vercel.app
+
 ## Tecnologias Utilizadas
 
 ### Frontend
@@ -94,7 +96,7 @@ pnpm install
 3. Configure as variáveis de ambiente:
 
 ```bash
-cp .env.example .env.local
+cp .env.example 
 ```
 
 4. Inicie o servidor de desenvolvimento:
@@ -115,7 +117,7 @@ pnpm dev
 O projeto utiliza um design system consistente baseado em:
 
 - **Tipografia**: Geist Sans para texto e Geist Mono para código
-- **Componentes**: Biblioteca shadcn/ui com customizações
+- **Componentes**: Bibliotecas Radix-ui - shadcn/ui com customizações
 
 ##  Como Contribuir
 
