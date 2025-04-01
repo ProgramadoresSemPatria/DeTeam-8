@@ -8,7 +8,7 @@ const getGuests = async (eventId: string) => {
         return data as GuestOnEvent; 
     } catch (error) {
         console.error("Erro ao carregar eventos:", error);
-        return 0; 
+        return null; 
     }
 };
 
