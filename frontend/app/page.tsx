@@ -1,49 +1,49 @@
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
-import Hero from "./components/general/Hero";
-import { Button } from "./components/ui/button";
+"use client";
+import CallToAction from "@/components/general/CallToAction";
+import EventCard from "@/components/general/EventCard";
+import { EventCardSkeleton } from "@/components/general/EventCardSkeleton";
+import Hero from "@/components/general/Hero";
+import { Suspense, useEffect, useState } from "react";
+import TextButton from "@/components/general/TextButton";
+import { EventTypes } from "@/util/types/event";
+import { useGetAllPublicEvents } from "@/services/eventFunctions";
+
 
 export default function Home() {
-  return (
-    <div className="min-h-screen flex flex-col">
-      <Hero />
 
-      {/* CTA Section */}
-      <section className="py-12 sm:py-20 px-4 sm:px-6">
-        <div className="container mx-auto max-w-6xl">
-          <div className="glass-card overflow-hidden rounded-xl sm:rounded-2xl p-6 sm:p-12 relative">
-            <div className="absolute top-0 right-0 -mr-16 -mt-16 w-48 sm:w-64 h-48 sm:h-64 bg-blue-500 opacity-10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-48 sm:w-64 h-48 sm:h-64 bg-green-500 opacity-10 rounded-full blur-3xl"></div>
+    const [eventPublic, setPublicEvents] = useState<EventTypes[]>([]);
 
-            <div className="relative z-10 flex flex-col lg:flex-row items-center">
-              <div className="w-full lg:w-2/3 mb-8 lg:mb-0 lg:pr-12 text-center lg:text-left">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 mb-4">
-                  Pronto para simplificar seus pagamentos internacionais?
-                </h2>
-                <p className="text-base sm:text-lg md:text-xl text-gray-600">
-                  Gerencie taxas, impostos e receba seu dinheiro com mais
-                  eficiência, como milhares de desenvolvedores já fazem.
-                </p>
+    const { data: events } = useGetAllPublicEvents();
+    
+    useEffect(() => {
+        setPublicEvents(events || []);
+    }, [events]);
+
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Hero />
+
+        <div className="container py-12 mx-auto max-w-6xl">
+          <TextButton />
+          <Suspense
+            fallback={
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {Array.from({ length: 3 }).map((_, index) => (
+                  <EventCardSkeleton key={index} />
+                ))}
               </div>
-              <div className="w-full lg:w-1/3 flex justify-center">
-                <Button
-                  asChild
-                  size="lg"
-                  className="w-full sm:w-auto rounded-full bg-blue-500 hover:bg-blue-600 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg"
-                >
-                  <Link
-                    href="/dashboard"
-                    className="flex items-center justify-center gap-2"
-                  >
-                    Comece agora
-                    <ArrowRight className="h-4 sm:h-5 w-4 sm:w-5" />
-                  </Link>
-                </Button>
-              </div>
+            }
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {eventPublic?.slice(0, 3).map((event, index) => (
+                <EventCard key={event.id} event={eventPublic[index]} />
+              ))}
             </div>
-          </div>
+          </Suspense>
         </div>
-      </section>
-    </div>
-  );
+
+        <CallToAction />
+      </div>
+    );
 }
+

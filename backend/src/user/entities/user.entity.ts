@@ -1,5 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany } from 'typeorm';
 import { IsEmail, IsNotEmpty } from 'class-validator';
+import { EventEntity } from 'src/events/entities/event.entity';
+import { Guest } from 'src/guests/entities/guest.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity('users')
 export class User {
@@ -14,15 +17,25 @@ export class User {
     email: string;
 
     @Column()
+    @Exclude()
     @IsNotEmpty()
     password: string;
 
-    @CreateDateColumn()
-    created_at: Date;
+    @Exclude()
+    @CreateDateColumn({ name: "created_at" })
+    createdAt: Date;
 
-    @UpdateDateColumn()
-    updated_at: Date;
+    @Exclude()
+    @UpdateDateColumn({ name: "updated_at" })
+    updatedAt: Date;
 
-    @DeleteDateColumn()
-    deleted_at: Date;
+    @Exclude()
+    @DeleteDateColumn({ name: "deleted_at", nullable: true })
+    deletedAt?: Date;
+
+    @OneToMany(() => EventEntity, event => event.user)
+    events: EventEntity[];
+
+    @OneToMany(() => Guest, guest => guest.user)
+    guests: Guest[];
 }
