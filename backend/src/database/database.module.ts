@@ -1,6 +1,15 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
+import { UserSubscriber } from 'src/user/subscribers/user.subscriber';
+import { EventEventSubscriber } from 'src/events/subscribers/event.subscriber';
+import { WishListSubscriber } from 'src/wish-list/subscribers/wish-list.subscriber';
+
+const substribers = [
+  UserSubscriber,
+  EventEventSubscriber,
+  WishListSubscriber,
+]
 
 @Module({
   imports: [
@@ -14,6 +23,7 @@ import { ConfigService } from '@nestjs/config';
             entities: [__dirname + '/../**/*.entity{.ts,.js}'],
             logging: ['error', 'schema'],
             synchronize: configService.get<string>('NODE_ENV') === 'DEVELOPMENT',
+            subscribers: substribers,
             ssl: { rejectUnauthorized: false },
           };
         }
@@ -26,6 +36,7 @@ import { ConfigService } from '@nestjs/config';
           password: configService.get<string>('DB_PASSWORD'),
           entities: [__dirname + '/../**/*.entity{.ts,.js}'],
           logging: ['error', 'schema'],
+          subscribers: substribers,
           synchronize: configService.get<string>('NODE_ENV') === 'DEVELOPMENT',
         };
       },
@@ -33,4 +44,4 @@ import { ConfigService } from '@nestjs/config';
     }),
   ],
 })
-export class DatabaseModule {}
+export class DatabaseModule { }
